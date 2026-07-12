@@ -52,4 +52,26 @@
 ---
 
 ## 🎯 OBJETIVO
+
+**Fase 1:** SaaS para contadores en 🇨🇴 **Colombia** (primero, donde tengo más experiencia contable)
+**Fase 2:** Adaptación para 🇪🇸 **España** (cuando esté funcionando en Colombia)
+
 Vender como servicio por suscripción
+
+---
+
+## 🧩 FUNCIONALIDADES PARA VENTA (inspirado en Kontalid Tools)
+
+| Módulo | Descripción |
+|---|---|
+| 🗂️ **Categorías y tareas** | Organización del contador (lo que ya tenemos) |
+| 🛠️ **Herramientas / Enlaces** | Calculadoras, enlaces útiles (DIAN, Cámara de Comercio, etc.) |
+| 📜 **Normativa actual** | Legislación vigente colombiana, cambios fiscales, DIAN |
+| 🧮 **Cálculos** | IVA, retención en la fuente, liquidaciones, nómina |
+
+---
+
+## 🔍 REFERENCIA
+
+**Kontalid Tools** (Colombia 🇨🇴) — https://kontalid.com.co/kontalid-tools
+SaaS contable colombiano. Modelo a seguir para presentación y precios.
