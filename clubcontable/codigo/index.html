@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta name="version" content="2026-07-11-2-updated">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+  <meta name="description" content="Gestión Contable Colombia - Checklist, calendario fiscal, IVA, Retefuente, Seguridad Social, Renta y cierres contables. Datos guardados en tu navegador." />
+  <meta name="keywords" content="contabilidad, Colombia, DIAN, IVA, Retefuente, seguridad social, renta, cierre contable, calendario fiscal" />
+  <meta name="author" content="Club Contable" />
+  <meta name="theme-color" content="#0a2e4a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="canonical" href="https://clubcontable.surge.sh" />
+  <title>Club Contable · Gestión Tributaria Colombia 🇨🇴</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+      background:#f0f4f8;color:#1e293b;min-height:100vh;font-size:16px;line-height:1.4
+    }
+    a{color:#0077b6;text-decoration:none}
+
+    /* ===== HEADER ===== */
+    header{
+      background:linear-gradient(135deg,#0a2e4a 0%,#005780 100%);
+      color:#fff;padding:.7rem 1rem;text-align:center;position:sticky;top:0;z-index:100;
+      box-shadow:0 2px 8px rgba(10,46,74,0.25)
+    }
+    header h1{font-size:1.1rem;letter-spacing:.3px}
+    header p{font-size:.7rem;color:#94b8d4;margin-top:2px}
+
+    /* ===== CONTAINER ===== */
+    .container{max-width:960px;margin:0 auto;padding:.6rem}
+
+    /* ===== ALERTAS (Checklist) ===== */
+    .alertas{padding:.3rem 0;margin-bottom:.5rem}
+    .alerta{
+      background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:8px;
+      padding:.5rem .7rem;font-size:.78rem;margin-bottom:.3rem;display:flex;align-items:flex-start;gap:.45rem
+    }
+    .alerta .ico{font-size:.95rem;flex-shrink:0;margin-top:1px}
+    .alerta.verde{background:#f0fdf4;border-color:#bbf7d0;color:#15803d}
+    .alerta.amarilla{background:#fefce8;border-color:#fef08a;color:#92400e}
+    .alerta.naranja{background:#fff7ed;border-color:#fed7aa;color:#c2410c}
+
+    /* ===== MENÚ DE SECCIONES ===== */
+    .menu-secciones{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+      gap:.35rem;margin-bottom:.6rem
+    }
+    .menu-secciones .sec-btn{
+      background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;
+      padding:.45rem .25rem;text-align:center;cursor:pointer;transition:all .15s;
+      font-size:.68rem;font-weight:600;color:#475569;line-height:1.2
+    }
+    .menu-secciones .sec-btn .ico{font-size:1.2rem;display:block;margin-bottom:2px}
+    .menu-secciones .sec-btn:hover{border-color:#0077b6;background:#f0f9ff}
+    .menu-secciones .sec-btn.activo{
+      background:#0a2e4a;color:#fff;border-color:#0a2e4a;box-shadow:0 2px 8px rgba(10,46,74,0.25)
+    }
+    .menu-secciones .sec-btn .cnt-badge{
+      display:inline-block;background:#dc2626;color:#fff;border-radius:999px;
+      font-size:.55rem;padding:1px 5px;font-weight:700;margin-left:2px;vertical-align:top;line-height:1.3
+    }
+    .menu-secciones .sec-btn.activo .cnt-badge{background:#f87171;color:#fff}
+
+    /* ===== PANELES ===== */
+    .panel{display:none}
+    .panel.activo{display:block;animation:fadeIn .2s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ===== BARRA DE HERRAMIENTAS ===== */
+    .bar{
+      display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem;align-items:center
+    }
+    .bar select,.bar input{
+      padding:.35rem .55rem;border:1px solid #bfdbfe;border-radius:6px;font-size:.78rem;flex:1;min-width:80px
+    }
+    .bar .btn{margin-left:auto}
+
+    /* ===== BOTONES ===== */
+    .btn{
+      background:#0077b6;color:#fff;border:none;padding:.4rem .85rem;border-radius:6px;
+      font-weight:600;font-size:.78rem;cursor:pointer;white-space:nowrap;transition:background .12s;
+      display:inline-flex;align-items:center;gap:.25rem;touch-action:manipulation
+    }
+    .btn:hover{background:#005f8a}
+    .btn:active{transform:scale(.97)}
+    .btn.sec{background:#e2e8f0;color:#1e293b}
+    .btn.sec:hover{background:#cbd5e1}
+    .btn.verde{background:#16a34a}
+    .btn.verde:hover{background:#15803d}
+    .btn.danger{background:#dc2626}
+    .btn.danger:hover{background:#b91c1c}
+    .btn.azul-oscuro{background:#0a2e4a}
+    .btn.azul-oscuro:hover{background:#0a2342}
+    .btn.full{width:100%;justify-content:center;padding:.5rem}
+    .btn-sm{padding:.3rem .6rem;font-size:.7rem}
+
+    /* ===== STATS ===== */
+    .stats{
+      display:flex;gap:.4rem;margin-bottom:.55rem;flex-wrap:wrap
+    }
+    .stat{
+      background:#fff;border:1px solid #e2e8f0;border-radius:8px;
+      padding:.4rem .6rem;flex:1;min-width:70px;text-align:center
+    }
+    .stat .n{font-size:1.2rem;font-weight:800;color:#0a2e4a}
+    .stat .l{font-size:.65rem;color:#64748b}
+
+    /* ===== CALENDARIO ===== */
+    .mes{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:.6rem}
+    .dia-n{
+      background:#0a2e4a;color:#fff;padding:.25rem;text-align:center;
+      font-size:.62rem;font-weight:600;border-radius:3px
+    }
+    .dia{
+      background:#fff;border:1px solid #e2e8f0;border-radius:3px;min-height:52px;
+      padding:.2rem;font-size:.62rem;cursor:pointer;transition:.15s;position:relative;overflow:hidden
+    }
+    .dia:hover{border-color:#0077b6}
+    .dia.otro{background:#f8fafc;color:#94a3b8}
+    .dia .num{font-weight:600;font-size:.58rem;margin-bottom:.08rem}
+    .dia .ev{
+      font-size:.52rem;padding:.04rem .15rem;border-radius:2px;margin-bottom:.04rem;
+      overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer
+    }
+    .dia .ev.r{background:#fecaca;color:#dc2626}
+    .dia .ev.v{background:#bbf7d0;color:#16a34a}
+    .dia .ev.a{background:#fef9c3;color:#a16207}
+    .dia .ev.g{background:#dbeafe;color:#0077b6}
+    .dia.hoy{border-color:#0077b6;border-width:2px}
+
+    /* ===== CHECKLIST ===== */
+    .checklist{display:flex;flex-direction:column;gap:.3rem}
+    .item-c{
+      background:#fff;border:1px solid #e2e8f0;border-radius:8px;
+      padding:.5rem .65rem;display:flex;align-items:center;gap:.45rem;transition:.15s
+    }
+    .item-c:hover{border-color:#0077b6}
+    .item-c:active{background:#f8faff}
+    .item-c input[type=checkbox]{
+      width:17px;height:17px;accent-color:#0077b6;cursor:pointer;flex-shrink:0
+    }
+    .item-c .info{flex:1;min-width:0}
+    .item-c .info strong{font-size:.8rem;display:block;word-wrap:break-word}
+    .item-c .info .meta{font-size:.68rem;color:#64748b;margin-top:.06rem}
+    .item-c.hecho{background:#f0fdf4;border-color:#bbf7d0}
+    .item-c.hecho .info strong{text-decoration:line-through;color:#16a34a}
+    .item-c .acc{display:flex;gap:.2rem;flex-shrink:0}
+    .item-c .acc button{
+      background:none;border:none;cursor:pointer;font-size:.75rem;
+      padding:.12rem .25rem;border-radius:4px;touch-action:manipulation
+    }
+    .item-c .acc button:hover{background:#e2e8f0}
+    .item-c .badge{font-size:.6rem;padding:.06rem .3rem;border-radius:999px;font-weight:600;flex-shrink:0}
+    .badge.r{background:#fecaca;color:#dc2626}
+    .badge.v{background:#bbf7d0;color:#16a34a}
+    .badge.a{background:#fef9c3;color:#a16207}
+    .item-c .cat-tag{
+      font-size:.58rem;padding:.04rem .35rem;border-radius:999px;font-weight:600;
+      flex-shrink:0;background:#e2e8f0;color:#475569;white-space:nowrap
+    }
+
+    /* ===== MODAL ===== */
+    .modal{
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(10,46,74,0.45);align-items:center;justify-content:center;
+      z-index:200;backdrop-filter:blur(1px)
+    }
+    .modal.m{display:flex}
+    .modal-in{
+      background:#fff;border-radius:14px;padding:1.1rem;width:92%;max-width:420px;
+      max-height:90vh;overflow-y:auto;box-shadow:0 8px 30px rgba(10,46,74,0.2);
+      animation:modalIn .2s ease
+    }
+    @keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+    .modal-in h2{font-size:.9rem;margin-bottom:.6rem;color:#0a2e4a}
+    .modal-in label{
+      display:block;font-size:.72rem;font-weight:600;margin-bottom:.12rem;
+      margin-top:.5rem;color:#334155
+    }
+    .modal-in input,.modal-in select,.modal-in textarea{
+      width:100%;padding:.4rem .6rem;border:1.5px solid #dbeafe;border-radius:6px;
+      font-size:.78rem;background:#fafbff;font-family:inherit;transition:border-color .12s
+    }
+    .modal-in input:focus,.modal-in select:focus,.modal-in textarea:focus{
+      outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.1)
+    }
+    .modal-in textarea{min-height:42px;resize:vertical}
+    .modal-in .br{display:flex;gap:.5rem;margin-top:.65rem}
+    .modal-in .br .btn{flex:1;text-align:center}
+
+    /* ===== VACÍO ===== */
+    .vacio{text-align:center;padding:2rem 1rem;color:#94a3b8;font-size:.8rem}
+
+    /* ===== FOOTER ===== */
+    footer{
+      text-align:center;padding:.8rem 1rem;margin-top:1rem;
+      border-top:1px solid #e2e8f0;color:#64748b;font-size:.7rem
+    }
+    footer .contador{font-weight:700;color:#0a2e4a;font-size:.75rem;margin-bottom:.15rem}
+    footer .legal{color:#94a3b8;font-size:.62rem}
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:600px){
+      header h1{font-size:.95rem}
+      header p{display:none}
+      .menu-secciones{grid-template-columns:repeat(3,1fr);gap:.3rem}
+      .menu-secciones .sec-btn{padding:.35rem .15rem;font-size:.62rem;border-radius:8px}
+      .menu-secciones .sec-btn .ico{font-size:1.1rem}
+      .dia{min-height:38px;font-size:.55rem}
+      .dia .ev{font-size:.45rem}
+      .stats .stat .n{font-size:1rem}
+      .stats{gap:.3rem}
+      .stat{padding:.3rem .4rem;min-width:55px}
+      .stat .l{font-size:.6rem}
+      .container{padding:.4rem}
+    }
+    @media(max-width:400px){
+      .menu-secciones{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(min-width:768px){
+      .menu-secciones{grid-template-columns:repeat(7,1fr)}
+    }
+  </style>
+</head>
+<body>
+<!-- ===== LOGIN ===== -->
+<div id="loginScreen" style="display:flex;position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0f172a,#1e293b);z-index:9999;justify-content:center;align-items:center;flex-direction:column">
+  <div style="background:#1e293b;padding:2.5rem;border-radius:16px;max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5);text-align:center">
+    <div style="font-size:3rem;margin-bottom:.5rem">🇨🇴</div>
+    <h2 style="color:#fbbf24;margin:0 0 .3rem;font-size:1.6rem">Club Contable</h2>
+    <p style="color:#94a3b8;margin:0 0 1.5rem;font-size:.9rem">Accede a tus tareas contables</p>
+    <select id="loginUser" style="width:100%;padding:12px 15px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:white;font-size:1rem;margin-bottom:12px;cursor:pointer">
+      <option value="">Selecciona tu usuario</option>
+      <option value="sandra">👩‍💼 Sandra (Administradora)</option>
+      <option value="maria">👤 María Ángel</option>
+      <option value="yurleny">👤 Yurleny</option>
+      <option value="kareling">👤 Kareling</option>
+    </select>
+    <input type="password" id="loginPass" placeholder="Contraseña" style="width:100%;padding:12px 15px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:white;font-size:1rem;margin-bottom:1.2rem;box-sizing:border-box">
+    <button onclick="login()" style="width:100%;padding:12px;border-radius:10px;border:none;background:#fbbf24;color:#0f172a;font-size:1rem;font-weight:bold;cursor:pointer">🔓 Entrar</button>
+    <p id="loginError" style="color:#ef4444;font-size:.85rem;margin-top:1rem;display:none"></p>
+  </div>
+</div>
+
+<script>
+// ===== USUARIOS =====
+const USERS = {
+  sandra:  { name:'Sandra (Administradora)', pass:'Sandra2026', admin:true },
+  maria:   { name:'María Ángel', pass:'Maria2026', admin:false },
+  yurleny: { name:'Yurleny', pass:'Yurleny2026', admin:false },
+  kareling:{ name:'Kareling', pass:'Kareling2026', admin:false }
+};
+
+function login() {
+  const user = document.getElementById('loginUser').value;
+  const pass = document.getElementById('loginPass').value;
+  const err = document.getElementById('loginError');
+  if (!user) { err.textContent='Selecciona un usuario'; err.style.display='block'; return; }
+  if (!pass) { err.textContent='Introduce la contraseña'; err.style.display='block'; return; }
+  if (USERS[user] && USERS[user].pass === pass) {
+    err.style.display='none';
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('userInfo').textContent = '👤 ' + USERS[user].name;
+    if (!USERS[user].admin) {
+      // Ocultar sección admin si no es administradora
+      document.querySelectorAll('.admin-only').forEach(el => el.style.display='none');
+    }
+  } else {
+    err.textContent='❌ Usuario o contraseña incorrectos';
+    err.style.display='block';
+  }
+}
+</script>
+
+<div id="userInfo" style="position:fixed;top:8px;right:12px;z-index:999;color:#fbbf24;font-size:.85rem;font-weight:bold;display:none"></div>
+
+
+<header>
+  <h1>🇨🇴 Club Contable · Colombia</h1>
+  <div style="margin-top:5px;display:flex;justify-content:center">
+    <select id="selectorEmpresa" onchange="cambiarEmpresa()" style="
+      background:#ffffff15;color:#fff;border:1px solid #ffffff30;border-radius:6px;
+      padding:.25rem .6rem;font-size:.75rem;font-weight:600;max-width:90%;
+      cursor:pointer;text-align:center;appearance:auto
+    "></select>
+  </div>
+  <p style="margin-top:3px">DIAN · IVA · Retefuente · Seguridad Social · Renta · Cierres</p>
+</header>
+
+<div class="container">
+  <!-- Alertas en la parte superior del Checklist -->
+  <div id="alertas" class="alertas"></div>
+
+  <!-- MENÚ PRINCIPAL CON ICONOS -->
+  <div class="menu-secciones" id="menuSecciones">
+    <div class="sec-btn activo" data-seccion="checklist" onclick="irSeccion('checklist')">
+      <span class="ico">📋</span> Checklist
+    </div>
+    <div class="sec-btn" data-seccion="calendario" onclick="irSeccion('calendario')">
+      <span class="ico">📅</span> Calendario
+    </div>
+    <div class="sec-btn" data-seccion="iva" onclick="irSeccion('iva')">
+      <span class="ico">💰</span> IVA
+    </div>
+    <div class="sec-btn" data-seccion="retefuente" onclick="irSeccion('retefuente')">
+      <span class="ico">📄</span> Retefuente
+    </div>
+    <div class="sec-btn" data-seccion="seguridadsocial" onclick="irSeccion('seguridadsocial')">
+      <span class="ico">👥</span> Seg. Social
+    </div>
+    <div class="sec-btn" data-seccion="renta" onclick="irSeccion('renta')">
+      <span class="ico">📊</span> Renta
+    </div>
+    <div class="sec-btn" data-seccion="cierres" onclick="irSeccion('cierres')">
+      <span class="ico">📑</span> Cierres
+    </div>
+  </div>
+
+  <!-- ===== PANEL: CHECKLIST ===== -->
+  <div id="panelChecklist" class="panel activo">
+    <div class="stats" id="statsChecklist"></div>
+    <div class="bar">
+      <select id="filtroEstado" onchange="renderChecklist()">
+        <option value="todas">Todas</option>
+        <option value="pendientes">Pendientes</option>
+        <option value="completadas">Completadas</option>
+      </select>
+            <select id="filtroCategoria" onchange="cambioCategoria()">
+        <option value="">📁 Todas las categorías</option>
+        <option value="Impuestos">💰 Impuestos</option>
+        <option value="Laboral">👥 Laboral</option>
+        <option value="Contabilidad">📑 Contabilidad</option>
+        <option value="ReporteEntidades">🏛️ Reporte a Entidades</option>
+        <option value="Visitas">🚗 Visitas</option>
+        <option value="SolicitudAreas">📋 Solicitud de Áreas</option>
+      </select>
+      <select id="filtroSubcategoria" onchange="renderChecklist()" style="margin-top:8px">
+        <option value="">📂 Todas las subcategorías</option>
+      </select>
+      <select id="filtroNit" onchange="renderChecklist()">
+        <option value="">Todos los NIT</option>
+      </select>
+      <button class="btn" onclick="abrirModal()">➕ Añadir</button>
+    </div>
+    <div id="checklist" class="checklist"></div>
+  </div>
+
+  <!-- ===== PANEL: CALENDARIO ===== -->
+  <div id="panelCalendario" class="panel">
+    <div class="bar">
+      <select id="mesS">
+        <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
+        <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
+        <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
+        <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
+      </select>
+      <input type="number" id="anioS" min="2024" max="2035" style="max-width:80px" />
+      <button class="btn btn-sm" onclick="renderCalendario()">Ir</button>
+      <button class="btn btn-sm sec" onclick="irHoyCal()">Hoy</button>
+      <button class="btn btn-sm" onclick="abrirModal()">➕</button>
+    </div>
+    <div id="calendario" class="mes"></div>
+    <div id="proximos"></div>
+  </div>
+
+  <!-- ===== PANEL: IVA ===== -->
+  <div id="panelIva" class="panel">
+    <div class="stats" id="statsIva"></div>
+    <div class="bar">
+      <select id="filtroIva" onchange="renderSeccion('iva')">
+        <option value="todas">Todas</option>
+        <option value="pendientes">Pendientes</option>
+        <option value="completadas">Completadas</option>
+      </select>
+      <button class="btn" onclick="abrirModal(null,'IVA')">➕ Añadir IVA</button>
+    </div>
+    <div id="listaIva" class="checklist"></div>
+  </div>
+
+  <!-- ===== PANEL: RETEFUENTE ===== -->
+  <div id="panelRetefuente" class="panel">
+    <div class="stats" id="statsRetefuente"></div>
+    <div class="bar">
+      <select id="filtroRetefuente" onchange="renderSeccion('retefuente')">
+        <option value="todas">Todas</option>
+        <option value="pendientes">Pendientes</option>
+        <option value="completadas">Completadas</option>
+      </select>
+      <button class="btn" onclick="abrirModal(null,'Retefuente')">➕ Añadir Retefuente</button>
+    </div>
+    <div id="listaRetefuente" class="checklist"></div>
+  </div>
+
+  <!-- ===== PANEL: SEGURIDAD SOCIAL ===== -->
+  <div id="panelSeguridadSocial" class="panel">
+    <div class="stats" id="statsSeguridadSocial"></div>
+    <div class="bar">
+      <select id="filtroSeguridadSocial" onchange="renderSeccion('seguridadsocial')">
+        <option value="todas">Todas</option>
+        <option value="pendientes">Pendientes</option>
+        <option value="completadas">Completadas</option>
+      </select>
+      <button class="btn" onclick="abrirModal(null,'SeguridadSocial')">➕ Añadir Seg. Social</button>
+    </div>
+    <div id="listaSeguridadSocial" class="checklist"></div>
+  </div>
+
+  <!-- ===== PANEL: RENTA ===== -->
+  <div id="panelRenta" class="panel">
+    <div class="stats" id="statsRenta"></div>
+    <div class="bar">
+      <select id="filtroRenta" onchange="renderSeccion('renta')">
+        <option value="todas">Todas</option>
+        <option value="pendientes">Pendientes</option>
+        <option value="completadas">Completadas</option>
+      </select>
+      <button class="btn" onclick="abrirModal(null,'Renta')">➕ Añadir Renta</button>
+    </div>
+    <div id="listaRenta" class="checklist"></div>
+  </div>
+
+  <!-- ===== PANEL: CIERRES CONTABLES ===== -->
+  <div id="panelCierres" class="panel">
+    <div class="stats" id="statsCierres"></div>
+    <div class="bar">
+      <select id="filtroCierres" onchange="renderSeccion('cierres')">
+        <option value="todas">Todas</option>
+        <option value="pendientes">Pendientes</option>
+        <option value="completadas">Completadas</option>
+      </select>
+      <button class="btn" onclick="abrirModal(null,'CierreContable')">➕ Añadir Cierre</button>
+    </div>
+    <div id="listaCierres" class="checklist"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="contador" id="footerContador">🗂️ 0 / 0 tareas completadas</div>
+  <div>💾 Datos guardados en tu navegador (localStorage)</div>
+  <div class="legal">Club Contable · Calendario fiscal Colombia · Los datos no se envían a ningún servidor</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-in">
+    <h2 id="modalTit">➕ Nueva actividad</h2>
+    <label>Título *</label>
+    <input type="text" id="eNom" placeholder="Ej: Presentar declaración de IVA" />
+    <label>Fecha límite *</label>
+    <input type="date" id="eFecha" />
+    <label>NIT / Empresa</label>
+    <select id="eNit"></select>
+    <label>Responsable</label>
+    <input type="text" id="eResp" placeholder="Nombre de quien lo hace" />
+    <label>Tipo</label>
+    <select id="eTipo">
+      <option value="normal">📌 Normal</option>
+      <option value="urgente">⚠️ Vencimiento (DIAN)</option>
+      <option value="recordatorio">🔔 Recordatorio</option>
+    </select>
+    <label>Categoría</label>
+    <select id="eCategoria">
+      <option value="General">📌 General</option>
+      <option value="IVA">💰 IVA</option>
+      <option value="Retefuente">📄 Retefuente</option>
+      <option value="SeguridadSocial">👥 Seguridad Social</option>
+      <option value="Renta">📊 Renta</option>
+      <option value="CierreContable">📑 Cierre Contable</option>
+    </select>
+    <label>NIT / Cliente</label>
+    <input type="text" id="eNit" placeholder="NIT o nombre del cliente (opcional)" />
+    <label>Notas</label>
+    <textarea id="eNotas" placeholder="Instrucciones, detalles adicionales…"></textarea>
+    <div class="br">
+      <button class="btn" onclick="guardarItem()">💾 Guardar</button>
+      <button class="btn sec" onclick="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATOS =====
+let datos = [{"id": "e_celpa_0", "titulo": "FIC", "fecha": "2026-01-15", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_1", "titulo": "Conciliaciones bancarias", "fecha": "2026-01-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_2", "titulo": "Informe de cartera", "fecha": "2026-02-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_3", "titulo": "Verificación legalización anticipos", "fecha": "2026-02-28", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_4", "titulo": "Traslado al Inventario", "fecha": "2026-03-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_5", "titulo": "Anexos Plan Maestro", "fecha": "2026-03-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_6", "titulo": "Gestión RUB Febrero, Mayo, Agosto, Noviembre", "fecha": "2026-04-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_7", "titulo": "Verificación NR IVA 3.500 UVT", "fecha": "2026-04-30", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_8", "titulo": "Conciliación activos fijos", "fecha": "2026-05-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_9", "titulo": "Conciliación cuentas por pagar", "fecha": "2026-05-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_10", "titulo": "Notas y conciliación de impuestos", "fecha": "2026-06-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_11", "titulo": "Nóminas", "fecha": "2026-06-30", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_12", "titulo": "Primas", "fecha": "2026-07-10", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_13", "titulo": "Consolidación prestaciones - Excel", "fecha": "2026-07-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_14", "titulo": "Consolidación prestaciones - World Office", "fecha": "2026-08-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_15", "titulo": "Seguridad social", "fecha": "2026-08-31", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_16", "titulo": "Nota seguridad social", "fecha": "2026-09-10", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_17", "titulo": "Facturación usuarios", "fecha": "2026-09-30", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_18", "titulo": "Informe de operaciones por tercero", "fecha": "2026-10-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_19", "titulo": "Verificación notas crédito y devoluciones", "fecha": "2026-10-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_20", "titulo": "Conciliación vinculadas", "fecha": "2026-11-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_21", "titulo": "Facturas de compra - Listado DIAN", "fecha": "2026-11-30", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_22", "titulo": "RADIAN y Documento Electrónico", "fecha": "2026-12-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_23", "titulo": "Operaciones sospechosas", "fecha": "2026-12-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_24", "titulo": "Renovación factura electrónica", "fecha": "2026-01-15", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_25", "titulo": "Envío carpeta SOL", "fecha": "2026-01-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_26", "titulo": "Incapacidades por cobrar", "fecha": "2026-02-10", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_27", "titulo": "Informe proveedores nuevos Celpa", "fecha": "2026-02-28", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_28", "titulo": "Formato proveedores - BEPROX", "fecha": "2026-03-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_29", "titulo": "Borradores impuestos", "fecha": "2026-03-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_30", "titulo": "Revisión saldos de cartera", "fecha": "2026-04-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_31", "titulo": "Cálculo retefuente por salarios", "fecha": "2026-04-30", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_32", "titulo": "Libros oficiales", "fecha": "2026-05-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_33", "titulo": "Agentes de retención IVA factura", "fecha": "2026-05-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_34", "titulo": "Activos fijos Celpa", "fecha": "2026-06-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_35", "titulo": "Vacaciones equipo", "fecha": "2026-06-30", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_36", "titulo": "Certificado ingresos y retenciones", "fecha": "2026-07-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_37", "titulo": "SOL - Respuesta alcaldía", "fecha": "2026-07-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_38", "titulo": "Descargar VISUM ADVISORE", "fecha": "2026-08-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_39", "titulo": "Actualizar RUT SOL", "fecha": "2026-08-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_40", "titulo": "Renta", "fecha": "2026-09-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_41", "titulo": "Exógena DIAN", "fecha": "2026-09-30", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_42", "titulo": "Conciliación fiscal", "fecha": "2026-10-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_43", "titulo": "Supersociedades", "fecha": "2026-10-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_44", "titulo": "Bogotá - Exógena", "fecha": "2026-11-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_45", "titulo": "Bucaramanga - Exógena", "fecha": "2026-11-30", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_46", "titulo": "Bucaramanga - ICA", "fecha": "2026-12-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_47", "titulo": "Cierre fiducia", "fecha": "2026-12-31", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_48", "titulo": "Cámara de Comercio - Capital al mil", "fecha": "2026-01-15", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_49", "titulo": "Paz y salvo Alcaldía", "fecha": "2026-01-31", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_50", "titulo": "Visita Régimen Franco", "fecha": "2026-02-10", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_51", "titulo": "Predial", "fecha": "2026-02-28", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_52", "titulo": "Traslado retenciones al pasivo", "fecha": "2026-03-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_53", "titulo": "Intereses cesantías", "fecha": "2026-03-31", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_54", "titulo": "Cesantías", "fecha": "2026-04-10", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_55", "titulo": "Conciliación seguridad social", "fecha": "2026-04-30", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_56", "titulo": "Seguimiento circularizaciones - certificado retención", "fecha": "2026-05-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_57", "titulo": "Solicitud certificados retenciones", "fecha": "2026-05-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_58", "titulo": "Evaluación de desempeño", "fecha": "2026-06-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_59", "titulo": "Cierre año - programa", "fecha": "2026-06-30", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_60", "titulo": "Notas Estados Financieros", "fecha": "2026-07-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_61", "titulo": "Renovación Cámara de Comercio", "fecha": "2026-07-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_62", "titulo": "Bloqueo documentos", "fecha": "2026-08-10", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_63", "titulo": "Tasa Supersociedades", "fecha": "2026-08-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_def_64", "titulo": "Información Exógena DIAN", "fecha": "2026-03-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "", "notas": "", "ok": false}, {"id": "e_def_65", "titulo": "Estados Financieros - Corte", "fecha": "2026-12-31", "resp": "", "tipo": "normal", "categoria": "Contabilidad", "nit": "", "notas": "", "ok": false}, {"id": "e_def_66", "titulo": "Estados Financieros - Aprobación", "fecha": "2027-03-31", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "", "notas": "", "ok": false}];
+let empresas = [{"id":"e_default","nombre":"Celpa"},{"id":"e_copropiedad","nombre":"Copropiedad"}];
+let editId = null;
+let seccionActiva = 'checklist';
+let empresaSeleccionada = localStorage.getItem('clubcontable_empresa_sel') || '__todas__';
+
+const CATS = {
+  Impuestos: {
+    IVA: ['iva', 'iva mensual', 'iva bimestral', 'declaración iva'],
+    Retefuente: ['retefuente', 'retención en la fuente', 'retencion en la fuente'],
+    Renta: ['renta', 'declaración de renta', 'declaracion de renta'],
+    Exogena: ['exógena', 'exogena', 'información exógena'],
+    RUB: ['rub', 'registro único'],
+    Reteica: ['reteica', 'retención ica', 'retencion ica']
+  },
+  Laboral: {
+    SeguridadSocial: ['seguridad social', 'pago seguridad', 'planilla'],
+    Nomina: ['nómina', 'nomina', 'nómina electrónica', 'nomina electronica']
+  },
+  Contabilidad: {
+    ComprasGastosProveedores: ['compras', 'gastos', 'proveedores', 'cuenta por pagar', 'factura proveedor'],
+    TesoreriaCartera: ['tesorería', 'tesoreria', 'cartera', 'flujo de caja', 'recaudo', 'pago', 'bancos'],
+    ActivosFijos: ['activos fijos', 'activo fijo', 'depreciación', 'depreciacion'],
+    Financiero: ['financiero', 'estados financieros', 'balance', 'pyg', 'estado resultado'],
+    Facturacion: ['facturación', 'facturacion', 'factura electrónica', 'factura electronica']
+  },
+  ReporteEntidades: {
+    RNB: ['rnb', 'registro nacional'],
+    Supersociedades: ['supersociedades', 'super sociedades', 'informe supersociedades'],
+    PlanMaestro: ['plan maestro', 'planmaestro'],
+    CamaraComercio: ['cámara de comercio', 'camara de comercio', 'registro mercantil'],
+    Otra: ['reporte', 'informe entidad']
+  },
+  Visitas: {
+    RevisoriaFiscal: ['revisoría fiscal', 'revisoria fiscal', 'revisor'],
+    AuditoriaRegimenFranco: ['auditoría régimen franco', 'auditoria regimen franco', 'régimen franco'],
+    AuditoriaSagrilatf: ['auditoría sagrilatf', 'auditoria sagrilatf', 'sagrilatf'],
+    Otra: ['visita', 'reunión', 'cita externa', 'diligencia']
+  },
+  SolicitudAreas: {
+    AccionistasJuntaDirectiva: ['accionistas', 'junta directiva', 'junta de socios', 'asamblea'],
+    GerenciaGeneral: ['gerencia general', 'dirección general', 'direccion general'],
+    GerenciaAdminFinanciera: ['gerencia administrativa', 'gerencia financiera'],
+    Operaciones: ['operaciones', 'operativo', 'logística', 'logistica'],
+    OfCumplimiento: ['oficina de cumplimiento', 'cumplimiento', 'sarlaft'],
+    Otra: ['solicitud', 'requerimiento', 'pedido área']
+  }
+};
+const CAT_ICON = { Impuestos:'💰', Laboral:'👥', Contabilidad:'📑', ReporteEntidades:'🏛️', Visitas:'🚗', SolicitudAreas:'📋', General:'📌' };
+const SUBCAT_ICON = {
+  IVA:'💰', Retefuente:'📄', Renta:'📊', Exogena:'📋', RUB:'🔖', Reteica:'🧾',
+  SeguridadSocial:'🛡️', Nomina:'👤',
+  ComprasGastosProveedores:'🛒', TesoreriaCartera:'💳', ActivosFijos:'🏗️', Financiero:'📈', Facturacion:'🧾',
+  RNB:'📜', Supersociedades:'🏛️', PlanMaestro:'📋', CamaraComercio:'🏪', Otra:'📌',
+  RevisoriaFiscal:'🔍', AuditoriaRegimenFranco:'📋', AuditoriaSagrilatf:'🛡️',
+  AccionistasJuntaDirectiva:'👥', GerenciaGeneral:'👔', GerenciaAdminFinanciera:'💼', Operaciones:'⚙️', OfCumplimiento:'✅'
+};
+const CAT_NOMBRE = {
+  Impuestos:'💰 Impuestos', Laboral:'👥 Laboral', Contabilidad:'📑 Contabilidad',
+  ReporteEntidades:'🏛️ Reporte Entidades', Visitas:'🚗 Visitas', SolicitudAreas:'📋 Solicitud Áreas',
+  General:'📌 General',
+  IVA:'IVA', Retefuente:'Retefuente', Renta:'Renta', Exogena:'Exógena', RUB:'RUB', Reteica:'Reteica',
+  SeguridadSocial:'Seguridad Social', Nomina:'Nómina',
+  ComprasGastosProveedores:'Compras/Gastos/Proveedores', TesoreriaCartera:'Tesorería y Cartera',
+  ActivosFijos:'Activos Fijos', Financiero:'Financiero', Facturacion:'Facturación',
+  RNB:'RNB', Supersociedades:'Supersociedades', PlanMaestro:'Plan Maestro',
+  CamaraComercio:'Cámara de Comercio', Otra:'Otra',
+  RevisoriaFiscal:'Revisoría Fiscal', AuditoriaRegimenFranco:'Auditoría Régimen Franco',
+  AuditoriaSagrilatf:'Auditoría Sagrilatf',
+  AccionistasJuntaDirectiva:'Accionistas/Junta Directiva', GerenciaGeneral:'Gerencia General',
+  GerenciaAdminFinanciera:'Gerencia Admin/Financiera', Operaciones:'Operaciones',
+  OfCumplimiento:'Of. Cumplimiento'
+};
+
+// ===== MIGRACIÓN AUTOMÁTICA: detecta categoría por texto =====
+function detectarSubcategoria(item) {
+  const t = (item.titulo + ' ' + (item.notas || '')).toLowerCase();
+  const cat_principal = item.categoria || 'General';
+  if (!CATS[cat_principal]) return 'General';
+  for (const [subcat, keywords] of Object.entries(CATS[cat_principal])) {
+    if (keywords.some(k => t.includes(k))) return subcat;
+  }
+  return 'General';
+}
+
+function detectarCategoria(item) {
+  const t = (item.titulo + ' ' + (item.notas || '')).toLowerCase();
+  for (const [cat, subcats] of Object.entries(CATS)) {
+    for (const [subcat, keywords] of Object.entries(subcats)) {
+      if (keywords.some(k => t.includes(k))) return cat;
+    }
+  }
+  return 'General';
+}
+
+// Migrar datos existentes: si no tienen categoría, asignarla
+function migrarDatos() { datos = JSON.parse(localStorage.getItem(clubcontable_datos)); if (!datos || !datos.length) { datos = [{"id":"e_def_01782907409824","titulo":" Información Exógena DIAN","fecha":"2026-03-31","resp":"","tipo":"urgente","categoria":"Renta","nit":"","notas":"Presentar información exógena","ok":false},{"id":"e_def_11782907409824","titulo":" Estados Financieros - Corte","fecha":"2026-12-31","resp":"","tipo":"normal","categoria":"CierreContable","nit":"","notas":"Corte de estados financieros anuales","ok":false},{"id":"e_def_21782907409824","titulo":" Estados Financieros - Aprobación","fecha":"2027-03-31","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"","notas":"Aprobar estados financieros","ok":false},{"id":"e_celpa_001782907409823","titulo":"FIC","fecha":"2026-01-15","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_011782907409823","titulo":"Conciliaciones bancarias","fecha":"2026-01-31","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_021782907409823","titulo":"Informe de cartera","fecha":"2026-02-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_031782907409823","titulo":"Verificación legalización anticipos","fecha":"2026-02-28","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_041782907409823","titulo":"Traslado al Inventario","fecha":"2026-03-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_051782907409823","titulo":"Anexos Plan Maestro","fecha":"2026-03-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_061782907409823","titulo":"Gestión RUB FEB -1, MAYO, AGO, NOV","fecha":"2026-04-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_071782907409823","titulo":"Verificación NR IVA 3500 UVT","fecha":"2026-04-30","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_081782907409823","titulo":"Conciliación activos fijos","fecha":"2026-05-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_091782907409824","titulo":"Conciliación de cuentas por pagar","fecha":"2026-05-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_101782907409824","titulo":"Notas y conciliación de Impuestos","fecha":"2026-06-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_111782907409824","titulo":"Nóminas","fecha":"2026-06-30","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_121782907409824","titulo":"Primas","fecha":"2026-07-10","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_131782907409824","titulo":"Consolidación prestaciones Excel","fecha":"2026-07-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_141782907409824","titulo":"Consolidación prestaciones World Office","fecha":"2026-08-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_151782907409824","titulo":"Seguridad social","fecha":"2026-08-31","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_161782907409824","titulo":"Nota Seguridad social","fecha":"2026-09-10","resp":"","tipo":"normal","categoria":"SeguridadSocial","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_171782907409824","titulo":"Facturación usuarios","fecha":"2026-09-30","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_181782907409824","titulo":"Informe de operaciones y por tercero","fecha":"2026-10-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_191782907409824","titulo":"Verificación notas créditos y devoluciones","fecha":"2026-10-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_201782907409824","titulo":"Conciliación vinculadas","fecha":"2026-11-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_211782907409824","titulo":"Facturas de compra - Listado DIAN","fecha":"2026-11-30","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_221782907409824","titulo":"RADIAN y Doc. Electrónico","fecha":"2026-12-10","resp":"","tipo":"urgente","categoria":"IVA","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_231782907409824","titulo":"Operaciones sospechosas","fecha":"2026-12-31","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_241782907409824","titulo":"Renovación factura electrónica","fecha":"2026-01-15","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_251782907409824","titulo":"Envío carpeta SOL","fecha":"2026-01-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_261782907409824","titulo":"Incapacidades por cobrar","fecha":"2026-02-10","resp":"","tipo":"normal","categoria":"SeguridadSocial","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_271782907409824","titulo":"Informe proveedores nuevos Celpa","fecha":"2026-02-28","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_281782907409824","titulo":"Formato de proveedores - BEPROX","fecha":"2026-03-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_291782907409824","titulo":"Borradores impuestos","fecha":"2026-03-31","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_301782907409824","titulo":"Revisión saldos de cartera","fecha":"2026-04-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_311782907409824","titulo":"Cálculo retefuente por salarios","fecha":"2026-04-30","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_321782907409824","titulo":"Libros oficiales","fecha":"2026-05-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_331782907409824","titulo":"Agentes de retención de IVA factura","fecha":"2026-05-31","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_341782907409824","titulo":"Activos fijos Celpa","fecha":"2026-06-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_351782907409824","titulo":"Vacaciones equipo","fecha":"2026-06-30","resp":"","tipo":"normal","categoria":"SeguridadSocial","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_361782907409824","titulo":"Certificado de ingresos y retenciones","fecha":"2026-07-10","resp":"","tipo":"urgente","categoria":"Retefuente","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_371782907409824","titulo":"SOL - Respuesta alcaldía","fecha":"2026-07-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_381782907409824","titulo":"Bajar VISUM ADVYSORE","fecha":"2026-08-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_391782907409824","titulo":"ACTUALIZAR RUT SOL","fecha":"2026-08-31","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_401782907409824","titulo":"RENTA","fecha":"2026-09-10","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_411782907409824","titulo":"EXÓGENA DIAN","fecha":"2026-09-30","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_421782907409824","titulo":"CONCILIACIÓN FISCAL","fecha":"2026-10-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_431782907409824","titulo":"SUPERSOCIEDADES","fecha":"2026-10-31","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_441782907409824","titulo":"BOGOTÁ - EXÓGENA","fecha":"2026-11-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_451782907409824","titulo":"BTURA - EXÓGENA","fecha":"2026-11-30","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_461782907409824","titulo":"BTURA - ICA","fecha":"2026-12-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_471782907409824","titulo":"CIERRE FIDUCIA","fecha":"2026-12-31","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_481782907409824","titulo":"Cámara de Comercio Celpa capital al mil","fecha":"2026-01-15","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_491782907409824","titulo":"PAZ Y SALVO ALCALDÍA","fecha":"2026-01-31","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_501782907409824","titulo":"VISITA RÉGIMEN FRANCO","fecha":"2026-02-10","resp":"","tipo":"normal","categoria":"CierreContable","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_511782907409824","titulo":"PREDIAL","fecha":"2026-02-28","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_521782907409824","titulo":"Traslado retenciones al Pasivo","fecha":"2026-03-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_531782907409824","titulo":"Int. Cesantías","fecha":"2026-03-31","resp":"","tipo":"normal","categoria":"SeguridadSocial","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_541782907409824","titulo":"Cesantías","fecha":"2026-04-10","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_551782907409824","titulo":"Conciliación seguridad social","fecha":"2026-04-30","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_561782907409824","titulo":"Seguimiento circularizaciones - certificado retención","fecha":"2026-05-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_571782907409824","titulo":"Solicitud certificados retenciones","fecha":"2026-05-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_581782907409824","titulo":"Evaluación de desempeño","fecha":"2026-06-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_591782907409824","titulo":"Cierre año - programa","fecha":"2026-06-30","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_601782907409824","titulo":"Notas Estados Financieros","fecha":"2026-07-10","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_611782907409824","titulo":"RENOVACIÓN CÁMARA DE COMERCIO","fecha":"2026-07-31","resp":"","tipo":"urgente","categoria":"General","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_621782907409824","titulo":"BLOQUEO DOCUMENTOS","fecha":"2026-08-10","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"Celpa","ok":false},{"id":"e_celpa_631782907409824","titulo":"TASA SUPERSOCIEDADES","fecha":"2026-08-31","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"Celpa","ok":false}]; guardarLS(); }
+  let migrados = false;
+  datos.forEach(d => {
+    if (!d.categoria) {
+      d.categoria = detectarCategoria(d);
+      migrados = true;
+    }
+  });
+  // Migrar desde localStorage anterior si estaba vacío
+  if (datos.length === 0) {
+    const viejos = JSON.parse(localStorage.getItem('cfg_contabilidad_co') || '[]');
+    if (viejos.length > 0) {
+      datos = viejos;
+      datos.forEach(d => {
+        if (!d.categoria) d.categoria = detectarCategoria(d);
+      });
+      migrados = true;
+    }
+  }
+  // Si sigue vacío, cargar defaults
+  if (datos.length === 0) {
+    datos = generarDefaults();
+    migrados = true;
+  }
+  if (migrados) guardarLS();
+}
+
+function generarDefaults() {
+  const d = [];
+  const add = (titulo, fecha, tipo, categoria, notas) => {
+    d.push({ id:'d'+Date.now()+Math.random().toString(36).slice(2,6), titulo, fecha, resp:'', tipo, categoria, nit:'', notas:notas||'', ok:false });
+  };
+  // Cierres contables
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  for (let i = 0; i < 12; i++) {
+    const m = i+1; const a = m === 12 ? 2027 : 2026;
+    const nota = i === 0 ? 'Cierre del mes de enero' : (i === 11 ? 'Cierre anual' : '');
+    add('📆 Cierre contable - '+meses[i], `${a}-${String(m+1).padStart(2,'0')}-05`, 'recordatorio', 'CierreContable', nota);
+  }
+  // IVA
+  const ivaBim = [['Ene-Feb','03-10'],['Mar-Abr','05-10'],['May-Jun','07-10'],['Jul-Ago','09-10'],['Sep-Oct','11-10'],['Nov-Dic','01-10']];
+  ivaBim.forEach(([b,f],i) => {
+    const a = i === 5 ? 2027 : 2026;
+    add('💰 IVA Bimestral '+b, `${a}-${f}`, 'urgente', 'IVA', 'Presentar declaración IVA ante DIAN');
+  });
+  // Retefuente
+  for (let i = 0; i < 12; i++) {
+    const m = i+1; const a = m === 12 ? 2027 : 2026;
+    add('📄 ReteFuente - '+meses[i], `${a}-${String(m+1).padStart(2,'0')}-10`, 'urgente', 'Retefuente', 'Presentar declaración de retención en la fuente');
+  }
+  // Renta
+  add('📊 Declaración de Renta - Preparación', '2026-06-01', 'recordatorio', 'Renta', 'Iniciar revisión de documentos para declaración de renta');
+  add('📊 Declaración de Renta - Plazo máximo', '2026-08-15', 'urgente', 'Renta', 'Presentar declaración de renta año gravable 2025');
+  // Seguridad Social (solo algunos meses como ejemplo)
+  for (let i = 6; i < 12; i++) {
+    const m = i+1; const a = m > 11 ? 2027 : 2026;
+    add('👥 Pago Seguridad Social - '+meses[i], `${a}-${String(m+1).padStart(2,'0')}-05`, 'urgente', 'SeguridadSocial', 'Pago salud, pensión, ARL. Fecha tope: 5 de cada mes');
+  }
+  // Info exógena
+  add('📋 Información Exógena DIAN', '2026-03-31', 'urgente', 'General', 'Presentar información exógena año anterior a la DIAN');
+  add('📑 Estados Financieros - Corte', '2026-12-31', 'normal', 'CierreContable', 'Corte de estados financieros anuales');
+  add('📑 Estados Financieros - Aprobación', '2027-03-31', 'urgente', 'CierreContable', 'Aprobar y presentar estados financieros ante entes de control');
+  return d;
+}
+
+
+// ===== GESTIÓN NIT / EMPRESA =====
+function getEmpresas() {
+  if (!empresas.length) {
+    empresas = [{ id:'e_default', nombre:'Celpa' }, { id:'e_copropiedad', nombre:'Copropiedad' }];
+    guardarEmpresas();
+  }
+  return empresas;
+}
+function guardarEmpresas() { localStorage.setItem('clubcontable_empresas', JSON.stringify(empresas)); }
+function getNitActual() { return empresaSeleccionada; }
+function setEmpresaSel(nit) { empresaSeleccionada = nit || '__todas__'; localStorage.setItem('clubcontable_empresa_sel', empresaSeleccionada); }
+function filtrarPorEmpresa(items) {
+  if (!empresaSeleccionada || empresaSeleccionada === '__todas__') return items;
+  return items.filter(function(d) { return d.nit === empresaSeleccionada; });
+}
+function renderSelectorEmpresa() {
+  var sel = document.getElementById('selectorEmpresa');
+  if (!sel) return;
+  var emps = getEmpresas();
+  var opts = '<option value="__todas__"> Todas las empresas</option>';
+  for (var i = 0; i < emps.length; i++) {
+    var selAttr = (empresaSeleccionada === emps[i].id) ? 'selected' : '';
+    opts += '<option value="' + emps[i].id + '" ' + selAttr + '>' + emps[i].nombre + '</option>';
+  }
+  opts += '<option value="__nueva__" style="font-weight:600;color:#0077b6">+ Anadir empresa</option>';
+  sel.innerHTML = opts;
+}
+function cambiarEmpresa() {
+  var val = document.getElementById('selectorEmpresa').value;
+  if (val === '__nueva__') {
+    var nom = prompt('Nombre de la nueva empresa:');
+    if (nom && nom.trim()) {
+      empresas.push({ id:'e_'+Date.now(), nombre:nom.trim() });
+      guardarEmpresas();
+      setEmpresaSel(empresas[empresas.length-1].id);
+    } else {
+      setEmpresaSel('__todas__');
+    }
+  } else {
+    setEmpresaSel(val);
+  }
+  renderSelectorEmpresa();
+  refrescarTodo();
+}
+function renderSelectoresNit() {
+  var selModal = document.getElementById('eNitEmpresa');
+  if (selModal) {
+    var emps = getEmpresas();
+    var opts = '<option value="">Sin empresa asignada</option>';
+    for (var i = 0; i < emps.length; i++) {
+      opts += '<option value="' + emps[i].id + '">' + emps[i].nombre + '</option>';
+    }
+    selModal.innerHTML = opts;
+  }
+  var selFiltro = document.getElementById('filtroNitCheck');
+  if (selFiltro) {
+    var emps = getEmpresas();
+    var opts = '<option value="">Todas las empresas</option>';
+    for (var i = 0; i < emps.length; i++) {
+      opts += '<option value="' + emps[i].id + '">' + emps[i].nombre + '</option>';
+    }
+    selFiltro.innerHTML = opts;
+  }
+}
+getEmpresas();
+
+
+function guardarLS() { localStorage.setItem('clubcontable_datos', JSON.stringify(datos)); }
+
+// ===== UTILIDADES =====
+function diaStr(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtFecha(f) {
+  const d = new Date(f + 'T12:00:00');
+  return d.toLocaleDateString('es-CO', { weekday:'short', day:'numeric', month:'short' });
+}
+function fmtFechaCorta(f) {
+  const d = new Date(f + 'T12:00:00');
+  return d.toLocaleDateString('es-CO', { day:'numeric', month:'short' });
+}
+
+// ===== GESTIÓN DE EMPRESAS =====
+function getEmpresas() {
+  if (!empresas.length) {
+    empresas = [{ id:'e_default', nombre:'Celpa' }, { id:'e_copropiedad', nombre:'Copropiedad' }];
+    guardarEmpresas();
+  }
+  return empresas;
+}
+function guardarEmpresas() { localStorage.setItem('clubcontable_empresas', JSON.stringify(empresas)); }
+function getNitActual() { return empresaSeleccionada; }
+function setNitActual(nit) { empresaSeleccionada = nit || '__todas__'; localStorage.setItem('clubcontable_empresa_sel', empresaSeleccionada); }
+function filtrarPorEmpresa(items) {
+  if (!empresaSeleccionada || empresaSeleccionada === '__todas__') return items;
+  return items.filter(d => d.nit === empresaSeleccionada);
+}
+function renderSelectorEmpresa() {
+  const sel = document.getElementById('selectorEmpresa');
+  if (!sel) return;
+  const emps = getEmpresas();
+  sel.innerHTML = '<option value="__todas__">🏢 Todas las empresas</option>' +
+    emps.map(e => `<option value="${e.id}" ${empresaSeleccionada === e.id ? 'selected' : ''}>${e.nombre}</option>`).join('') +
+    '<option value="__nueva__" style="font-weight:600;color:#0077b6">➕ Añadir empresa</option>';
+}
+function cambiarEmpresa() {
+  const val = document.getElementById('selectorEmpresa').value;
+  if (val === '__nueva__') {
+    const nom = prompt('Nombre de la nueva empresa:');
+    if (nom && nom.trim()) {
+      empresas.push({ id:'e_'+Date.now(), nombre:nom.trim() });
+      guardarEmpresas();
+      setNitActual(empresas[empresas.length-1].id);
+    } else {
+      setNitActual('__todas__');
+    }
+  } else {
+    setNitActual(val);
+  }
+  renderSelectorEmpresa();
+  refrescarTodo();
+}
+// También añadir empresa desde el modal
+getEmpresas();
+
+// ===== NAVEGACIÓN =====
+function irSeccion(sec) {
+  seccionActiva = sec;
+  document.querySelectorAll('.sec-btn').forEach(b => b.classList.toggle('activo', b.dataset.seccion === sec));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('activo'));
+  const panel = document.getElementById('panel'+sec.charAt(0).toUpperCase()+sec.slice(1));
+  if (panel) panel.classList.add('activo');
+  // Renderizar según sección
+  switch(sec) {
+    case 'checklist': renderChecklist(); break;
+    case 'calendario': renderCalendario(); break;
+    default: renderSeccion(sec); break;
+  }
+  actualizarContadorFooter();
+}
+
+// ===== ALERTAS (Checklist) =====
+function renderAlertas() {
+  const el = document.getElementById('alertas');
+  const hoy = new Date();
+  const hoyStr = diaStr(hoy);
+  const manana = new Date(hoy); manana.setDate(manana.getDate()+1);
+  const mananaStr = diaStr(manana);
+  const en7 = new Date(hoy); en7.setDate(en7.getDate()+7);
+  const en7Str = diaStr(en7);
+
+  var itemsEmp = filtrarPorEmpresa(datos);
+  const atrasadas = itemsEmp.filter(function(d) { return !d.ok && d.fecha < hoyStr; });
+  const vencenHoyManana = itemsEmp.filter(function(d) { return !d.ok && (d.fecha === hoyStr || d.fecha === mananaStr); });
+  const proximas = itemsEmp.filter(function(d) { return !d.ok && d.fecha > mananaStr && d.fecha <= en7Str; });
+
+  const fmtAlerta = (a) => a.titulo + (a.nit ? ' (🆔 '+a.nit+')' : '');
+
+  let html = '';
+  if (atrasadas.length > 0) {
+    html += `<div class="alerta"><span class="ico">🚨</span><div><strong>${atrasadas.length} vencida(s):</strong> ${atrasadas.slice(0,3).map(fmtAlerta).join(', ')}${atrasadas.length>3?' …y '+(atrasadas.length-3)+' más':''}</div></div>`;
+  }
+  if (vencenHoyManana.length > 0) {
+    html += `<div class="alerta naranja"><span class="ico">🔴</span><div><strong>Vencen hoy/mañana (${vencenHoyManana.length}):</strong> ${vencenHoyManana.map(fmtAlerta).join(', ')}</div></div>`;
+  }
+  if (proximas.length > 0) {
+    html += `<div class="alerta amarilla"><span class="ico">📅</span><div><strong>Próximos 7 días (${proximas.length}):</strong> ${proximas.slice(0,4).map(fmtAlerta).join(', ')}${proximas.length>4?' …y '+(proximas.length-4)+' más':''}</div></div>`;
+  }
+  if (!atrasadas.length && !vencenHoyManana.length && !proximas.length) {
+    html += `<div class="alerta verde"><span class="ico">✅</span><div>Todo al día. No hay tareas pendientes urgentes.</div></div>`;
+  }
+  el.innerHTML = html;
+}
+
+// ===== STATS GENÉRICOS =====
+function renderStats(containerId, items, label) {
+  const total = items.length;
+  const hechas = items.filter(d => d.ok).length;
+  const pendientes = total - hechas;
+  const urgentes = items.filter(d => !d.ok && d.tipo === 'urgente').length;
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = `
+    <div class="stat"><div class="n">${total}</div><div class="l">📋 Total</div></div>
+    <div class="stat"><div class="n">${pendientes}</div><div class="l">⏳ Pendientes</div></div>
+    <div class="stat"><div class="n">${hechas}</div><div class="l">✅ Hechas</div></div>
+    <div class="stat"><div class="n">${urgentes}</div><div class="l">⚠️ Urgentes</div></div>
+  `;
+}
+
+// ===== RENDER CHECKLIST =====
+
+// ===== SUBCATEGORÍAS =====
+function cambioCategoria() {
+  const selCat = document.getElementById('filtroCategoria');
+  const selSub = document.getElementById('filtroSubcategoria');
+  const cat = selCat.value;
+  selSub.innerHTML = '';
+  
+  const optTodas = document.createElement('option');
+  optTodas.value = '';
+  optTodas.textContent = '📂 Todas las subcategorías';
+  selSub.appendChild(optTodas);
+  
+  if (cat && CATS[cat]) {
+    for (const [subcat, _] of Object.entries(CATS[cat])) {
+      if (subcat === 'General') continue;
+      const icon = SUBCAT_ICON[subcat] || '📂';
+      const nombre = CAT_NOMBRE[subcat] || subcat;
+      const opt = document.createElement('option');
+      opt.value = subcat;
+      opt.textContent = icon + ' ' + nombre;
+      selSub.appendChild(opt);
+    }
+  }
+  renderChecklist();
+}
+
+function getSubcategoriaTarea(item) {
+  if (item.subcategoria) return item.subcategoria;
+  // Si no tiene subcategoria, detectarla
+  return detectarSubcategoria(item);
+}
+function renderChecklist() {
+  var nitFiltro = (document.getElementById('filtroNitCheck') || {}).value || '';
+  const filtroEstado = document.getElementById('filtroEstado').value;
+  const filtroCat = document.getElementById('filtroCategoria').value;
+  const filtroNit = document.getElementById('filtroNit').value;
+  let items = [...datos];
+  if (filtroEstado === 'pendientes') items = items.filter(d => !d.ok);
+  if (filtroEstado === 'completadas') items = items.filter(d => d.ok);
+    if (filtroCat) {
+    items = items.filter(function(d) { return d.categoria === filtroCat; });
+    const filtroSub = document.getElementById('filtroSubcategoria').value;
+    if (filtroSub) {
+      items = items.filter(function(d) { 
+        const sub = d.subcategoria || detectarSubcategoria(d);
+        return sub === filtroSub;
+      });
+    }
+  }
+  if (nitFiltro) items = items.filter(function(d) { return d.nit === nitFiltro; });
+  items = filtrarPorEmpresa(items);
+  if (filtroNit) items = items.filter(d => d.nit === filtroNit);
+  items.sort((a,b) => {
+    if (a.ok !== b.ok) return a.ok ? 1 : -1;
+    return a.fecha.localeCompare(b.fecha);
+  });
+  const el = document.getElementById('checklist');
+  el.innerHTML = pintarLista(items);
+  renderStats('statsChecklist', filtrarPorEmpresa(datos), 'Checklist');
+  renderAlertas();
+  actualizarContadorFooter();
+}
+
+// ===== RENDER SECCIÓN ESPECÍFICA =====
+function renderSeccion(sec) {
+  const mapa = {
+    iva:         { filtro:'filtroIva',         lista:'listaIva',         stats:'statsIva',         cats:['IVA'] },
+    retefuente:  { filtro:'filtroRetefuente',   lista:'listaRetefuente',  stats:'statsRetefuente',  cats:['Retefuente'] },
+    seguridadsocial: { filtro:'filtroSeguridadSocial', lista:'listaSeguridadSocial', stats:'statsSeguridadSocial', cats:['SeguridadSocial'] },
+    renta:       { filtro:'filtroRenta',        lista:'listaRenta',       stats:'statsRenta',       cats:['Renta'] },
+    cierres:     { filtro:'filtroCierres',      lista:'listaCierres',     stats:'statsCierres',     cats:['CierreContable'] }
+  };
+  const cfg = mapa[sec];
+  if (!cfg) return;
+  const filtroEstado = document.getElementById(cfg.filtro).value;
+  var items = filtrarPorEmpresa(datos.filter(function(d) { return cfg.cats.indexOf(d.categoria) >= 0; }));
+  if (filtroEstado === 'pendientes') items = items.filter(d => !d.ok);
+  if (filtroEstado === 'completadas') items = items.filter(d => d.ok);
+  items.sort((a,b) => {
+    if (a.ok !== b.ok) return a.ok ? 1 : -1;
+    return a.fecha.localeCompare(b.fecha);
+  });
+  document.getElementById(cfg.lista).innerHTML = pintarLista(items);
+  renderStats(cfg.stats, items, sec);
+}
+
+// ===== PINTAR LISTA DE ITEMS =====
+function pintarLista(items) {
+  if (items.length === 0) {
+    return '<div class="vacio">✨ No hay actividades. ¡Añade una!</div>';
+  }
+  const hoy = new Date();
+  const hoyStr = diaStr(hoy);
+  return items.map(d => {
+    const bdg = d.tipo === 'urgente' ? '<span class="badge r">🔴</span>' :
+                d.tipo === 'recordatorio' ? '<span class="badge a">🔔</span>' : '';
+    const venc = !d.ok && d.fecha < hoyStr ? ' · 🚨 Vencida' : '';
+    const nitMostrar = d.nit ? ' · '+d.nit : '';
+    const nitShow = d.nit ? ' · 🆔 '+d.nit : '';
+    const catTag = d.categoria && d.categoria !== 'General'
+      ? `<span class="cat-tag">${CAT_ICON[d.categoria]||'📌'} ${CAT_NOMBRE[d.categoria]||d.categoria} › ${SUBCAT_ICON[d.subcategoria||detectarSubcategoria(d)]||'📂'} ${CAT_NOMBRE[d.subcategoria||detectarSubcategoria(d)]||d.subcategoria||"General"}</span>`
+      : '';
+    return `<div class="item-c ${d.ok ? 'hecho' : ''}">
+      <input type="checkbox" ${d.ok ? 'checked' : ''} onchange="toggleOk('${d.id}')" />
+      ${bdg}
+      <div class="info">
+        <strong>${d.titulo}</strong>
+        <div class="meta">📅 ${fmtFecha(d.fecha)}${d.resp ? ' · 👤 '+d.resp : ''}${nitShow}${venc}</div>
+      </div>
+      ${catTag}
+      <div class="acc">
+        <button onclick="editarItem('${d.id}')" title="Editar">✏️</button>
+        <button onclick="borrarItem('${d.id}')" title="Eliminar">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== TOGGLE OK =====
+function toggleOk(id) {
+  const d = datos.find(x => x.id === id);
+  if (d) { d.ok = !d.ok; guardarLS(); refrescarTodo(); }
+}
+
+// ===== BORRAR =====
+function borrarItem(id) {
+  if (!confirm('¿Eliminar esta actividad definitivamente?')) return;
+  datos = datos.filter(d => d.id !== id);
+  guardarLS(); refrescarTodo();
+}
+
+// ===== CALENDARIO =====
+function renderCalendario() {
+  const mes = parseInt(document.getElementById('mesS').value);
+  const anio = parseInt(document.getElementById('anioS').value);
+  const el = document.getElementById('calendario');
+  el.innerHTML = '';
+  ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'].forEach(n => {
+    const d = document.createElement('div'); d.className = 'dia-n'; d.textContent = n; el.appendChild(d);
+  });
+  const pd = new Date(anio, mes, 1);
+  const ud = new Date(anio, mes+1, 0);
+  const is = pd.getDay();
+  const ma = new Date(anio, mes, 0);
+  // Días del mes anterior
+  for (let i = is-1; i >= 0; i--) {
+    const d = document.createElement('div'); d.className = 'dia otro';
+    d.textContent = ma.getDate() - i; el.appendChild(d);
+  }
+  const hoy = new Date();
+  // Días del mes actual
+  for (let i = 1; i <= ud.getDate(); i++) {
+    const f = `${anio}-${String(mes+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+    const d = document.createElement('div'); d.className = 'dia';
+    if (i === hoy.getDate() && mes === hoy.getMonth() && anio === hoy.getFullYear()) {
+      d.classList.add('hoy');
+    }
+    const num = document.createElement('div'); num.className = 'num';
+    num.textContent = i; d.appendChild(num);
+    const evs = filtrarPorEmpresa(datos).filter(function(e) { return e.fecha === f; });
+    evs.forEach(e => {
+      const ev = document.createElement('div');
+      ev.className = `ev ${e.tipo === 'urgente' ? 'r' : e.tipo === 'recordatorio' ? 'a' : e.ok ? 'v' : 'g'}`;
+      ev.textContent = (e.ok ? '✅ ' : '') + e.titulo;
+      ev.onclick = (evt) => { evt.stopPropagation(); editarItem(e.id); };
+      d.appendChild(ev);
+    });
+    d.onclick = () => abrirModal(f);
+    el.appendChild(d);
+  }
+  // Rellenar días del siguiente mes
+  const resto = 7 - ((is + ud.getDate()) % 7 || 7);
+  for (let i = 1; i <= resto; i++) {
+    const d = document.createElement('div'); d.className = 'dia otro';
+    d.textContent = i; el.appendChild(d);
+  }
+  // Próximos 30 días
+  const en30 = new Date(hoy); en30.setDate(en30.getDate()+30);
+  const prox = filtrarPorEmpresa(datos).filter(function(d) { return !d.ok && d.fecha >= diaStr(hoy) && d.fecha <= diaStr(en30); })
+    .sort((a,b) => a.fecha.localeCompare(b.fecha));
+  const pel = document.getElementById('proximos');
+  if (prox.length === 0) {
+    pel.innerHTML = '<p style="color:#94a3b8;font-size:.78rem;text-align:center;padding:.5rem">📭 No hay vencimientos en los próximos 30 días</p>';
+  } else {
+    pel.innerHTML = `<h3 style="font-size:.82rem;margin-bottom:.35rem;color:#0a2e4a">📋 Vencimientos próximos (30 días)</h3>` +
+      prox.map(d => `<div class="item-c" style="margin-bottom:.2rem;padding:.35rem .5rem">
+        <div class="info" style="font-size:.75rem"><strong>${d.titulo}</strong> · ${fmtFechaCorta(d.fecha)}</div>
+        <div class="acc"><button onclick="editarItem('${d.id}')" style="background:none;border:none;cursor:pointer">📝</button></div>
+      </div>`).join('');
+  }
+}
+
+function irHoyCal() {
+  const h = new Date();
+  document.getElementById('mesS').value = h.getMonth();
+  document.getElementById('anioS').value = h.getFullYear();
+  renderCalendario();
+}
+
+// ===== MODAL =====
+function abrirModal(fecha, categoria) {
+  editId = null;
+  document.getElementById('modalTit').textContent = '➕ Nueva actividad';
+  document.getElementById('eNom').value = '';
+  document.getElementById('eFecha').value = fecha || diaStr(new Date());
+  document.getElementById('eResp').value = '';
+  if (document.getElementById('eNitEmpresa')) document.getElementById('eNitEmpresa').value = (empresaSeleccionada !== '__todas__') ? empresaSeleccionada : '';
+  document.getElementById('eTipo').value = 'normal';
+  document.getElementById('eCategoria').value = categoria || 'General';
+  document.getElementById('eNit').value = '';
+  document.getElementById('eNotas').value = '';
+  document.getElementById('modal').classList.add('m');
+  // Focus en título
+  setTimeout(() => document.getElementById('eNom').focus(), 100);
+}
+
+function editarItem(id) {
+  const d = datos.find(x => x.id === id);
+  if (!d) return;
+  editId = id;
+  document.getElementById('modalTit').textContent = '✏️ Editar actividad';
+  document.getElementById('eNom').value = d.titulo;
+  document.getElementById('eFecha').value = d.fecha;
+  document.getElementById('eResp').value = d.resp || '';
+  document.getElementById('eTipo').value = d.tipo;
+  document.getElementById('eCategoria').value = d.categoria || 'General';
+  document.getElementById('eNit').value = d.nit || '';
+  document.getElementById('eNotas').value = d.notas || '';
+  document.getElementById('modal').classList.add('m');
+}
+
+function guardarItem() {
+  const nom = document.getElementById('eNom').value.trim();
+  const fecha = document.getElementById('eFecha').value;
+  const resp = document.getElementById('eResp').value.trim();
+  const tipo = document.getElementById('eTipo').value;
+  const categoria = document.getElementById('eCategoria').value;
+  const nit = (document.getElementById('eNitEmpresa') || {}).value || '';
+  const nit = document.getElementById('eNit').value.trim();
+  const notas = document.getElementById('eNotas').value.trim();
+  if (!nom || !fecha) { alert('⚠️ Título y fecha son obligatorios'); return; }
+  if (editId) {
+    const d = datos.find(x => x.id === editId);
+    if (d) { d.titulo = nom; d.fecha = fecha; d.resp = resp; d.tipo = tipo; d.categoria = categoria; d.nit = nit; d.notas = notas; }
+  } else {
+    datos.push({ id:'e'+Date.now()+Math.random().toString(36).slice(2,6), titulo:nom, fecha, resp, tipo, categoria, nit, notas, ok:false });
+  }
+  guardarLS();
+  cerrarModal();
+  refrescarTodo();
+}
+
+function cerrarModal() {
+  document.getElementById('modal').classList.remove('m');
+  editId = null;
+}
+
+// ===== FOOTER =====
+function actualizarContadorFooter() {
+  var empItems = filtrarPorEmpresa(datos);
+  const total = empItems.length;
+  const hechas = empItems.filter(function(d) { return d.ok; }).length;
+  document.getElementById('footerContador').textContent = `🗂️ ${hechas} / ${total} tareas completadas`;
+}
+
+// ===== REFRESCAR TODO =====
+function refrescarTodo() {
+  switch(seccionActiva) {
+    case 'checklist': renderChecklist(); break;
+    case 'calendario': renderCalendario(); break;
+    default: renderSeccion(seccionActiva); break;
+  }
+  actualizarContadorFooter();
+  actualizarBadges();
+  actualizarFiltroNit();
+}
+
+// ===== BADGES EN EL MENÚ =====
+function actualizarBadges() {
+  var itemsFiltrados = filtrarPorEmpresa(datos);
+  const secciones = [
+    { key:'IVA', id:'iva' },
+    { key:'Retefuente', id:'retefuente' },
+    { key:'SeguridadSocial', id:'seguridadsocial' },
+    { key:'Renta', id:'renta' },
+    { key:'CierreContable', id:'cierres' }
+  ];
+  secciones.forEach(s => {
+    const pend = itemsFiltrados.filter(function(d) { return d.categoria === s.key && !d.ok; }).length;
+    const btn = document.querySelector(`.sec-btn[data-seccion="${s.id}"]`);
+    if (btn) {
+      // Quitar badge existente
+      const old = btn.querySelector('.cnt-badge');
+      if (old) old.remove();
+      if (pend > 0) {
+        const badge = document.createElement('span');
+        badge.className = 'cnt-badge';
+        badge.textContent = pend;
+        btn.appendChild(badge);
+      }
+    }
+  });
+}
+
+// ===== FILTRO NIT =====
+function actualizarFiltroNit() {
+  const nits = [...new Set(datos.map(d => d.nit).filter(n => n && n.trim()))].sort();
+  const sel = document.getElementById('filtroNit');
+  if (!sel) return;
+  const actual = sel.value;
+  sel.innerHTML = '<option value="">Todos los NIT</option>' +
+    nits.map(n => `<option value="${n}"${n===actual?' selected':''}>🆔 ${n}</option>`).join('');
+}
+
+// ===== CERRAR MODAL CON ESC =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cerrarModal();
+});
+
+// ===== INICIALIZAR =====
+(function init() {
+  renderSelectorEmpresa();
+  renderSelectoresNit();
+  migrarDatos();
+  const h = new Date();
+  document.getElementById('mesS').value = h.getMonth();
+  document.getElementById('anioS').value = h.getFullYear();
+  renderChecklist();
+  renderCalendario();
+  actualizarBadges();
+  actualizarFiltroNit();
+  // Renderizar todas las secciones (por si acaso)
+  ['iva','retefuente','seguridadsocial','renta','cierres'].forEach(s => renderSeccion(s));
+  actualizarContadorFooter();
+})();
+</script>
+</body>
+</html>
