@@ -240,7 +240,7 @@
     <p class="section-sub">Cuéntanos qué necesitas y te respondemos en menos de 24h.</p>
     <div class="form-card">
       <h3>Cuéntanos tu caso</h3>
-      <form id="contactForm" action="https://95df0b5e9ff964.lhr.life/api/contacto" method="POST">
+      <form name="seguros-cfg" id="contactForm" netlify>
         <div class="form-group">
           <label>Nombre</label>
           <input type="text" name="nombre" required placeholder="Tu nombre" />
@@ -320,18 +320,30 @@
       const formData = new FormData(this);
       const data = {};
       formData.forEach((val, key) => data[key] = val);
-      const res = await fetch(this.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const result = await res.json();
-      if (result.success) {
+
+      const token = '8109029340:AAFnLqA1KUKOFK1ipD8b_jHR3SkVdyWPFzA';
+      const chatId = '7890204626';
+      let mensaje = '';
+      mensaje += '\u{1F514} *Nuevo lead CFG Seguros*\n\n';
+      mensaje += '\u{1F464} *Nombre:* ' + data.nombre + '\n';
+      mensaje += '\u{1F4DE} *Tel\u00E9fono:* ' + data.telefono + '\n';
+      mensaje += '\u2709\uFE0F *Correo:* ' + data.email + '\n';
+      mensaje += '\u{1F382} *Fecha nac.:* ' + data.fecha_nacimiento + '\n';
+      mensaje += '\u{1F4CB} *Seguro:* ' + data.seguro + '\n';
+      mensaje += '\u{1F3E2} *Aseguradora:* ' + data.aseguradora_interes + '\n';
+      mensaje += '\u{1F4C5} *Fecha:* ' + new Date().toLocaleDateString('es-ES');
+
+      const url = 'https://api.telegram.org/bot' + token + '/sendMessage';
+      const body = JSON.stringify({ chat_id: chatId, text: mensaje, parse_mode: 'Markdown' });
+      const resTelegram = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body });
+      const telegramResult = await resTelegram.json();
+
+      if (telegramResult.ok) {
         this.reset();
         document.getElementById('formOk').style.display = 'block';
         setTimeout(() => document.getElementById('formOk').style.display = 'none', 5000);
       } else {
-        alert('Error: ' + result.message);
+        alert('Error al enviar. Int\u00E9ntalo de nuevo.');
       }
     } catch(err) {
       alert('Error de conexión. Inténtalo de nuevo.');

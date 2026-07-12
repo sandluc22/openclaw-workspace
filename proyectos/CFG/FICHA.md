@@ -146,4 +146,4 @@ Sanitas, Adeslas, Asisa, Mapfre, DKV, AXA, Allianz, Generali, Caser, Reale, Aego
 
 ---
 
-**Última actualización:** 09-jul-2026 23:02h
+**Última actualización:** 12-jul-2026 17:45h

@@ -1,6 +1,6 @@
 # 📋 TAREAS PENDIENTES
 
-**Actualizado:** 12-jul-2026 14:00h
+**Actualizado:** 12-jul-2026 17:45h
 
 ---
 
@@ -33,6 +33,19 @@
 - [ ] **Google Search Console** — Verificar dominio con crecimientofinancieroglobal@gmail.com
 - [ ] Enviar sitemap.xml a Google para indexación
 - [ ] Probar que el formulario envía datos a info@
+
+### 🆕 MAÑANA 13-JUL: FORMULARIO CFG
+- [ ] **Formspree** — Sandra se registra en formspree.io y pasa la URL
+- [ ] Alfa conecta el formulario a la web y despliega
+
+### 🆕 FIVERR: SEGUNDO GIG (Asistente Virtual + Contable + Traducciones)
+- [ ] Definir título, descripción y paquetes
+- [ ] Incluir: contabilidad, facturación, gestión documental, **traducción de textos**
+- [ ] Crear el Gig en Fiverr (sin publicar aún)
+
+### 🆕 CLUB CONTABLE PENDIENTE EXTRA
+- [ ] **Suscripciones** — Crear plan de venta por suscripción (precio, funcionalidades, cómo se cobra)
+- [ ] Definir qué incluye cada plan (usuarios, tareas, informes...)
 
 ---
 

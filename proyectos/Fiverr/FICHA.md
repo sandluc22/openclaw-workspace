@@ -73,3 +73,21 @@ Message me before ordering so I can confirm I can help with your project.
 - Perfil en español, Gig en inglés (para llegar a más clientes)
 - Las redes sociales son solo **creación de perfiles + textos iniciales**, NO gestión continua
 - Sandra + Alfa trabajan en equipo: Sandra pone contenido y atención al cliente, Alfa ayuda con la parte técnica
+
+
+---
+
+## 🆕 GIG PENDIENTE — Asistente Virtual + Contable + Traducciones
+
+| Campo | Valor |
+|---|---|
+| **Estado** | 🔴 **Pendiente de crear** |
+| **Servicios a incluir** | Asistencia contable, facturación, gestión documental, **traducción de textos** |
+| **Pendiente definir** | Título, descripción, paquetes y precios |
+
+### Pendientes de este Gig
+- [ ] Definir título en inglés
+- [ ] Definir descripción
+- [ ] Configurar paquetes (Básico / Estándar / Premium)
+- [ ] Crear el Gig en Fiverr (sin publicar)
+- [ ] Publicar cuando se verifique identidad + W-9
