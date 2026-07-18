@@ -1,0 +1,20 @@
+# Cargar automáticamente al inicio de cada sesión
+context_files:
+  - /home/node/workspace/PROYECTOS.md
+  - /home/node/workspace/TABLERO.md
+  - /home/node/workspace/MEMORIA_VIVA.md
+  - /home/node/workspace/proyectos/CFG/FICHA.md
+  - /home/node/workspace/proyectos/Club Contable/FICHA.md
+  - /home/node/workspace/proyectos/Fiverr/FICHA.md
+  - /home/node/workspace/proyectos/Libro IA/FICHA.md
+  - /home/node/workspace/SOUL.md
+  - /home/node/workspace/IDENTITY.md
+  - /home/node/workspace/USER.md
+
+# Club Contable FICHA
+- path: /home/node/workspace/proyectos/Club Contable/FICHA.md
+  priority: 10
+
+# CLAVES
+- path: /home/node/workspace/CLAVES.md
+  priority: 5

@@ -1,29 +1,99 @@
-# 🏢 Club Contable
+# Club Contable · clubcontable.com
 
-> App/web de contabilidad.
-> **Dominio:** clubcontable.com
-> **Registrado en:** Namecheap
-> **Última actualización:** 3 julio 2026
+## Información general
+- **Nombre:** Club Contable
+- **País:** Colombia 🇨🇴
+- **Descripción:** Plataforma interna de gestión de tareas contables por empresa y categoría
+- **Dominio:** clubcontable.com
+- **Registrador:** Namecheap (sandluc22)
+- **Fecha de migración a Cloudflare:** Julio 2026
 
 ---
 
-## 📋 Estado
+## Hosting
+- **Plataforma:** Cloudflare Pages ✅ (migrado desde Netlify)
+- **Proyecto:** clubcontable-web
+- **URL producción:** https://clubcontable.com
+- **URL pages.dev:** https://clubcontable-web.pages.dev
+- **Account ID (Cloudflare):** 72305fb85467e89da2940e359f9e09cc
+- **Zone ID (clubcontable.com):** 1f29ff229ec2d7cc6f23cc016c508c3b
 
-| Área | Estado | Notas |
-|------|--------|-------|
-| Dominio registrado | ✅ | Hasta 30/06/2027 |
-| Protección Whois | ✅ | Privacidad activa |
-| Código fuente | ✅ | Guardado en `codigo/index.html` (descargado de Surge) |
-| Web funcionando | ❌ | Clubcontable.com no carga (DNS o Netlify) |
-| Email corporativo | ⏳ | Pendiente de pago |
+## DNS (Cloudflare)
+- **Nameservers:** burt.ns.cloudflare.com / liz.ns.cloudflare.com
+- **CNAME @ →** clubcontable-web.pages.dev (Proxied 🟠)
+- **CNAME www →** clubcontable-web.pages.dev (Proxied 🟠)
+- **MX 10 →** aspmx1.migadu.com
+- **MX 20 →** aspmx2.migadu.com
 
-## 🔗 Accesos
+## SSL/TLS
+- **Estado:** Activo (certificado universal automático de Cloudflare)
+- **Tipo:** Full (strict)
 
-- **Namecheap:** sandluc22 / pass en credenciales.md
-- **Netlify:** crecimientofinancieroglobal@gmail.com (login con Google)
-- **Surge:** crecimientofinancieroglobal@gmail.com / Alfa.1982
+---
 
-## 📝 Historial
+## Usuarios del sistema
 
-- **01/07/2026** — Sandra envía HTML. Subido a Surge.sh y luego a Netlify.
-- **03/07/2026** — Código recuperado y guardado en `codigo/index.html`. Sistema de documentación creado (TABLERO.md, PROYECTOS.md, carpetas por proyecto).
+| Usuario | Nombre | Rol |
+|---------|--------|-----|
+| **sandra** | Sandra (Administradora) | 👑 Admin |
+| **maria** | María Ángel | 👤 Usuario |
+| **yurleny** | Yurleny | 👤 Usuario |
+| **kareling** | Kareling | 👤 Usuario |
+
+### Contraseñas
+- Sandra: `Sandra2026`
+- María Ángel: `Maria2026`
+- Yurleny: `Yurleny2026`
+- Kareling: `Kareling2026`
+
+---
+
+## Categorías del sistema
+
+| Categoría | Subcategorías |
+|-----------|---------------|
+| 💰 **Impuestos** | IVA, Retefuente, Renta, Exógena, RUB, Reteica |
+| 👷 **Laboral** | Seg. Social, Nómina |
+| 📊 **Contabilidad** | Compras, Tesorería, Activos Fijos, Financiero, Facturación |
+| 🏛️ **Reporte Entidades** | RNB, Supersociedades, Plan Maestro, Cámara Comercio, Otra |
+| 🔍 **Visitas** | Revisoría, Aud. Régimen Franco, Aud. Sagrilatf, Otra |
+| 📋 **Solicitud Áreas** | Accionistas, Gerencia Gral, Gerencia Admin/Fin, Operaciones, Of. Cumplimiento, Otra |
+
+---
+
+## Empresas registradas
+El sistema permite gestionar tareas por empresa (NIT). La lista completa está en el código fuente (`codigo/index.html`).
+
+---
+
+## Estructura del proyecto
+
+```
+clubcontable/
+├── README.md              ← Esta ficha
+├── notas.md               ← Notas del proyecto (versión anterior)
+└── codigo/
+    └── index.html         ← App completa (login, categorías, tareas, empresas)
+```
+
+---
+
+## Deploy (Cloudflare Pages)
+- **Método:** `npx wrangler pages deploy . --project-name=clubcontable-web`
+- **Dominio vinculado:** clubcontable.com (desde Cloudflare Pages → Custom domains)
+- **Nota:** Antes del deploy quitar dominio con API, deployar, re-asignar
+
+---
+
+## Próximos pasos pendientes
+- [ ] Verificar que **clubcontable.com** carga correctamente
+- [ ] Confirmar SSL activo
+- [ ] Configurar correos en Migadu (si se necesitan)
+- [ ] Agregar SPF y DMARC en DNS de Cloudflare
+- [ ] Subir a GitHub (sandluc22/club-contable)
+
+---
+
+## Google Search Console (pendiente)
+- [ ] Verificar dominio en Google Search Console
+- [ ] Enviar sitemap (cuando se genere)

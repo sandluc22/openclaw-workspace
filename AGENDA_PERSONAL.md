@@ -36,3 +36,7 @@
 - [ ] **CFG Colombia** — pendiente de definir alcance
 - [ ] **Proyecto estudiantes Colombia** — pendiente de definir
 - [ ] **Pensiones Colombia** — consultar situación
+
+## 🏠 Inmobiliario
+
+- [ ] **Información proyecto Ciudadela (Metropolitano, Madrid)** — precios, plazos, dónde registrarse

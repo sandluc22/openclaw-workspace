@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crecimiento Financiero Global · Sandra Caicedo · Grupo Galilea</title>
+  <meta name="description" content="Agente de Grupo Galilea en Madrid. Planes de ahorro, inversión y seguros de vida, salud y hogar para particulares y empresas en toda España." />
+  <meta property="og:title" content="Crecimiento Financiero Global · Sandra Caicedo · Grupo Galilea" />
+  <meta property="og:description" content="Protege tu patrimonio y haz crecer tu dinero con Grupo Galilea. Planes de ahorro, seguros de vida, salud y hogar en toda España." />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;
+      background:#0a0a0b;color:#e4e4e7;line-height:1.6;min-height:100vh
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+    .btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:#f59e0b;color:#0a0a0b;font-weight:700;
+      padding:.8rem 1.8rem;border-radius:.5rem;border:none;
+      font-size:.95rem;cursor:pointer;transition:background .2s,transform .15s
+    }
+    .btn:hover{background:#d97706;transform:translateY(-1px)}
+    .btn-outline{
+      background:transparent;border:1px solid #3f3f46;color:#e4e4e7
+    }
+    .btn-outline:hover{background:#27272a;border-color:#f59e0b}
+    .badge{
+      display:inline-block;background:#27272a;color:#f59e0b;
+      font-size:.75rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:.05em;padding:.3rem .9rem;border-radius:999px
+    }
+
+    /* HEADER */
+    header{
+      border-bottom:1px solid #27272a;padding:1rem 0;
+      position:sticky;top:0;background:rgba(10,10,11,.9);backdrop-filter:blur(12px);z-index:100
+    }
+    header .container{display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em}
+    .logo span{color:#f59e0b}
+    nav{display:flex;gap:1.25rem;align-items:center}
+    nav a{font-size:.85rem;font-weight:500;color:#a1a1aa;transition:color .2s}
+    nav a:hover{color:#f59e0b}
+    nav a.cta-link{
+      background:#f59e0b;color:#0a0a0b;padding:.35rem .9rem;
+      border-radius:999px;font-weight:700
+    }
+    nav a.cta-link:hover{background:#d97706}
+    @media(max-width:640px){
+      nav{gap:.6rem}
+      nav a{font-size:.75rem}
+      nav a.cta-link{padding:.3rem .7rem;font-size:.75rem}
+    }
+
+    /* HERO */
+    .hero{
+      padding:6rem 0 4rem;text-align:center;
+      background:radial-gradient(ellipse at center,#18181b 0%,#0a0a0b 70%)
+    }
+    .hero h1{
+      font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.15;
+      letter-spacing:-.03em;margin-bottom:.8rem
+    }
+    .hero h1 span{color:#f59e0b}
+    .hero p{color:#a1a1aa;font-size:1.1rem;max-width:600px;margin:0 auto 2rem}
+    .hero-badges{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+
+    /* PRODUCTS */
+    .section{padding:4rem 0}
+    .section-title{font-size:1.6rem;font-weight:700;margin-bottom:.5rem;text-align:center}
+    .section-sub{color:#a1a1aa;margin-bottom:2.5rem;text-align:center;font-size:.95rem}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    @media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+    .card{
+      background:#18181b;border:1px solid #27272a;border-radius:1rem;
+      padding:1.75rem;transition:border-color .2s,transform .15s
+    }
+    .card:hover{border-color:#f59e0b;transform:translateY(-2px)}
+    .card .icon{font-size:2rem;margin-bottom:.75rem}
+    .card h3{font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
+    .card p{font-size:.85rem;color:#a1a1aa;line-height:1.5}
+
+    .card-featured{
+      background:linear-gradient(135deg,#18181b,#27272a);
+      border-color:#f59e0b;text-align:center;padding:2.5rem
+    }
+    .card-featured .btn{margin-top:1.25rem}
+
+    /* ABOUT */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+    @media(max-width:700px){.about-grid{grid-template-columns:1fr}}
+    .about-text h2{font-size:1.5rem;margin-bottom:.75rem}
+    .about-text p{color:#a1a1aa;font-size:.9rem;margin-bottom:.6rem}
+
+    /* CONTACT FORM */
+    .form-card{
+      background:#18181b;border:1px solid #27272a;
+      border-radius:1rem;padding:2rem;max-width:520px;margin:0 auto
+    }
+    .form-card h3{text-align:center;margin-bottom:1.25rem;font-size:1.15rem}
+    .form-group{margin-bottom:1rem}
+    label{display:block;font-size:.8rem;color:#a1a1aa;margin-bottom:.3rem;font-weight:600}
+    input,textarea,select{
+      width:100%;padding:.75rem 1rem;border-radius:.5rem;
+      border:1px solid #3f3f46;background:#0a0a0b;color:#e4e4e7;
+      font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s
+    }
+    input:focus,textarea:focus{border-color:#f59e0b}
+    textarea{resize:vertical;min-height:80px}
+    .form-card .btn{width:100%;justify-content:center;margin-top:.5rem}
+    .form-ok{
+      display:none;padding:1rem;background:#22c55e;color:#0a0a0b;
+      border-radius:.5rem;text-align:center;font-weight:600
+    }
+
+    /* FOOTER */
+    footer{
+      border-top:1px solid #27272a;padding:2rem 0;
+      text-align:center;color:#52525b;font-size:.8rem
+    }
+    footer a{color:#a1a1aa;text-decoration:underline}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="#" class="logo">📈 <span>Crecimiento</span> Financiero Global</a>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#contacto" class="cta-link">Hablamos</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badges">
+      <span class="badge">Planes de ahorro</span>
+      <span class="badge">Seguros</span>
+      <span class="badge">Inversión</span>
+    </div>
+    <h1>Protege tu patrimonio y haz crecer tu dinero con <span>Grupo Galilea</span></h1>
+    <p>Soy Sandra, agente de Grupo Galilea en Madrid. Ayudo a particulares y empresas a planificar su ahorro y proteger lo que importa.</p>
+    <a href="#contacto" class="btn">📩 Háblame sin compromiso</a>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="section">
+  <div class="container">
+    <h2 class="section-title">💼 Lo que te ofrezco</h2>
+    <p class="section-sub">Productos de Grupo Galilea adaptados a ti, sin letra pequeña ni sorpresas.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">📈</div>
+        <h3>Planes de ahorro e inversión</h3>
+        <p>Haz crecer tu dinero con productos adaptados a tu perfil. Beneficios fiscales para autónomos.</p>
+      </div>
+      <div class="card">
+        <div class="icon">❤️</div>
+        <h3>Seguro de vida</h3>
+        <p>Protege a tu familia si tú faltas. Desde 30€ al mes. Hipoteca, fallecimiento, invalidez.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏥</div>
+        <h3>Seguro de salud</h3>
+        <p>Acceso a las mejores clínicas sin esperas. Individual, familiar o para empresas.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏠</div>
+        <h3>Seguro de hogar</h3>
+        <p>Cobertura completa para tu vivienda habitual o alquilada. Desde 15€ al mes.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏢</div>
+        <h3>Para empresas</h3>
+        <p>Seguros de responsabilidad civil, accidentes laborales, salud corporativa y planes de previsión.</p>
+      </div>
+      <div class="card card-featured">
+        <div class="icon">🛡️</div>
+        <h3>Plan personalizado</h3>
+        <p>Te ayudo a elegir lo que realmente necesitas. Nada de productos que no te sirven.</p>
+        <a href="#contacto" class="btn">👉 Quiero mi plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi" class="section" style="background:#0f0f11">
+  <div class="container">
+    <h2 class="section-title">🧑‍💼 Sobre mí</h2>
+    <p class="section-sub">Soy Sandra, agente de Grupo Galilea en Madrid. Trabajo con particulares y empresas en toda España.</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>¿Por qué trabajar conmigo?</h2>
+        <p>✅ Te explico las cosas claras, sin tecnicismos ni presión.</p>
+        <p>✅ Te ayudo a elegir el producto que encaja contigo, no el que más comisión me deje.</p>
+        <p>✅ Estoy en Madrid pero atiendo a toda España online.</p>
+        <p>✅ Respaldo de Grupo Galilea, una aseguradora con años de presencia en España.</p>
+        <p style="margin-top:1.5rem;font-size:.85rem;color:#71717a">📍 Madrid · Toda España</p>
+        <a href="#contacto" class="btn" style="margin-top:1rem">📩 Escríbeme</a>
+      </div>
+      <div style="background:#18181b;border:1px solid #27272a;border-radius:1rem;padding:2.5rem;text-align:center;font-size:5rem">
+        👩‍💼
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="section">
+  <div class="container">
+    <h2 class="section-title">📩 Hablemos sin compromiso</h2>
+    <p class="section-sub">Dime qué necesitas y te respondo en menos de 24h.</p>
+    <div class="form-card">
+      <h3>Cuéntame tu caso</h3>
+      <form id="contactForm">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" name="nombre" required placeholder="Tu nombre" />
+        </div>
+        <div class="form-group">
+          <label>Teléfono o email</label>
+          <input type="text" name="contacto" required placeholder="Teléfono o correo" />
+        </div>
+        <div class="form-group">
+          <label>¿Qué te interesa?</label>
+          <select name="interes">
+            <option value="">Selecciona una opción</option>
+            <option>Plan de ahorro / inversión</option>
+            <option>Seguro de vida</option>
+            <option>Seguro de salud</option>
+            <option>Seguro de hogar</option>
+            <option>Seguro para empresa / autónomos</option>
+            <option>No sé, necesito asesoramiento</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje (opcional)</label>
+          <textarea name="mensaje" placeholder="Cuéntame tu situación o lo que necesites"></textarea>
+        </div>
+        <button type="submit" class="btn">📨 Enviar consulta</button>
+        <p style="font-size:.7rem;color:#52525b;text-align:center;margin-top:.75rem">
+          Al enviar aceptas que te contacte para informarte sobre mis servicios. Puedes darte de baja en cualquier momento.
+        </p>
+      </form>
+      <div id="formOk" class="form-ok">✅ Mensaje enviado. Te respondo en menos de 24h.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Crecimiento Financiero Global · Sandra Caicedo · <a href="#">Grupo Galilea</a></p>
+    <p style="margin-top:.3rem">Agente colaborador · Madrid · Toda España</p>
+    <p style="margin-top:.3rem">📧 crecimientofinancieroglobal@gmail.com</p>
+    <p style="margin-top:.5rem"><a href="#">Aviso legal</a> · <a href="#">Política de privacidad</a></p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = {
+      nombre: this.nombre.value,
+      contacto: this.contacto.value,
+      interes: this.interes.value,
+      mensaje: this.mensaje.value
+    };
+    console.log('Formulario enviado:', data);
+    // Aquí conectarás con un servicio de email o webhook más tarde
+    this.style.display = 'none';
+    document.getElementById('formOk').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

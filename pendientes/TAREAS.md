@@ -1,12 +1,18 @@
-# 📋 TAREAS PENDIENTES
+# 📋 TAREAS PENDIENTES — ÍNDICE
 
-**Actualizado:** 12-jul-2026 17:45h
+**Las tareas se guardan por fecha en archivos separados.**
 
 ---
 
-## ✅ CFG (crecimientofinancieroglobal.com)
+## 📂 Archivos por fecha
 
-**Estado:** 🟡 **Web funcional. Pendiente verificar publicación de cambios.**
+- [12-jul-2026](./2026-07-12.md) — CFG formulario, Fiverr, Hotmart, Club Contable
+
+---
+
+## 📌 Histórico de sesiones
+
+_(Se añade cada día que trabajemos)_
 
 ### ✅ COMPLETADO
 - ✅ **SSL resuelto** — Cloudflare proxy naranja, Google Trust, válido hasta 25-sep-2026

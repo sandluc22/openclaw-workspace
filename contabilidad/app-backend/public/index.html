@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión Contable Colombia</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1e293b;min-height:100vh}
+    /* Login */
+    #loginScreen{
+      display:flex;align-items:center;justify-content:center;min-height:100vh;
+      background:linear-gradient(135deg,#0a2e4a,#005f8a);padding:1rem
+    }
+    #loginScreen .card{
+      background:#fff;border-radius:12px;padding:2rem;width:100%;max-width:380px;box-shadow:0 10px 30px rgba(0,0,0,.2)
+    }
+    #loginScreen .card h1{font-size:1.3rem;color:#0a2e4a;margin-bottom:.3rem;text-align:center}
+    #loginScreen .card p{font-size:.8rem;color:#64748b;margin-bottom:1.2rem;text-align:center}
+    #loginScreen .card label{display:block;font-size:.78rem;font-weight:600;margin-bottom:.2rem;margin-top:.7rem}
+    #loginScreen .card input{width:100%;padding:.55rem .7rem;border:1px solid #bfdbfe;border-radius:8px;font-size:.85rem}
+    #loginScreen .card button{
+      width:100%;margin-top:1rem;padding:.6rem;background:#0077b6;color:#fff;border:none;
+      border-radius:8px;font-weight:600;font-size:.88rem;cursor:pointer
+    }
+    #loginScreen .card button:hover{background:#005f8a}
+    #loginScreen .card .error{color:#dc2626;font-size:.78rem;margin-top:.5rem;text-align:center}
+    /* App */
+    #appScreen{display:none}
+    header{background:#0a2e4a;color:#fff;padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+    header h1{font-size:1rem}
+    header .user-info{display:flex;align-items:center;gap:.5rem;font-size:.78rem}
+    header .user-info button{background:rgba(255,255,255,.15);color:#fff;border:none;padding:.3rem .6rem;border-radius:6px;cursor:pointer;font-size:.72rem}
+    header .user-info button:hover{background:rgba(255,255,255,.25)}
+    .container{max-width:960px;margin:0 auto;padding:.75rem}
+    .alertas{padding:.5rem;margin-bottom:.5rem}
+    .alerta{
+      background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:8px;
+      padding:.55rem .75rem;font-size:.8rem;margin-bottom:.35rem;display:flex;align-items:flex-start;gap:.5rem
+    }
+    .alerta .ico{font-size:1rem;flex-shrink:0;margin-top:1px}
+    .alerta.verde{background:#f0fdf4;border-color:#bbf7d0;color:#16a34a}
+    .alerta.amarilla{background:#fefce8;border-color:#fef08a;color:#a16207}
+    .tabs{display:flex;gap:.25rem;margin-bottom:.75rem;flex-wrap:wrap}
+    .tab{
+      padding:.4rem .9rem;border-radius:8px 8px 0 0;font-size:.78rem;font-weight:600;
+      background:#e2e8f0;color:#475569;cursor:pointer;border:none;transition:.15s
+    }
+    .tab.activo{background:#0077b6;color:#fff}
+    .tab:hover{background:#cbd5e1}
+    .tab.activo:hover{background:#005f8a}
+    .panel{display:none}
+    .panel.activo{display:block}
+    .bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem;align-items:center}
+    .bar select,.bar input{padding:.4rem .6rem;border:1px solid #bfdbfe;border-radius:6px;font-size:.78rem;flex:1;min-width:100px}
+    .btn{
+      background:#0077b6;color:#fff;border:none;padding:.4rem .85rem;border-radius:6px;
+      font-weight:600;font-size:.76rem;cursor:pointer;white-space:nowrap
+    }
+    .btn:hover{background:#005f8a}
+    .btn.sec{background:#e2e8f0;color:#1e293b}
+    .btn.sec:hover{background:#cbd5e1}
+    .btn.verde{background:#16a34a}
+    .btn.verde:hover{background:#15803d}
+    .btn.danger{background:#dc2626}
+    .btn.danger:hover{background:#b91c1c}
+    .stats{display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap}
+    .stat{
+      background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:.45rem .7rem;flex:1;min-width:90px;text-align:center
+    }
+    .stat .n{font-size:1.4rem;font-weight:800;color:#0a2e4a}
+    .stat .l{font-size:.7rem;color:#64748b}
+    .mes{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:.75rem}
+    .dia-n{background:#0a2e4a;color:#fff;padding:.3rem;text-align:center;font-size:.65rem;font-weight:600;border-radius:3px}
+    .dia{
+      background:#fff;border:1px solid #e2e8f0;border-radius:3px;min-height:55px;padding:.2rem;
+      font-size:.65rem;cursor:pointer;transition:.15s;position:relative
+    }
+    .dia:hover{border-color:#0077b6}
+    .dia.otro{background:#f8fafc;color:#94a3b8}
+    .dia .num{font-weight:600;font-size:.6rem;margin-bottom:.08rem}
+    .dia .ev{font-size:.56rem;padding:.05rem .15rem;border-radius:2px;margin-bottom:.05rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+    .dia .ev.r{background:#fecaca;color:#dc2626}
+    .dia .ev.v{background:#bbf7d0;color:#16a34a}
+    .dia .ev.a{background:#fef9c3;color:#a16207}
+    .dia .ev.g{background:#dbeafe;color:#0077b6}
+    .checklist{display:flex;flex-direction:column;gap:.35rem}
+    .item-c{
+      background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:.5rem .65rem;
+      display:flex;align-items:center;gap:.45rem;transition:.15s
+    }
+    .item-c:hover{border-color:#0077b6}
+    .item-c input[type=checkbox]{width:16px;height:16px;accent-color:#0077b6;cursor:pointer;flex-shrink:0}
+    .item-c .info{flex:1}
+    .item-c .info strong{font-size:.8rem;display:block}
+    .item-c .info .meta{font-size:.68rem;color:#64748b;margin-top:.06rem}
+    .item-c.hecho{background:#f0fdf4;border-color:#bbf7d0}
+    .item-c.hecho .info strong{text-decoration:line-through;color:#16a34a}
+    .item-c .acc{display:flex;gap:.2rem;flex-shrink:0}
+    .item-c .acc button{background:none;border:none;cursor:pointer;font-size:.75rem;padding:.15rem .25rem;border-radius:4px}
+    .item-c .acc button:hover{background:#e2e8f0}
+    .item-c .badge{font-size:.6rem;padding:.06rem .3rem;border-radius:999px;font-weight:600;flex-shrink:0}
+    .badge.r{background:#fecaca;color:#dc2626}
+    .badge.v{background:#bbf7d0;color:#16a34a}
+    .badge.a{background:#fef9c3;color:#a16207}
+    .modal{
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,.4);align-items:center;justify-content:center;z-index:200
+    }
+    .modal.m{display:flex}
+    .modal-in{
+      background:#fff;border-radius:12px;padding:1.2rem;width:90%;max-width:420px;max-height:90vh;overflow-y:auto
+    }
+    .modal-in h2{font-size:.92rem;margin-bottom:.65rem}
+    .modal-in label{display:block;font-size:.72rem;font-weight:600;margin-bottom:.15rem;margin-top:.5rem}
+    .modal-in input,.modal-in select,.modal-in textarea{
+      width:100%;padding:.42rem .6rem;border:1px solid #bfdbfe;border-radius:6px;font-size:.78rem;
+      background:#f8faff;font-family:inherit
+    }
+    .modal-in textarea{min-height:40px;resize:vertical}
+    .modal-in .br{display:flex;gap:.5rem;margin-top:.65rem}
+    .modal-in .br .btn{flex:1;text-align:center}
+    .vacio{text-align:center;padding:1.5rem;color:#94a3b8;font-size:.8rem}
+    table{width:100%;border-collapse:collapse;font-size:.78rem}
+    th{background:#f1f5f9;padding:.45rem .6rem;text-align:left;font-weight:600;border-bottom:2px solid #e2e8f0}
+    td{padding:.4rem .6rem;border-bottom:1px solid #e2e8f0}
+    tr:hover td{background:#f8fafc}
+    .badge-rol{padding:.12rem .4rem;border-radius:999px;font-size:.68rem;font-weight:600}
+    .badge-rol.admin{background:#dbeafe;color:#0077b6}
+    .badge-rol.responsable{background:#fef9c3;color:#a16207}
+    .activo-si{color:#16a34a;font-weight:600}
+    .activo-no{color:#dc2626}
+    .info-adicional{
+      background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:.5rem .7rem;
+      font-size:.75rem;color:#0369a1;margin-bottom:.65rem;line-height:1.35
+    }
+    .toast{
+      position:fixed;bottom:1rem;right:1rem;background:#1e293b;color:#fff;
+      padding:.6rem 1rem;border-radius:8px;font-size:.8rem;z-index:300;
+      opacity:0;transition:opacity .3s;pointer-events:none
+    }
+    .toast.mostrar{opacity:1}
+    @media(max-width:600px){
+      .dia{min-height:40px}
+      .stats .stat .n{font-size:1.1rem}
+      header h1{font-size:.85rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="card">
+    <h1>🇨🇴 Gestión Contable</h1>
+    <p>Colombia · Acceso de usuarios</p>
+    <label>Email</label>
+    <input type="email" id="loginEmail" value="admin@contabilidad.co" />
+    <label>Contraseña</label>
+    <input type="password" id="loginPass" value="admin123" />
+    <button onclick="login()">Iniciar sesión</button>
+    <div id="loginError" class="error"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="appScreen">
+  <header>
+    <h1>📋 Gestión Contable Colombia</h1>
+    <div class="user-info">
+      <span id="userName">—</span>
+      <span id="userRol">—</span>
+      <button onclick="logout()">Salir</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="info-adicional" id="infoBienvenida">📌 Calendario fiscal Colombia 2026 · Tus datos quedan registrados</div>
+    <div id="alertas" class="alertas"></div>
+
+    <div class="tabs">
+      <button class="tab activo" onclick="cambiarTab('check')">✅ Tareas</button>
+      <button class="tab" onclick="cambiarTab('cal')">📅 Calendario</button>
+      <button class="tab" id="tabUsuarios" onclick="cambiarTab('users')" style="display:none">👥 Usuarios</button>
+      <button class="tab" id="tabAudit" onclick="cambiarTab('audit')" style="display:none">📝 Auditoría</button>
+    </div>
+
+    <!-- Panel Tareas -->
+    <div id="panelCheck" class="panel activo">
+      <div class="stats" id="stats"></div>
+      <div style="margin-bottom:.5rem;display:flex;gap:.4rem;flex-wrap:wrap">
+        <select id="filtroEstado" style="padding:.4rem .6rem;border:1px solid #bfdbfe;border-radius:6px;font-size:.76rem" onchange="renderTareas()">
+          <option value="todas">Todas</option>
+          <option value="pendientes">Pendientes</option>
+          <option value="completadas">Completadas</option>
+        </select>
+        <select id="filtroResp" style="padding:.4rem .6rem;border:1px solid #bfdbfe;border-radius:6px;font-size:.76rem" onchange="renderTareas()">
+          <option value="">Todos los responsables</option>
+        </select>
+        <button class="btn" onclick="abrirModal()" style="margin-left:auto">➕ Nueva tarea</button>
+      </div>
+      <div id="checklist" class="checklist"></div>
+    </div>
+
+    <!-- Panel Calendario -->
+    <div id="panelCal" class="panel">
+      <div class="bar">
+        <select id="mesS">
+          <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
+          <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
+          <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
+          <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
+        </select>
+        <input type="number" id="anioS" min="2025" max="2035" />
+        <button class="btn" onclick="renderCal()">Ir</button>
+        <button class="btn sec" onclick="irHoy()">Hoy</button>
+        <button class="btn" onclick="abrirModal()">➕</button>
+      </div>
+      <div id="calendario" class="mes"></div>
+      <div id="proximos"></div>
+    </div>
+
+    <!-- Panel Usuarios -->
+    <div id="panelUsers" class="panel">
+      <div style="margin-bottom:.5rem;display:flex;gap:.4rem;flex-wrap:wrap">
+        <button class="btn" onclick="abrirModalUsuario()">➕ Nuevo usuario</button>
+      </div>
+      <div id="tablaUsuarios"></div>
+    </div>
+
+    <!-- Panel Auditoría -->
+    <div id="panelAudit" class="panel">
+      <div style="margin-bottom:.5rem;font-size:.78rem;color:#64748b">Últimos 200 cambios registrados</div>
+      <div id="tablaAuditoria"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TAREA -->
+<div class="modal" id="modalTarea">
+  <div class="modal-in">
+    <h2 id="modalTit">Nueva tarea</h2>
+    <label>Título</label>
+    <input type="text" id="eNom" placeholder="Ej: Presentar IVA Bimestral" />
+    <label>Fecha límite</label>
+    <input type="date" id="eFecha" />
+    <label>Responsable</label>
+    <input type="text" id="eResp" placeholder="Nombre del responsable" />
+    <label>Tipo</label>
+    <select id="eTipo">
+      <option value="normal">📌 Normal</option>
+      <option value="urgente">⚠️ Vencimiento DIAN</option>
+      <option value="recordatorio">🔔 Recordatorio</option>
+    </select>
+    <label>Notas</label>
+    <textarea id="eNotas" placeholder="Instrucciones, detalles..."></textarea>
+    <div class="br">
+      <button class="btn" onclick="guardarTarea()">💾 Guardar</button>
+      <button class="btn sec" onclick="cerrarModal('modalTarea')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL USUARIO -->
+<div class="modal" id="modalUsuario">
+  <div class="modal-in">
+    <h2 id="modalUsTit">Nuevo usuario</h2>
+    <label>Nombre</label>
+    <input type="text" id="uNom" placeholder="Nombre completo" />
+    <label>Email</label>
+    <input type="email" id="uEmail" placeholder="correo@ejemplo.co" />
+    <label>Contraseña</label>
+    <input type="password" id="uPass" placeholder="Mínimo 6 caracteres" />
+    <label>Rol</label>
+    <select id="uRol">
+      <option value="responsable">👤 Responsable</option>
+      <option value="admin">🔧 Admin</option>
+    </select>
+    <div class="br">
+      <button class="btn" onclick="guardarUsuario()">💾 Guardar</button>
+      <button class="btn sec" onclick="cerrarModal('modalUsuario')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const API = window.location.origin;
+let token = localStorage.getItem('cfg_token') || '';
+let usuario = null;
+let editId = null;
+let editUserId = null;
+
+async function req(method, url, body) {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (token) opts.headers['Authorization'] = 'Bearer ' + token;
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(API + url, opts);
+  return r.json();
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('mostrar');
+  setTimeout(() => el.classList.remove('mostrar'), 3000);
+}
+
+// ===== LOGIN =====
+async function login() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  document.getElementById('loginError').textContent = '';
+  try {
+    const r = await req('POST', '/api/login', { email, password: pass });
+    if (r.error) { document.getElementById('loginError').textContent = r.error; return; }
+    token = r.token;
+    usuario = r.usuario;
+    localStorage.setItem('cfg_token', token);
+    mostrarApp();
+  } catch(e) { document.getElementById('loginError').textContent = 'Error de conexión'; }
+}
+
+function logout() {
+  token = '';
+  usuario = null;
+  localStorage.removeItem('cfg_token');
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('appScreen').style.display = 'none';
+}
+
+async function mostrarApp() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('appScreen').style.display = 'block';
+  document.getElementById('userName').textContent = usuario.nombre + ' ' + (usuario.rol === 'admin' ? '🔧' : '👤');
+  document.getElementById('userRol').textContent = usuario.rol === 'admin' ? 'Admin' : 'Responsable';
+
+  document.getElementById('tabUsuarios').style.display = usuario.rol === 'admin' ? '' : 'none';
+  document.getElementById('tabAudit').style.display = usuario.rol === 'admin' ? '' : 'none';
+
+  await cargarTareas();
+  renderAlertas();
+  renderStats();
+}
+
+// ===== TAREAS =====
+let tareas = [];
+
+async function cargarTareas() {
+  const r = await req('GET', '/api/tareas');
+  if (r.error) { toast('Error al cargar tareas'); return; }
+  tareas = r;
+  renderTareas();
+  actualizarFiltroResp();
+}
+
+function renderTareas() {
+  const filtro = document.getElementById('filtroEstado').value;
+  const respF = document.getElementById('filtroResp').value;
+  let items = [...tareas];
+  if (filtro === 'pendientes') items = items.filter(d => !d.completada);
+  if (filtro === 'completadas') items = items.filter(d => d.completada);
+  if (respF) items = items.filter(d => d.responsable === respF);
+  items.sort((a,b) => {
+    if (a.completada !== b.completada) return a.completada ? 1 : -1;
+    return a.fecha.localeCompare(b.fecha);
+  });
+  const el = document.getElementById('checklist');
+  if (items.length === 0) {
+    el.innerHTML = '<div class="vacio">✨ No hay tareas.</div>'; return;
+  }
+  const hoy = new Date();
+  const hoyStr = diaStr(hoy);
+  el.innerHTML = items.map(d => {
+    const bdg = d.tipo === 'urgente' ? '<span class="badge r">🔴</span>' :
+               d.tipo === 'recordatorio' ? '<span class="badge a">🔔</span>' : '';
+    const venc = !d.completada && d.fecha < hoyStr ? ' · 🚨 Vencida' : '';
+    return `<div class="item-c ${d.completada ? 'hecho' : ''}">
+      <input type="checkbox" ${d.completada ? 'checked' : ''} onchange="toggleTarea('${d.id}')" />
+      ${bdg}
+      <div class="info">
+        <strong>${d.titulo}</strong>
+        <div class="meta">📅 ${fmtFecha(d.fecha)}${d.responsable ? ' · 👤 '+d.responsable : ''}${venc}</div>
+      </div>
+      <div class="acc">
+        <button onclick="editarTarea('${d.id}')">✏️</button>
+        <button onclick="borrarTarea('${d.id}')">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+  renderStats();
+  renderAlertas();
+}
+
+async function toggleTarea(id) {
+  const r = await req('PUT', `/api/tareas/${id}/toggle`);
+  if (r.error) { toast('Error'); return; }
+  await cargarTareas();
+  renderCal();
+}
+
+async function borrarTarea(id) {
+  if (!confirm('¿Eliminar esta tarea?')) return;
+  await req('DELETE', `/api/tareas/${id}`);
+  await cargarTareas();
+  renderCal();
+}
+
+function renderStats() {
+  const total = tareas.length;
+  const hechas = tareas.filter(d => d.completada).length;
+  const pend = total - hechas;
+  const urgentes = tareas.filter(d => !d.completada && d.tipo === 'urgente').length;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="n">${total}</div><div class="l">📋 Total</div></div>
+    <div class="stat"><div class="n">${pend}</div><div class="l">⏳ Pendientes</div></div>
+    <div class="stat"><div class="n">${hechas}</div><div class="l">✅ Completadas</div></div>
+    <div class="stat"><div class="n">${urgentes}</div><div class="l">🔴 Vencimientos</div></div>
+  `;
+}
+
+function renderAlertas() {
+  const el = document.getElementById('alertas');
+  const hoy = new Date(); const hoyStr = diaStr(hoy);
+  const manana = new Date(hoy); manana.setDate(manana.getDate()+1); const mananaStr = diaStr(manana);
+  const en7 = new Date(hoy); en7.setDate(en7.getDate()+7); const en7Str = diaStr(en7);
+  const urgentes = tareas.filter(d => !d.completada && (d.fecha === hoyStr || d.fecha === mananaStr) && d.tipo === 'urgente');
+  const proximos = tareas.filter(d => !d.completada && d.fecha > mananaStr && d.fecha <= en7Str);
+  const atrasados = tareas.filter(d => !d.completada && d.fecha < hoyStr);
+  let html = '';
+  if (atrasados.length) html += `<div class="alerta"><span class="ico">🚨</span><strong>${atrasados.length} vencidas:</strong> ${atrasados.map(a=>a.titulo).join(', ')}</div>`;
+  if (urgentes.length) html += `<div class="alerta"><span class="ico">🔴</span><strong>Vencen hoy/mañana:</strong> ${urgentes.map(a=>a.titulo).join(', ')}</div>`;
+  if (proximos.length) html += `<div class="alerta amarilla"><span class="ico">📅</span><strong>Próximos 7 días (${proximos.length}):</strong> ${proximos.map(a=>a.titulo).join(', ')}</div>`;
+  if (!atrasados.length && !urgentes.length && !proximos.length) html += `<div class="alerta verde"><span class="ico">✅</span>Todo al día.</div>`;
+  el.innerHTML = html;
+}
+
+function actualizarFiltroResp() {
+  const resps = [...new Set(tareas.map(d => d.responsable).filter(r => r))];
+  const sel = document.getElementById('filtroResp');
+  const actual = sel.value;
+  sel.innerHTML = '<option value="">Todos los responsables</option>' +
+    resps.map(r => `<option value="${r}" ${r === actual ? 'selected' : ''}>👤 ${r}</option>`).join('');
+}
+
+// ===== MODAL TAREA =====
+function abrirModal(fecha) {
+  editId = null;
+  document.getElementById('modalTit').textContent = '➕ Nueva tarea';
+  document.getElementById('eNom').value = '';
+  document.getElementById('eFecha').value = fecha || diaStr(new Date());
+  document.getElementById('eResp').value = '';
+  document.getElementById('eTipo').value = 'normal';
+  document.getElementById('eNotas').value = '';
+  document.getElementById('modalTarea').classList.add('m');
+}
+
+function editarTarea(id) {
+  const d = tareas.find(x => x.id == id);
+  if (!d) return;
+  editId = id;
+  document.getElementById('modalTit').textContent = '✏️ Editar tarea';
+  document.getElementById('eNom').value = d.titulo;
+  document.getElementById('eFecha').value = d.fecha;
+  document.getElementById('eResp').value = d.responsable || '';
+  document.getElementById('eTipo').value = d.tipo;
+  document.getElementById('eNotas').value = d.notas || '';
+  document.getElementById('modalTarea').classList.add('m');
+}
+
+async function guardarTarea() {
+  const nom = document.getElementById('eNom').value.trim();
+  const fecha = document.getElementById('eFecha').value;
+  const resp = document.getElementById('eResp').value.trim();
+  const tipo = document.getElementById('eTipo').value;
+  const notas = document.getElementById('eNotas').value.trim();
+  if (!nom || !fecha) { alert('Título y fecha obligatorios'); return; }
+  const body = { titulo: nom, fecha, responsable: resp, tipo, notas };
+  if (editId) {
+    await req('PUT', `/api/tareas/${editId}`, body);
+  } else {
+    await req('POST', '/api/tareas', body);
+  }
+  cerrarModal('modalTarea');
+  await cargarTareas();
+  renderCal();
+  toast(editId ? 'Tarea actualizada ✅' : 'Tarea creada ✅');
+}
+
+// ===== CALENDARIO =====
+function renderCal() {
+  const mes = parseInt(document.getElementById('mesS').value);
+  const anio = parseInt(document.getElementById('anioS').value);
+  const el = document.getElementById('calendario'); el.innerHTML = '';
+  ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'].forEach(n => {
+    const d = document.createElement('div'); d.className = 'dia-n'; d.textContent = n; el.appendChild(d);
+  });
+  const pd = new Date(anio, mes, 1), ud = new Date(anio, mes+1, 0), is = pd.getDay();
+  const ma = new Date(anio, mes, 0);
+  for (let i = is-1; i >= 0; i--) { const d = document.createElement('div'); d.className = 'dia otro'; d.textContent = ma.getDate()-i; el.appendChild(d); }
+  for (let i = 1; i <= ud.getDate(); i++) {
+    const f = `${anio}-${String(mes+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+    const d = document.createElement('div'); d.className = 'dia';
+    const num = document.createElement('div'); num.className = 'num'; num.textContent = i; d.appendChild(num);
+    const hoy = new Date();
+    if (i === hoy.getDate() && mes === hoy.getMonth() && anio === hoy.getFullYear()) { d.style.borderColor = '#0077b6'; d.style.borderWidth = '2px'; }
+    const evs = tareas.filter(e => e.fecha === f);
+    evs.forEach(e => {
+      const ev = document.createElement('div');
+      ev.className = `ev ${e.tipo === 'urgente' ? 'r' : e.tipo === 'recordatorio' ? 'a' : e.completada ? 'v' : 'g'}`;
+      ev.textContent = (e.completada ? '✅ ' : '') + e.titulo;
+      ev.onclick = (evt) => { evt.stopPropagation(); editarTarea(e.id); };
+      d.appendChild(ev);
+    });
+    d.onclick = () => abrirModal(f);
+    el.appendChild(d);
+  }
+  const resto = 7 - ((is + ud.getDate()) % 7 || 7);
+  for (let i = 1; i <= resto; i++) { const d = document.createElement('div'); d.className = 'dia otro'; d.textContent = i; el.appendChild(d); }
+  // Próximos
+  const hoy = new Date();
+  const en30 = new Date(hoy); en30.setDate(en30.getDate()+30);
+  const prox = tareas.filter(d => !d.completada && d.fecha >= diaStr(hoy) && d.fecha <= diaStr(en30)).sort((a,b)=>a.fecha.localeCompare(b.fecha));
+  const pel = document.getElementById('proximos');
+  if (prox.length === 0) pel.innerHTML = '<p style="color:#94a3b8;font-size:.76rem;text-align:center">No hay vencimientos próximos</p>';
+  else pel.innerHTML = `<h3 style="font-size:.82rem;margin-bottom:.35rem">📋 Próximos 30 días</h3>` +
+    prox.map(d => `<div class="item-c" style="margin-bottom:.2rem;padding:.3rem .5rem"><div class="info" style="font-size:.76rem"><strong>${d.titulo}</strong> · ${fmtFecha(d.fecha)}</div></div>`).join('');
+}
+
+function irHoy() { const h = new Date(); document.getElementById('mesS').value = h.getMonth(); document.getElementById('anioS').value = h.getFullYear(); renderCal(); }
+
+// ===== USUARIOS (admin) =====
+async function cargarUsuarios() {
+  const r = await req('GET', '/api/usuarios');
+  if (r.error) { toast('Error al cargar usuarios'); return; }
+  const el = document.getElementById('tablaUsuarios');
+  if (r.length === 0) { el.innerHTML = '<div class="vacio">No hay usuarios</div>'; return; }
+  el.innerHTML = `<table><thead><tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th><th></th></tr></thead><tbody>` +
+    r.map(u => `<tr>
+      <td><strong>${u.nombre}</strong></td>
+      <td>${u.email}</td>
+      <td><span class="badge-rol ${u.rol}">${u.rol === 'admin' ? '🔧 Admin' : '👤 Responsable'}</span></td>
+      <td class="${u.activo ? 'activo-si' : 'activo-no'}">${u.activo ? 'Activo' : 'Inactivo'}</td>
+      <td><button class="btn sec" style="font-size:.68rem;padding:.2rem .5rem" onclick="editarUsuario('${u.id}')">✏️</button>
+      <button class="btn danger" style="font-size:.68rem;padding:.2rem .5rem" onclick="borrarUsuario('${u.id}')">🗑️</button></td>
+    </tr>`).join('') + `</tbody></table>`;
+}
+
+function abrirModalUsuario() {
+  editUserId = null;
+  document.getElementById('modalUsTit').textContent = '➕ Nuevo usuario';
+  document.getElementById('uNom').value = '';
+  document.getElementById('uEmail').value = '';
+  document.getElementById('uPass').value = '';
+  document.getElementById('uRol').value = 'responsable';
+  document.getElementById('modalUsuario').classList.add('m');
+}
+
+function editarUsuario(id) {
+  editUserId = id;
+  document.getElementById('modalUsTit').textContent = '✏️ Editar usuario';
+  document.getElementById('uNom').value = '';
+  document.getElementById('uEmail').value = '';
+  document.getElementById('uPass').value = '';
+  document.getElementById('uRol').value = 'responsable';
+  document.getElementById('modalUsuario').classList.add('m');
+  toast('Función de editar usuario completa próximamente');
+}
+
+async function guardarUsuario() {
+  const nom = document.getElementById('uNom').value.trim();
+  const email = document.getElementById('uEmail').value.trim();
+  const pass = document.getElementById('uPass').value;
+  const rol = document.getElementById('uRol').value;
+  if (!nom || !email || !pass) { alert('Todos los campos obligatorios'); return; }
+  if (pass.length < 6) { alert('Contraseña mínimo 6 caracteres'); return; }
+  await req('POST', '/api/usuarios', { nombre: nom, email, password: pass, rol });
+  cerrarModal('modalUsuario');
+  await cargarUsuarios();
+  toast('Usuario creado ✅');
+}
+
+async function borrarUsuario(id) {
+  if (!confirm('¿Eliminar este usuario?')) return;
+  await req('DELETE', `/api/usuarios/${id}`);
+  await cargarUsuarios();
+  toast('Usuario eliminado');
+}
+
+// ===== AUDITORÍA (admin) =====
+async function cargarAuditoria() {
+  const r = await req('GET', '/api/auditoria');
+  if (r.error) { toast('Error'); return; }
+  const el = document.getElementById('tablaAuditoria');
+  if (r.length === 0) { el.innerHTML = '<div class="vacio">Sin registros</div>'; return; }
+  el.innerHTML = `<table><thead><tr><th>Fecha</th><th>Usuario</th><th>Acción</th><th>Detalle</th></tr></thead><tbody>` +
+    r.map(a => `<tr>
+      <td style="white-space:nowrap">${a.created_at?.replace('T',' ').slice(0,16) || ''}</td>
+      <td><strong>${a.usuario_nombre || '—'}</strong></td>
+      <td>${a.accion}</td>
+      <td style="font-size:.72rem;color:#64748b">${a.detalle || ''}</td>
+    </tr>`).join('') + `</tbody></table>`;
+}
+
+// ===== GENERAL =====
+function cambiarTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('activo'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('activo'));
+  if (tab === 'check') {
+    document.querySelectorAll('.tab')[0].classList.add('activo');
+    document.getElementById('panelCheck').classList.add('activo');
+  } else if (tab === 'cal') {
+    document.querySelectorAll('.tab')[1].classList.add('activo');
+    document.getElementById('panelCal').classList.add('activo');
+    renderCal();
+  } else if (tab === 'users') {
+    document.querySelectorAll('.tab')[2].classList.add('activo');
+    document.getElementById('panelUsers').classList.add('activo');
+    cargarUsuarios();
+  } else if (tab === 'audit') {
+    document.querySelectorAll('.tab')[3].classList.add('activo');
+    document.getElementById('panelAudit').classList.add('activo');
+    cargarAuditoria();
+  }
+}
+
+function cerrarModal(id) { document.getElementById(id).classList.remove('m'); }
+
+function diaStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function fmtFecha(f) {
+  const d = new Date(f+'T12:00:00');
+  return d.toLocaleDateString('es-CO', { weekday:'short', day:'numeric', month:'short' });
+}
+
+// Init
+if (token) {
+  req('GET', '/api/perfil').then(r => {
+    if (r.usuario) { usuario = r.usuario; mostrarApp(); }
+    else { document.getElementById('loginScreen').style.display = 'flex'; }
+  }).catch(() => { document.getElementById('loginScreen').style.display = 'flex'; });
+} else {
+  document.getElementById('loginScreen').style.display = 'flex';
+}
+</script>
+</body>
+</html>

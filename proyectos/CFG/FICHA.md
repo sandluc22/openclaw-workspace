@@ -1,149 +1,84 @@
-# FICHA TÉCNICA - Crecimiento Financiero Global (CFG)
+# FICHA TÉCNICA — CFG Seguros
 
-## 1. Dominio
-- **URL:** crecimientofinancieroglobal.com
-- **Registrador:** Porkbun
-- **Caducidad:** 23-jun-2027 (auto-renovación activada)
-- **Estado:** ✅ Funcionando
-
-## 2. DNS
-- **Gestionados por:** Cloudflare
-- **NS en Porkbun:** chase.ns.cloudflare.com, sima.ns.cloudflare.com
-- **Estado:** ✅ Activados (propagados globalmente)
-- **Proxy:** Naranja (SSL gratuito vía Cloudflare)
-- **A record @** → 75.2.60.5 (Netlify, proxy naranja)
-
-## 3. Hosting
-- **Servicio:** Netlify
-- **URL directa:** https://6a4d6f12b35ba94756643174--crecimientofinancieroglobal.netlify.app
-- **URL producción:** https://crecimientofinancieroglobal.com
-- **SSL:** ✅ Google Trust Services (vía Cloudflare, válido hasta 25-sep-2026)
-- **Site ID:** `937397ab-3157-469a-a8f4-7305963713dc`
-- **Email Netlify:** crecimientofinancieroglobal@gmail.com
-- **Token Netlify activo:** nfp_YEHGmHDD38cdGz3ivUFC6o9obMxa4uZE29e0 (expira 16-jul-2026)
-- **Último deploy manual:** 09-jul a las 22:54 (Sandra desde su PC)
-
-## 4. Correos
-- **Gestor:** Migadu
-- **Email principal:** info@crecimientofinancieroglobal.com ✅
-- **Otros:** admin@, ventas@, administracion@, financiero@, director@
-- **Estado:** ✅ Funcionando (MX en Cloudflare)
-
-## 5. SEO y Visibilidad
-
-### ✅ Completado
-- **robots.txt:** ✅ Permite Googlebot, bloquea bots IA (GPTBot, ClaudeBot, etc.), apunta a sitemap
-- **sitemap.xml:** ✅ Actualizado con **15 URLs** — incluye blog, artículos, páginas legales
-- **SSL:** ✅ Google Trust Services
-- **SEO básico:** Title, meta description, OG tags, canonical — todo correcto
-- **Velocidad:** HTTP/2 + Cloudflare CDN con caché
-
-### ❌ Pendiente
-- **Google Search Console:** No configurado aún
-  - Usar cuenta: `crecimientofinancieroglobal@gmail.com`
-  - Enviar sitemap: `https://crecimientofinancieroglobal.com/sitemap.xml`
-- **Google Analytics:** Ya configurado (GA4, G-ZSXBB84TL3)
-- **Indexación Google:** Pendiente
-
-## 6. Diseño
-- **Estilo:** Oscuro azul marino (#0a1f44)
-- **Logo:** Icono en azul marino + texto "Crecimiento" (azul) · "Financiero Global" (naranja #f97316)
-- **Color principal:** 🟠 **Naranja** (#f97316) — cambiado de amarillo el 09-jul-2026
-- **Formulario:** Nombre, Teléfono, Email, Fecha de nacimiento, Aseguradora de interés (desplegable), Seguro solicitado
-
-## 7. Aseguradoras en desplegable
-Sanitas, Adeslas, Asisa, Mapfre, DKV, AXA, Allianz, Generali, Caser, Reale, Aegon, Otra, No lo sé todavía
-
-## 8. Formulario
-- **action:** `form.php` (método POST)
-- **Destino:** info@crecimientofinancieroglobal.com
-- **Archivo:** `/home/node/workspace/proyectos/CFG/form.php`
-- **Estado:** ✅ Configurado, pendiente de confirmar que está en el deploy de Netlify
-
-## 9. Archivos del proyecto
-- **Localización:** `/home/node/workspace/proyectos/CFG/`
-- **`index.html`** — página principal (naranja, formulario completo)
-- **`form.php`** — backend del formulario (envío a info@)
-- **`sitemap.xml`** — 15 URLs con prioridades y lastmod
-- **Copia backup:** `/home/node/workspace/index_cfg.html`
-
-## 10. Despliegue temporal (para descarga)
-- **URL:** https://descargar-cfg.surge.sh/index.html (archivo actualizado completo)
-- **Cuenta Surge:** sandluc22@gmail.com (plan Student, 1 dominio)
-
-## 11. CFG Seguros — Redes Sociales (11 julio 2026)
-
-### Identidad visual
-- **Color principal:** #143278 (Azul CFG) ✅ Guardado
-- **Color tarjeta:** #284b9b
-- **Acento:** #fbbf24 (amarillo)
-- **Fuente:** Liberation Sans Bold (negrita, grande)
-- **Fotos:** Reales de personas (Pexels)
-- **Contacto:** info@crecimientofinancieroglobal.com / +34 641 75 44 90
-
-### 7 imágenes definitivas para redes
-| # | Tema | URL |
-|---|---|---|
-| 🛡️ | Lanzamiento | https://files.catbox.moe/p25fb1.png |
-| 🏠 | Seguro de Hogar | https://files.catbox.moe/g0asp5.png |
-| 🚗 | Seguro de Coche | https://files.catbox.moe/bpr6re.png |
-| ❤️ | Seguro de Salud | https://files.catbox.moe/odh5fh.png |
-| 🧑‍💼 | Autónomos | https://files.catbox.moe/tusi92.png |
-| 💼 | Seguro de Vida | https://files.catbox.moe/tnnhq9.png |
-| 👴 | Planes de Ahorro | https://files.catbox.moe/zr7crw.png |
-
-### Instagram (@cfg.seguros)
-- [x] Primer post de lanzamiento publicado
-- [ ] Publicar Seguro de Hogar 🏠 (lunes 13)
-- 7 posts guardados en: `redes/instagram/POSTS.md`
-
-### Facebook (CFG Seguros)
-- [x] Primer post de lanzamiento publicado
-- [ ] Publicar Seguro de Hogar 🏠 (lunes 13)
-- 5 posts guardados en: `redes/facebook/POSTS.md`
-
-### LinkedIn
-- [ ] Página de empresa pendiente de crear
-- [ ] Primer post profesional pendiente
-- 4 posts guardados en: `redes/linkedin/POSTS.md`
-
-### WhatsApp
-- [x] Mensajes enviados a contactos con presentación
-- 6 plantillas guardadas en: `redes/whatsapp/MENSAJES.md`
-
-### Google My Business
-- [x] Ficha creada: CFG Seguros
-- [x] Sin dirección pública (zona servicio: Madrid)
-- [ ] Pendiente carta de verificación postal (1-2 semanas, Av. Jaca 14, 28022 Madrid)
-- [ ] Pendiente de completar perfil cuando llegue la carta
-
-### Calendario
-- Guardado en: `redes/CALENDARIO.md`
-
-## 12. Pendientes CFG
-
-### 🎯 OBJETIVOS A FUTURO
-- **Club Contable:** Vender como servicio por suscripción mensual a contadores y pequeños negocios
-- **Fivver:** Personalizar perfil, crear gigs, enviar presupuestos y empezar a facturar
-
-### PRIORIDAD 1 — Formulario funcional (mañana 12 julio)
-- [ ] Terminar formulario que envíe a Google Sheets
-- [ ] Montar en Cloudflare Pages
-- [ ] Que apunte al dominio crecimientofinancieroglobal.com
-
-### Redes
-- [ ] Publicar Seguro de Hogar 🏠 (lunes 13)
-- [ ] LinkedIn: crear página empresa
-- [ ] LinkedIn: primer post
-- [ ] Esperar carta Google My Business
-
-## 13. Historial de trabajo (09-jul-2026)
-- Mañana: Cambios color naranja + formulario con Fecha nacimiento y desplegable aseguradoras
-- Tarde: Sandra desde su PC intenta subir a Netlify (archivo se descarga con nombre raro)
-- Noche: Varios intentos de deploy vía API con tokens de Netlify (fallaron por permisos)
-- 22:54h: Sandra sube manualmente el index.html a Netlify desde su ordenador personal
-- Pendiente: Verificar que Cloudflare sirve la versión nueva
+**Propietaria:** Sandra Caicedo
+**Última actualización:** 18-jul-2026
 
 ---
 
-**Última actualización:** 12-jul-2026 17:45h
+## 1. DOMINIO
+- **Dominio:** cfg-seguros.com
+- **Registrado en:** Porkbun
+- **Email cuenta:** crecimientofinancieroglobal@gmail.com
+- **Contraseña:** Sandra.1982
+- **API Key:** pk1_4a757ee2394d97598093b61ab86e45e5898cff6d91f675850fce8f67b31f45fe
+- **Secret API Key:** sk1_ce778b843bbc9e919e3cee418f331e55af6ac7e43e19ab01858c35699bf65776
+- **Fecha creación:** ~10-jul-2026
+- **Expiración:** Pendiente verificar
+
+## 2. HOSTING / WEB
+- **Plataforma:** Cloudflare Pages (proyecto cfg-seguros-web)
+- **URL:** cfg-seguros.com / cfg-seguros-web.pages.dev
+- **Deploy:** Automático desde GitHub (sandluc22/cfg-seguros, rama master)
+- **Cloudflare Account ID:** 72305fb85467e89da2940e359f9e09cc
+- **Cloudflare Zone ID:** 9986e3c1cb4dd72f25ba56ec9afdb727
+- **Token Pages:** cfut_z79y6120YMMJkXpIYWrWKPH2rwdJdoS8i4XP1u3e921ce861
+
+## 3. CORREOS
+- **info@cfg-seguros.com** — Migadu (pago) ✅
+- **ventas@cfg-seguros.com** — Migadu (pago) ✅
+- **info@crecimientofinancieroglobal.com** — Migadu (pago) ✅
+- **Migadu:** sandluc22@gmail.com / AlfaySandra.
+
+## 4. DNS
+- **Gestionado por:** Cloudflare
+- **SSL:** Activo (Flexible)
+- **CNAME:** cfg-seguros.com → cfg-seguros-web.pages.dev
+
+## 5. SERVICIOS TÉCNICOS
+- **Google Search Console:** Verificado ✅
+- **Google Business Profile:** En revisión (esperando carta) ⏳
+- **Web3Forms (formulario):** Funcionando ✅
+- **WhatsApp flotante:** wa.me/+34641754490 ✅
+- **Deploy automático:** GitHub → Cloudflare Pages ✅
+- **Favicon:** Puesto en todas las páginas ✅
+- **Google Analytics:** Pendiente ⏳
+
+## 6. REDES SOCIALES
+| Red | Usuario/URL | Posts | Estado |
+|-----|------------|-------|--------|
+| Instagram | @cfg_seguros_gg | 7 imágenes | ✅ Activa |
+| Facebook | profile.php?id=61591242009330 | 7 imágenes | ✅ Activa (WhatsApp integrado) |
+| LinkedIn | company/cfg-seguros | 3 imágenes + banner | ✅ Activa |
+| TikTok | @cfgsegurosgg | 2 vídeos | ✅ Creada |
+
+## 7. PÁGINAS WEB (16)
+index.html · privacidad.html · aviso-legal.html · seguros/index.html · seguros/vida.html · seguros/salud.html · seguros/hogar.html · seguros/coche.html · seguros/empresas.html · seguros/ahorro-inversion.html · blog/index.html · blog/seguro-vida-mitos-realidades.html · blog/seguro-salud-guia-completa.html · blog/proteccion-empresas-autonomos.html · blog/ahorro-inversion-primeros-pasos.html · referencia-crecimientofinancieroglobal.html
+
+## 8. PENDIENTES
+1. Google Business Profile (esperar carta) ⏳
+2. Publicar posts redes (lun/mié/vie) ⏳
+3. Supervende (chatbot WhatsApp) ⏳
+4. Más vídeos TikTok ⏳
+5. Más artículos blog ⏳
+6. Google Analytics ⏳
+7. Verificar caducidad dominio y Migadu ⏳
+
+## 9. CONTRASEÑAS
+- **Porkbun:** crecimientofinancieroglobal@gmail.com / Sandra.1982
+- **Gmail CFG:** crecimientofinancieroglobal@gmail.com / Slch12345+
+- **Cloudflare:** crecimientofinancieroglobal@gmail.com (token en .creds/)
+- **Migadu:** sandluc22@gmail.com / AlfaySandra.
+- **GitHub:** sandluc22 (token en .creds/)
+- **Netlify:** login Google
+- **Surge:** crecimientofinancieroglobal@gmail.com / Alfa.1982
+
+## 10. ARCHIVOS DEL PROYECTO
+- Código web: `/home/node/workspace/cfg-seguros/`
+- Posts redes: `/home/node/workspace/proyectos/CFG/redes/`
+- Ficha PDF: `/home/node/workspace/proyectos/CFG/FICHA_CFG_SEGUROS.pdf`
+- Seguimiento: `/home/node/workspace/SEGUIR_CON_SANDRA/CFG.md`
+- Diario: `/home/node/workspace/memory/2026-07-18.md`
+
+---
+
+**Nota:** Proyecto aparcado (no tocar) — crecimientofinancieroglobal.com

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SandraTech Reviews</title>
+  <meta name="description" content="Reviews de tecnología sin rodeos. Productos recomendados, comparativas y chollos tech. Enlaces de afiliado Amazon." />
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #0a0a0b;
+      color: #e4e4e7;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* === UTILITIES === */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .badge {
+      display: inline-block;
+      background: #27272a;
+      color: #a1a1aa;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f59e0b;
+      color: #0a0a0b;
+      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+      font-size: 0.95rem;
+    }
+    .btn:hover { background: #d97706; transform: translateY(-1px); }
+    .btn-sm { padding: 0.5rem 1rem; font-size: 0.85rem; }
+
+    /* === HEADER === */
+    header {
+      border-bottom: 1px solid #27272a;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(10, 10, 11, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: #f59e0b; }
+    nav { display: flex; gap: 1.5rem; align-items: center; }
+    nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #a1a1aa;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #f59e0b; }
+    nav a.highlight {
+      background: #f59e0b;
+      color: #0a0a0b;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    nav a.highlight:hover { background: #d97706; }
+
+    /* === HERO === */
+    .hero {
+      padding: 5rem 0 3rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: #f59e0b; }
+    .hero p {
+      color: #a1a1aa;
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    /* === CATEGORIES === */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 4rem;
+    }
+    .cat-card {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 0.75rem;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+    .cat-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-2px);
+    }
+    .cat-card .emoji { font-size: 1.75rem; margin-bottom: 0.4rem; }
+    .cat-card .name { font-weight: 600; font-size: 0.9rem; }
+
+    /* === PRODUCT GRID === */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      color: #a1a1aa;
+      margin-bottom: 2rem;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .product-card {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .product-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-3px);
+    }
+    .product-card .thumb {
+      aspect-ratio: 16/9;
+      background: #27272a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .product-card .body {
+      padding: 1.25rem;
+    }
+    .product-card .body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .product-card .body .desc {
+      font-size: 0.85rem;
+      color: #a1a1aa;
+      margin-bottom: 0.75rem;
+    }
+    .product-card .body .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product-card .body .price {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .product-card .body .price small {
+      font-weight: 400;
+      font-size: 0.75rem;
+      color: #71717a;
+    }
+
+    /* === FEATURED REVIEW === */
+    .featured {
+      background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+      border: 1px solid #3f3f46;
+      border-radius: 1rem;
+      padding: 2.5rem;
+      margin-bottom: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .featured .thumb-feat {
+      aspect-ratio: 16/9;
+      background: #27272a;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .featured h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .featured p { color: #a1a1aa; margin-bottom: 1.25rem; }
+    .featured .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    @media (max-width: 768px) {
+      .featured { grid-template-columns: 1fr; padding: 1.5rem; }
+    }
+
+    /* === ABOUT / DISCLAIMER === */
+    .about-box {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 0.75rem;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+    .about-box h2 { margin-bottom: 0.75rem; }
+    .about-box p { color: #a1a1aa; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .about-box small { color: #52525b; font-size: 0.75rem; display: block; margin-top: 1rem; }
+
+    /* === YOUTUBE EMBED WRAP === */
+    .youtube-section {
+      margin-bottom: 4rem;
+    }
+    .youtube-section h2 { margin-bottom: 1rem; }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .video-card {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .video-card:hover { border-color: #f59e0b; }
+    .video-card .vthumb {
+      aspect-ratio: 16/9;
+      background: #27272a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .video-card .vbody { padding: 1rem; }
+    .video-card .vbody h3 { font-size: 0.95rem; font-weight: 600; }
+
+    /* === FOOTER === */
+    footer {
+      border-top: 1px solid #27272a;
+      padding: 2rem 0;
+      text-align: center;
+      color: #52525b;
+      font-size: 0.8rem;
+    }
+    footer a { color: #a1a1aa; text-decoration: underline; }
+
+    /* === RESPONSIVE TWEAKS === */
+    @media (max-width: 640px) {
+      nav { gap: 0.75rem; }
+      nav a { font-size: 0.8rem; }
+      nav a.highlight { padding: 0.3rem 0.75rem; font-size: 0.8rem; }
+      .hero { padding: 3rem 0 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <a href="/" class="logo">📺 <span>Sandra</span>Tech</a>
+      <nav>
+        <a href="#reviews">Reviews</a>
+        <a href="#chollos">Chollos</a>
+        <a href="#videos">Vídeos</a>
+        <a href="#about">Info</a>
+        <a href="https://youtube.com/@tucanal" target="_blank" class="highlight">YouTube ▶</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Tech sin <span>postureo</span></h1>
+      <p>Reviews de tecnología desde las trincheras. Productos que merecen la pena, chollos reales y comparativas sin humo.</p>
+      <a href="#reviews" class="btn">🎯 Ver últimas reviews</a>
+    </section>
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+      <div class="cat-card"><div class="emoji">🔌</div><div class="name">Cargadores</div></div>
+      <div class="cat-card"><div class="emoji">🎧</div><div class="name">Auriculares</div></div>
+      <div class="cat-card"><div class="emoji">🖥️</div><div class="name">Monitores</div></div>
+      <div class="cat-card"><div class="emoji">⌨️</div><div class="name">Periféricos</div></div>
+      <div class="cat-card"><div class="emoji">💻</div><div class="name">Portátiles</div></div>
+      <div class="cat-card"><div class="emoji">📱</div><div class="name">Accesorios</div></div>
+    </div>
+
+    <!-- FEATURED REVIEW -->
+    <section class="featured">
+      <div class="thumb-feat">⚡</div>
+      <div>
+        <span class="badge">🌟 Review destacada</span>
+        <h2>Este cargador GaN de 20€ carga 3 dispositivos</h2>
+        <p>Pequeño, potente, barato. ¿El mejor cargador calidad-precio del año? Te cuento mi experiencia después de 3 meses usándolo a diario.</p>
+        <div class="tags">
+          <span class="badge">Cargadores</span>
+          <span class="badge">GaN</span>
+          <span class="badge">Oferta</span>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="#" class="btn btn-sm">🎬 Ver review en vídeo</a>
+          <a href="#" class="btn btn-sm" style="background:#27272a;color:#e4e4e7;">🛒 Comprar en Amazon</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS GRID -->
+    <section id="reviews">
+      <h2 class="section-title">📦 Últimas reviews</h2>
+      <p class="section-sub">Productos que he probado y te recomiendo — o no. Sin pelos en la lengua.</p>
+      <div class="products">
+
+        <div class="product-card">
+          <div class="thumb">🎧</div>
+          <div class="body">
+            <h3>Auriculares Inalámbricos Soundcore P30i</h3>
+            <p class="desc">Cancelación de ruido activa, 30h batería, IP55. Calidad-precio bestial.</p>
+            <div class="meta">
+              <span class="price">~29€ <small>Amazon</small></span>
+              <a href="#" class="btn btn-sm">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="thumb">⌨️</div>
+          <div class="body">
+            <h3>Teclado Mecánico Logitech MX Mechanical</h3>
+            <p class="desc">Teclado mecánico inalámbrico. Perfecto para teletrabajo y escribir todo el día.</p>
+            <div class="meta">
+              <span class="price">~129€ <small>Amazon</small></span>
+              <a href="#" class="btn btn-sm">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="thumb">🔌</div>
+          <div class="body">
+            <h3>Cargador GaN 65W Ugreen</h3>
+            <p class="desc">3 puertos (2 USB-C + 1 USB-A). Carga portátil, tablet y móvil a la vez.</p>
+            <div class="meta">
+              <span class="price">~19€ <small>Amazon</small></span>
+              <a href="#" class="btn btn-sm">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="thumb">🖥️</div>
+          <div class="body">
+            <h3>Soporte Ajustable para Portátil</h3>
+            <p class="desc">Aluminio, ajustable en altura, pliegues de ventilación. Tu cuello te lo agradecerá.</p>
+            <div class="meta">
+              <span class="price">~22€ <small>Amazon</small></span>
+              <a href="#" class="btn btn-sm">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="thumb">📱</div>
+          <div class="body">
+            <h3>Soporte Magnético para Coche</h3>
+            <p class="desc">Iman potente, rotación 360°, se pega en cualquier salida de aire.</p>
+            <div class="meta">
+              <span class="price">~12€ <small>Amazon</small></span>
+              <a href="#" class="btn btn-sm">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="thumb">💻</div>
+          <div class="body">
+            <h3>Hub USB-C 7 en 1</h3>
+            <p class="desc">HDMI 4K, 3x USB-A, SD, microSD, PD 100W. Tu portátil te lo pide a gritos.</p>
+            <div class="meta">
+              <span class="price">~25€ <small>Amazon</small></span>
+              <a href="#" class="btn btn-sm">🛒</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CHOLLOS SECTION -->
+    <section id="chollos">
+      <h2 class="section-title">🔥 Chollos tech</h2>
+      <p class="section-sub">Productos que están de oferta y realmente merecen la pena. Actualizado cada semana.</p>
+      <div class="products">
+
+        <div class="product-card" style="border-color:#f59e0b;">
+          <div class="thumb">🎧</div>
+          <div class="body">
+            <span class="badge" style="background:#f59e0b;color:#0a0a0b;margin-bottom:0.5rem;">🔥 OFERTÓN</span>
+            <h3>Nothing Ear (a) - Negro</h3>
+            <p class="desc">Cancelación de ruido, 42h batería, diseño transparente. De 99€ a 69€.</p>
+            <div class="meta">
+              <span class="price">69€ <small>antes 99€</small></span>
+              <a href="#" class="btn btn-sm">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="thumb">⌨️</div>
+          <div class="body">
+            <span class="badge" style="background:#27272a;color:#a1a1aa;margin-bottom:0.5rem;">OFERTA</span>
+            <h3>Ratón Logitech MX Master 3S</h3>
+            <p class="desc">Ergonómico, sensor 8000 DPI, scroll MagSpeed. Cómodo y preciso.</p>
+            <div class="meta">
+              <span class="price">79€ <small>antes 109€</small></span>
+              <a href="#" class="btn btn-sm">🛒</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section id="videos" class="youtube-section">
+      <h2 class="section-title">🎬 Últimos vídeos</h2>
+      <p class="section-sub">Reviews en vídeo sin rostro, directas al grano.</p>
+      <div class="video-grid">
+
+        <div class="video-card">
+          <div class="vthumb">⚡</div>
+          <div class="vbody">
+            <h3>Este cargador de 20€ carga 3 dispositivos a la vez</h3>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="vthumb">🎧</div>
+          <div class="vbody">
+            <h3>Soundcore P30i vs Nothing Ear (a): ¿merecen la pena?</h3>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="vthumb">⌨️</div>
+          <div class="vbody">
+            <h3>Top 5 teclados baratos para teletrabajo en 2026</h3>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT + DISCLAIMER -->
+    <section id="about" class="about-box">
+      <h2>ℹ️ Sobre SandraTech</h2>
+      <p>Reviews honestas de tecnología. Sin marca que me pague por opinar, sin guión de agencia. Pruebo los productos, te cuento lo que me parecen, y si me gustan te dejo el enlace.</p>
+      <p>Todo el contenido es en vídeo sin rostro — porque el producto es lo que importa, no quien lo enseña.</p>
+      <small>Algunos enlaces de esta página son enlaces de afiliado de Amazon España. Si compras a través de ellos, yo recibo una pequeña comisión sin coste extra para ti. Esto me ayuda a seguir creando contenido independiente. Gracias por el apoyo ❤️</small>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SandraTech — Tech sin postureo</p>
+      <p><a href="#">YouTube</a> · <a href="#">TikTok</a> · <a href="#">Instagram</a></p>
+      <p style="margin-top:0.5rem;">Enlaces de afiliado Amazon ES · <a href="#">Política de privacidad</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

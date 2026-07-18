@@ -1,69 +1,98 @@
-# 💼 LinkedIn - CFG Seguros
-**Página:** /company/cfgseguros
+# 💼 LinkedIn — CFG-Seguros
+
+**Perfil:** linkedin.com/company/cfg-seguros
+**Tono:** Profesional, educativo, genera confianza
+**Frecuencia:** 3 posts/semana (lun, mié, vie)
 
 ---
 
-## Post 1 — Presentación (profesional)
-🛡️ **CFG Seguros** | Colaboradores de Grupo Galilea
+## Post 1 — Presentación (Lunes)
 
-Asesoramiento personalizado en seguros para particulares y empresas. Te ayudamos a proteger lo que más importa.
+**Texto:**
 
-**Nuestras áreas:**
-🔹 Particulares: Hogar, Coche, Salud, Vida, Ahorro
-🔹 Profesionales: Autónomos, Empresas, Responsabilidad Civil
-🔹 Especiales: Viajes, Accidentes, Decesos, Baja Laboral
+🛡️ **Nace CFG-Seguros en LinkedIn**
 
-📧 info@crecimientofinancieroglobal.com
-Consulta gratuita · sin compromiso
+Hoy damos un paso más para estar donde nuestros clientes nos necesitan.
 
-#CFGSeguros #GrupoGalilea #Seguros #Asesoramiento
+En CFG-Seguros, como Colaborador de Grupo Galilea, trabajamos con las principales aseguradoras del mercado para ofrecerte soluciones personalizadas en:
 
----
+🏠 Seguro de Hogar
+🚗 Seguro de Coche
+❤️ Seguro de Salud
+👴 Seguro de Vida
+💼 Seguros para Empresas y Autónomos
+💰 Planes de Ahorro e Inversión
 
-## Post 2 — Autónomos (profesional)
-🧑‍💼 **Autónomos: ¿estás realmente protegido?**
+Nuestra filosofía es sencilla: **asesoramiento transparente, sin compromiso y buscando siempre la mejor relación calidad-precio para ti.**
 
-Según datos del sector, más del 40% de los autónomos en España no tienen un seguro adaptado a su actividad real. Un accidente o una baja laboral puede suponer la paralización total de tu negocio.
+📧 info@cfg-seguros.com
+🌐 cfg-seguros.com
 
-En CFG Seguros analizamos tu caso y te recomendamos la cobertura que realmente necesitas:
-
-🛡️ Baja laboral por enfermedad o accidente
-🛡️ Responsabilidad civil profesional
-🛡️ Daños a instalaciones y equipos
-
-📧 info@crecimientofinancieroglobal.com
-Sin compromiso. Solo asesoramiento real.
-
-#Autónomos #Seguros #CFGSeguros #Asesoramiento
+#CFGSeguros #GrupoGalilea #Seguros #AsesoramientoFinanciero
 
 ---
 
-## Post 3 — Empresas (profesional)
-🏢 **Protege tu empresa y a tu equipo**
+## Post 2 — La importancia del asesoramiento (Miércoles)
 
-Toda empresa necesita una cobertura adaptada a su actividad. Desde responsabilidad civil hasta daños materiales.
+**Texto:**
 
-En CFG Seguros te ayudamos a diseñar un plan integral para tu negocio.
+❓ **¿Sabías que el 60% de los conductores podría ahorrar en su seguro de coche?**
 
-✅ Seguro multirriesgo comercial
-✅ Responsabilidad civil
-✅ Cobertura para empleados
+Cada año, millones de personas renuevan automáticamente su seguro sin revisar si siguen teniendo la mejor opción. Y las primas suben.
 
-📧 info@crecimientofinancieroglobal.com
+En CFG-Seguros te ayudamos a:
 
-#Empresas #SegurosEmpresas #CFGSeguros #ProtegeTuNegocio
+✅ Comparar entre múltiples aseguradoras
+✅ Ajustar las coberturas a tus necesidades reales
+✅ Evitar pagar por servicios que no utilizas
+✅ Conseguir asistencia legal y en carretera 24h
+
+Y esto aplica también para seguros de Hogar, Salud, Vida y Empresas.
+
+🔎 **Te hacemos un estudio comparativo gratuito en 24h.**
+
+📧 info@cfg-seguros.com
+🌐 cfg-seguros.com
+
+#CFGSeguros #Ahorro #SeguroDeCoche #Asesoramiento
 
 ---
 
-## Post 4 — Planes de Ahorro
-👴 **Planifica tu jubilación con ventajas fiscales**
+## Post 3 — Dato/curiosidad del sector (Viernes)
 
-Los planes de pensiones y de ahorro son una de las herramientas más eficaces para complementar tu pensión pública. En CFG Seguros te asesoramos para elegir el plan que mejor se adapte a tu perfil.
+**Texto:**
 
-✅ Planes individuales y de empresa
-✅ Ventajas fiscales
-✅ Gestión profesional
+📊 **¿Sabías que en España hay más de 200 aseguradoras compitiendo?**
 
-📧 info@crecimientofinancieroglobal.com
+Con tantas opciones, elegir el seguro adecuado puede ser abrumador. Ahí es donde entra un corredor de seguros.
 
-#PlanesDePensiones #Jubilación #Ahorro #CFGSeguros
+**Diferencia entre un corredor y un agente:**
+
+🔹 **Agente:** Trabaja para una sola aseguradora
+🔹 **Corredor:** Trabaja para ti, buscando entre todas las opciones del mercado
+
+En CFG-Seguros, como Colaborador de Grupo Galilea, somos corredores. **Tu interés es lo primero. Negociamos por ti.**
+
+¿Tienes dudas sobre tu póliza actual? Escríbenos sin compromiso.
+
+📧 info@cfg-seguros.com
+🌐 cfg-seguros.com
+
+#CFGSeguros #CorreduríaDeSeguros #GrupoGalilea #CulturaFinanciera
+
+---
+
+## 📅 Calendario LinkedIn
+
+| Día | Tema |
+|-----|------|
+| Lunes | Presentación / Institucional / Novedades |
+| Miércoles | Consejos y datos útiles del sector |
+| Viernes | Cultura financiera / Educación aseguradora |
+
+## 🎯 Estrategia LinkedIn
+
+- 💬 Responder a comentarios en menos de 24h
+- 🔗 Compartir los artículos del blog de cfg-seguros.com
+- 👥 Conectar con otros profesionales del sector
+- 📝 Publicar 1 artículo largo al mes en LinkedIn Articles

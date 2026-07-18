@@ -240,7 +240,10 @@
     <p class="section-sub">Cuéntanos qué necesitas y te respondemos en menos de 24h.</p>
     <div class="form-card">
       <h3>Cuéntanos tu caso</h3>
-      <form name="seguros-cfg" id="contactForm" netlify>
+      <form name="seguros-cfg" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="7d8a5f44-2eae-4a17-8581-6e8e29723d9e">
+        <input type="hidden" name="subject" value="Nuevo lead CFG Seguros - Web">
+        <input type="hidden" name="from_name" value="CFG Seguros Web">
         <div class="form-group">
           <label>Nombre</label>
           <input type="text" name="nombre" required placeholder="Tu nombre" />
@@ -293,7 +296,7 @@
           Al enviar aceptas que te contacte para informarte sobre mis servicios. Puedes darte de baja en cualquier momento.
         </p>
       </form>
-      <div id="formOk" class="form-ok">✅ Mensaje enviado. Te respondemos en menos de 24h.</div>
+      <div id="formOk" class="form-ok">✅ Mensaje enviado. Te responderemos en menos de 24h.</div>
     </div>
   </div>
 </section>
@@ -319,6 +322,13 @@
     try {
       const formData = new FormData(this);
       const data = {};
+
+      // Enviar a Web3Forms (correo)
+      const w3res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const w3result = await w3res.json();
       formData.forEach((val, key) => data[key] = val);
 
       const token = '8109029340:AAFnLqA1KUKOFK1ipD8b_jHR3SkVdyWPFzA';
@@ -338,7 +348,7 @@
       const resTelegram = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body });
       const telegramResult = await resTelegram.json();
 
-      if (telegramResult.ok) {
+      if (telegramResult.ok && w3result.success) {
         this.reset();
         document.getElementById('formOk').style.display = 'block';
         setTimeout(() => document.getElementById('formOk').style.display = 'none', 5000);

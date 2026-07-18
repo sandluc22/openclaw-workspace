@@ -1,0 +1,33 @@
+#!/usr/bin/expect -f
+set timeout 30
+cd /home/node/workspace/sandra-galilea
+spawn npx surge
+
+expect "email:"
+send "crecimientofinancieroglobal@gmail.com\r"
+expect {
+  "password:" {
+    send "Galilea2024!\r"
+  }
+  "token:" {
+    send "\r"
+  }
+}
+
+expect {
+  "project:" {
+    send "\r"
+  }
+  "domain:" {
+    send "\r"
+  }
+}
+
+expect {
+  "domain:" {
+    send "\r"
+  }
+}
+
+expect eof
+puts "\n=== DONE ==="

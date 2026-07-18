@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="version" content="2026-07-11-2-updated">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
@@ -330,14 +333,8 @@ function login() {
         <option value="pendientes">Pendientes</option>
         <option value="completadas">Completadas</option>
       </select>
-            <select id="filtroCategoria" onchange="cambioCategoria()">
+      <select id="filtroCategoria" onchange="cambioCategoria()">
         <option value="">📁 Todas las categorías</option>
-        <option value="Impuestos">💰 Impuestos</option>
-        <option value="Laboral">👥 Laboral</option>
-        <option value="Contabilidad">📑 Contabilidad</option>
-        <option value="ReporteEntidades">🏛️ Reporte a Entidades</option>
-        <option value="Visitas">🚗 Visitas</option>
-        <option value="SolicitudAreas">📋 Solicitud de Áreas</option>
       </select>
       <select id="filtroSubcategoria" onchange="renderChecklist()" style="margin-top:8px">
         <option value="">📂 Todas las subcategorías</option>
@@ -466,12 +463,11 @@ function login() {
     </select>
     <label>Categoría</label>
     <select id="eCategoria">
-      <option value="General">📌 General</option>
-      <option value="IVA">💰 IVA</option>
-      <option value="Retefuente">📄 Retefuente</option>
-      <option value="SeguridadSocial">👥 Seguridad Social</option>
-      <option value="Renta">📊 Renta</option>
-      <option value="CierreContable">📑 Cierre Contable</option>
+      <option value="">(selecciona categoría)</option>
+    </select>
+    <label>Subcategoría</label>
+    <select id="eSubcategoria">
+      <option value="">(selecciona categoría primero)</option>
     </select>
     <label>NIT / Cliente</label>
     <input type="text" id="eNit" placeholder="NIT o nombre del cliente (opcional)" />
@@ -493,58 +489,71 @@ let seccionActiva = 'checklist';
 let empresaSeleccionada = localStorage.getItem('clubcontable_empresa_sel') || '__todas__';
 
 const CATS = {
-  Impuestos: {
-    IVA: ['iva', 'iva mensual', 'iva bimestral', 'declaración iva'],
-    Retefuente: ['retefuente', 'retención en la fuente', 'retencion en la fuente'],
-    Renta: ['renta', 'declaración de renta', 'declaracion de renta'],
-    Exogena: ['exógena', 'exogena', 'información exógena'],
-    RUB: ['rub', 'registro único'],
-    Reteica: ['reteica', 'retención ica', 'retencion ica']
-  },
-  Laboral: {
-    SeguridadSocial: ['seguridad social', 'pago seguridad', 'planilla'],
-    Nomina: ['nómina', 'nomina', 'nómina electrónica', 'nomina electronica']
-  },
   Contabilidad: {
     ComprasGastosProveedores: ['compras', 'gastos', 'proveedores', 'cuenta por pagar', 'factura proveedor'],
     TesoreriaCartera: ['tesorería', 'tesoreria', 'cartera', 'flujo de caja', 'recaudo', 'pago', 'bancos'],
+    Facturacion: ['facturación', 'facturacion', 'factura electrónica', 'factura electronica'],
     ActivosFijos: ['activos fijos', 'activo fijo', 'depreciación', 'depreciacion'],
-    Financiero: ['financiero', 'estados financieros', 'balance', 'pyg', 'estado resultado'],
-    Facturacion: ['facturación', 'facturacion', 'factura electrónica', 'factura electronica']
+    Financiero: ['financiero', 'estados financieros', 'balance', 'pyg', 'estado resultado']
+  },
+  Impuestos: {
+    IVA: ['iva', 'iva mensual', 'iva bimestral', 'declaración iva'],
+    Retefuente: ['retefuente', 'retención en la fuente', 'retencion en la fuente'],
+    Reteica: ['reteica', 'retención ica', 'retencion ica'],
+    Renta: ['renta', 'declaración de renta', 'declaracion de renta'],
+    Exogena: ['exógena', 'exogena', 'información exógena'],
+    RUB: ['rub', 'registro único']
+  },
+  Laboral: {
+    Nomina: ['nómina', 'nomina', 'nómina electrónica', 'nomina electronica'],
+    SeguridadSocial: ['seguridad social', 'pago seguridad', 'planilla']
   },
   ReporteEntidades: {
-    RNB: ['rnb', 'registro nacional'],
     Supersociedades: ['supersociedades', 'super sociedades', 'informe supersociedades'],
+    RNB: ['rnb', 'registro nacional'],
     PlanMaestro: ['plan maestro', 'planmaestro'],
     CamaraComercio: ['cámara de comercio', 'camara de comercio', 'registro mercantil'],
     Otra: ['reporte', 'informe entidad']
   },
-  Visitas: {
-    RevisoriaFiscal: ['revisoría fiscal', 'revisoria fiscal', 'revisor'],
-    AuditoriaRegimenFranco: ['auditoría régimen franco', 'auditoria regimen franco', 'régimen franco'],
-    AuditoriaSagrilatf: ['auditoría sagrilatf', 'auditoria sagrilatf', 'sagrilatf'],
-    Otra: ['visita', 'reunión', 'cita externa', 'diligencia']
-  },
   SolicitudAreas: {
-    AccionistasJuntaDirectiva: ['accionistas', 'junta directiva', 'junta de socios', 'asamblea'],
-    GerenciaGeneral: ['gerencia general', 'dirección general', 'direccion general'],
-    GerenciaAdminFinanciera: ['gerencia administrativa', 'gerencia financiera'],
-    Operaciones: ['operaciones', 'operativo', 'logística', 'logistica'],
-    OfCumplimiento: ['oficina de cumplimiento', 'cumplimiento', 'sarlaft'],
-    Otra: ['solicitud', 'requerimiento', 'pedido área']
-  }
-};
-const CAT_ICON = { Impuestos:'💰', Laboral:'👥', Contabilidad:'📑', ReporteEntidades:'🏛️', Visitas:'🚗', SolicitudAreas:'📋', General:'📌' };
+    GerenciaGeneral: ['gerencia general', 'dirección general', 'dir general'],
+    GerenciaAdminFinanciera: ['gerencia administrativa', 'gerencia financiera', 'gerencia admin', 'dirección financiera', 'dir financiera'],
+    AccionistasJuntaDirectiva: ['accionistas', 'junta directiva', 'asamblea', 'accionista'],
+    Operaciones: ['operaciones', 'operativo', 'producción'],
+    OfCumplimiento: ['oficina de cumplimiento', 'cumplimiento', 'of cumplimiento'],
+    Otra: ['otra área', 'otro departamento']
+  },
+  Visitas: {
+    RevisoriaFiscal: ['revisoría fiscal', 'revisoria fiscal'],
+    AuditoriaRegimenFranco: ['auditoría régimen franco', 'regimen franco', 'régimen franco'],
+    AuditoriaSagrilatf: ['sagrilaft', 'sagrilatf', 'auditoría sagrilaft'],
+    Otra: ['otra visita']
+  },
+const CAT_ICON = { Contabilidad:'📑', Impuestos:'💰', Laboral:'👥', ReporteEntidades:'🏛️', SolicitudAreas:'📋', Visitas:'🚗', General:'📌' };
 const SUBCAT_ICON = {
-  IVA:'💰', Retefuente:'📄', Renta:'📊', Exogena:'📋', RUB:'🔖', Reteica:'🧾',
-  SeguridadSocial:'🛡️', Nomina:'👤',
-  ComprasGastosProveedores:'🛒', TesoreriaCartera:'💳', ActivosFijos:'🏗️', Financiero:'📈', Facturacion:'🧾',
-  RNB:'📜', Supersociedades:'🏛️', PlanMaestro:'📋', CamaraComercio:'🏪', Otra:'📌',
-  RevisoriaFiscal:'🔍', AuditoriaRegimenFranco:'📋', AuditoriaSagrilatf:'🛡️',
-  AccionistasJuntaDirectiva:'👥', GerenciaGeneral:'👔', GerenciaAdminFinanciera:'💼', Operaciones:'⚙️', OfCumplimiento:'✅'
+  ComprasGastosProveedores:'🛒', TesoreriaCartera:'💳', Facturacion:'🧾', ActivosFijos:'🏗️', Financiero:'📈',
+  IVA:'💰', Retefuente:'📄', Reteica:'🧾', Renta:'📊', Exogena:'📋', RUB:'🔖',
+  Nomina:'👤', SeguridadSocial:'🛡️',
+  Supersociedades:'🏛️', RNB:'📜', PlanMaestro:'📋', CamaraComercio:'🏪', Otra:'📌',
+  GerenciaGeneral:'👔', GerenciaAdminFinanciera:'💼', AccionistasJuntaDirectiva:'👥', Operaciones:'⚙️', OfCumplimiento:'✅',
+  RevisoriaFiscal:'🔍', AuditoriaRegimenFranco:'📋', AuditoriaSagrilatf:'🛡️', OtroGeneral:'📌'
 };
 const CAT_NOMBRE = {
-  Impuestos:'💰 Impuestos', Laboral:'👥 Laboral', Contabilidad:'📑 Contabilidad',
+  Contabilidad:'📑 Contabilidad', Impuestos:'💰 Impuestos', Laboral:'👥 Laboral',
+  ReporteEntidades:'🏛️ Reporte Entidades', SolicitudAreas:'📋 Solicitud Áreas', Visitas:'🚗 Visitas',
+  General:'📌 General',
+  ComprasGastosProveedores:'Compras/Gastos/Proveedores', TesoreriaCartera:'Tesorería y Cartera',
+  Facturacion:'Facturación', ActivosFijos:'Activos Fijos', Financiero:'Financiero',
+  IVA:'IVA', Retefuente:'Retefuente', Reteica:'Reteica', Renta:'Renta', Exogena:'Exógena', RUB:'RUB',
+  Nomina:'Nómina', SeguridadSocial:'Seguridad Social',
+  Supersociedades:'Supersociedades', RNB:'RNB', PlanMaestro:'Plan Maestro',
+  CamaraComercio:'Cámara de Comercio', Otra:'Otra',
+  GerenciaGeneral:'Gerencia General', GerenciaAdminFinanciera:'Gerencia Admin/Financiera',
+  AccionistasJuntaDirectiva:'Accionistas/Junta Directiva', Operaciones:'Operaciones',
+  OfCumplimiento:'Of. Cumplimiento',
+  RevisoriaFiscal:'Revisoría Fiscal', AuditoriaRegimenFranco:'Auditoría Régimen Franco',
+  AuditoriaSagrilatf:'Auditoría Sagrilaft', OtroGeneral:'Otro'
+};
   ReporteEntidades:'🏛️ Reporte Entidades', Visitas:'🚗 Visitas', SolicitudAreas:'📋 Solicitud Áreas',
   General:'📌 General',
   IVA:'IVA', Retefuente:'Retefuente', Renta:'Renta', Exogena:'Exógena', RUB:'RUB', Reteica:'Reteica',
@@ -852,12 +861,14 @@ function cambioCategoria() {
   optTodas.textContent = '📂 Todas las subcategorías';
   selSub.appendChild(optTodas);
   
-  if (cat && CATS[cat]) {
-    for (const [subcat, _] of Object.entries(CATS[cat])) {
-      if (subcat === 'General') continue;
-      const icon = SUBCAT_ICON[subcat] || '📂';
-      const nombre = CAT_NOMBRE[subcat] || subcat;
-      const opt = document.createElement('option');
+  if (cat) {
+    var subcats = getSubcategoriasCompletas(cat);
+    var subcatKeys = Object.keys(subcats);
+    for (var i = 0; i < subcatKeys.length; i++) {
+      var subcat = subcatKeys[i];
+      var icon = SUBCAT_ICON[subcat] || '📂';
+      var nombre = CAT_NOMBRE[subcat] || subcat;
+      var opt = document.createElement('option');
       opt.value = subcat;
       opt.textContent = icon + ' ' + nombre;
       selSub.appendChild(opt);
@@ -1049,6 +1060,9 @@ function abrirModal(fecha, categoria) {
   if (document.getElementById('eNitEmpresa')) document.getElementById('eNitEmpresa').value = (empresaSeleccionada !== '__todas__') ? empresaSeleccionada : '';
   document.getElementById('eTipo').value = 'normal';
   document.getElementById('eCategoria').value = categoria || 'General';
+  rellenarSelectCategorias();
+  rellenarFiltroCategorias();
+  document.getElementById('eSubcategoria').value = '';
   document.getElementById('eNit').value = '';
   document.getElementById('eNotas').value = '';
   document.getElementById('modal').classList.add('m');
@@ -1066,6 +1080,8 @@ function editarItem(id) {
   document.getElementById('eResp').value = d.resp || '';
   document.getElementById('eTipo').value = d.tipo;
   document.getElementById('eCategoria').value = d.categoria || 'General';
+  rellenarSelectCategorias();
+  document.getElementById('eSubcategoria').value = d.subcategoria || '';
   document.getElementById('eNit').value = d.nit || '';
   document.getElementById('eNotas').value = d.notas || '';
   document.getElementById('modal').classList.add('m');
@@ -1077,15 +1093,15 @@ function guardarItem() {
   const resp = document.getElementById('eResp').value.trim();
   const tipo = document.getElementById('eTipo').value;
   const categoria = document.getElementById('eCategoria').value;
-  const nit = (document.getElementById('eNitEmpresa') || {}).value || '';
   const nit = document.getElementById('eNit').value.trim();
+  const subcategoria = document.getElementById('eSubcategoria').value;
   const notas = document.getElementById('eNotas').value.trim();
   if (!nom || !fecha) { alert('⚠️ Título y fecha son obligatorios'); return; }
   if (editId) {
     const d = datos.find(x => x.id === editId);
-    if (d) { d.titulo = nom; d.fecha = fecha; d.resp = resp; d.tipo = tipo; d.categoria = categoria; d.nit = nit; d.notas = notas; }
+    if (d) { d.titulo = nom; d.fecha = fecha; d.resp = resp; d.tipo = tipo; d.categoria = categoria; d.subcategoria = subcategoria; d.nit = nit; d.notas = notas; }
   } else {
-    datos.push({ id:'e'+Date.now()+Math.random().toString(36).slice(2,6), titulo:nom, fecha, resp, tipo, categoria, nit, notas, ok:false });
+    datos.push({ id:'e'+Date.now()+Math.random().toString(36).slice(2,6), titulo:nom, fecha, resp, tipo, categoria, subcategoria, nit, notas, ok:false });
   }
   guardarLS();
   cerrarModal();
@@ -1172,9 +1188,192 @@ document.addEventListener('keydown', e => {
   actualizarBadges();
   actualizarFiltroNit();
   // Renderizar todas las secciones (por si acaso)
+  rellenarSelectCategorias();
   ['iva','retefuente','seguridadsocial','renta','cierres'].forEach(s => renderSeccion(s));
   actualizarContadorFooter();
 })();
+
+// ===== CATEGORÍAS Y SUBCATEGORÍAS PERSONALIZADAS =====
+// Se guardan en localStorage para persistencia
+
+function getCategoriasCustom() {
+  try { return JSON.parse(localStorage.getItem('cc_categorias_custom') || '{}'); }
+  catch(e) { return {}; }
+}
+
+function setCategoriasCustom(obj) {
+  localStorage.setItem('cc_categorias_custom', JSON.stringify(obj));
+}
+
+function getSubcategoriasCustom() {
+  try { return JSON.parse(localStorage.getItem('cc_subcategorias_custom') || '{}'); }
+  catch(e) { return {}; }
+}
+
+function setSubcategoriasCustom(obj) {
+  localStorage.setItem('cc_subcategorias_custom', JSON.stringify(obj));
+}
+
+function getCategoriasCompletas() {
+  const catsCustom = getCategoriasCustom();
+  const resultado = {};
+  Object.keys(CATS).forEach(function(k) { resultado[k] = CATS[k]; });
+  Object.keys(catsCustom).forEach(function(k) {
+    if (!resultado[k]) resultado[k] = {};
+  });
+  return resultado;
+}
+
+function getSubcategoriasCompletas(catKey) {
+  const subcatsCustom = getSubcategoriasCustom();
+  var base = CATS[catKey] ? {} : {};
+  if (CATS[catKey]) {
+    Object.keys(CATS[catKey]).forEach(function(k) { base[k] = CATS[catKey][k]; });
+  }
+  if (subcatsCustom[catKey]) {
+    subcatsCustom[catKey].forEach(function(sc) {
+      if (!base[sc]) base[sc] = ['custom'];
+    });
+  }
+  return base;
+}
+
+function rellenarSelectCategorias() {
+  var sel = document.getElementById('eCategoria');
+  if (!sel) return;
+  var actual = sel.value;
+  var html = '<option value="">(selecciona categoría)</option>';
+  var cats = getCategoriasCompletas();
+  var keys = Object.keys(cats);
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    var icono = CAT_ICON[k] || '📌';
+    var nombre = CAT_NOMBRE[k] || k;
+    html += '<option value="'+k+'"'+(k===actual?' selected':'')+'>'+icono+' '+nombre+'</option>';
+  }
+  html += '<option value="__NUEVA_CAT__" style="font-weight:bold;color:#4CAF50;">➕ Nueva categoría...</option>';
+  sel.innerHTML = html;
+}
+
+function rellenarSelectSubcategorias() {
+  var selCat = document.getElementById('eCategoria');
+  var selSub = document.getElementById('eSubcategoria');
+  if (!selCat || !selSub) return;
+  var catKey = selCat.value;
+  var actual = selSub.value;
+  if (!catKey || catKey === '__NUEVA_CAT__') {
+    selSub.innerHTML = '<option value="">(selecciona categoría primero)</option>';
+    return;
+  }
+  var subcats = getSubcategoriasCompletas(catKey);
+  var html = '<option value="">(ninguna)</option>';
+  var keys = Object.keys(subcats);
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    var nombre = CAT_NOMBRE[k] || k;
+    var icono = SUBCAT_ICON[k] || '📋';
+    html += '<option value="'+k+'"'+(k===actual?' selected':'')+'>'+icono+' '+nombre+'</option>';
+  }
+  html += '<option value="__NUEVA_SUBCAT__" style="font-weight:bold;color:#4CAF50;">➕ Nueva subcategoría...</option>';
+  selSub.innerHTML = html;
+}
+
+function cambioCategoriaForm() {
+  rellenarSelectSubcategorias();
+}
+
+
+function rellenarFiltroCategorias() {
+  var sel = document.getElementById('filtroCategoria');
+  if (!sel) return;
+  var actual = sel.value;
+  var html = '<option value="">📁 Todas las categorías</option>';
+  var cats = getCategoriasCompletas();
+  var keys = Object.keys(cats);
+  for (var i = 0; i < keys.length; i++) {
+    var cat = keys[i];
+    var icono = CAT_ICON[cat] || '📌';
+    var nombre = CAT_NOMBRE[cat] || cat;
+    html += '<option value="'+cat+'">'+icono+' '+nombre+'</option>';
+  }
+  sel.innerHTML = html;
+}
+function verificarAdmin() {
+  var checked = sessionStorage.getItem('cc_admin_verified');
+  if (checked === 'true') return true;
+  var userPass = localStorage.getItem('cc_admin_password') || 'admin2025';
+  var pass = prompt('🔒 Contraseña de administrador:');
+  if (pass && pass.startsWith('cambiar:')) {
+    var nueva = pass.substring(8).trim();
+    if (nueva.length >= 4) {
+      localStorage.setItem('cc_admin_password', nueva);
+      alert('✅ Contraseña cambiada a: "'+nueva+'".');
+    } else { alert('⚠️ Mínimo 4 caracteres.'); }
+    return false;
+  }
+  if (pass === userPass) {
+    sessionStorage.setItem('cc_admin_verified', 'true');
+    return true;
+  }
+  if (pass !== null) alert('❌ Contraseña incorrecta.');
+  return false;
+}
+
+function promptNuevaCategoria() {
+  if (!verificarAdmin()) return;
+  var nombre = prompt('🏷️ Nombre de la nueva categoría (ej: "Mi Proyecto"):');
+  if (!nombre || !nombre.trim()) return;
+  var key = nombre.trim().replace(/\\s+/g, '');
+  var catsCustom = getCategoriasCustom();
+  if (catsCustom[key] || CATS[key]) {
+    alert('⚠️ Ya existe una categoría similar. Usa otro nombre.');
+    return;
+  }
+  catsCustom[key] = true;
+  setCategoriasCustom(catsCustom);
+  var sel = document.getElementById('eCategoria');
+  sel.value = key;
+  rellenarSelectCategorias();
+  rellenarSelectSubcategorias();
+  alert('✅ Categoría "'+nombre.trim()+'" creada.');
+}
+
+function promptNuevaSubcategoria() {
+  if (!verificarAdmin()) return;
+  var catKey = document.getElementById('eCategoria').value;
+  if (!catKey || catKey === '__NUEVA_CAT__') {
+    alert('⚠️ Selecciona primero una categoría.');
+    return;
+  }
+  var catNombre = CAT_NOMBRE[catKey] || catKey;
+  var nombre = prompt('🏷️ Nueva subcategoría en "'+catNombre+'":');
+  if (!nombre || !nombre.trim()) return;
+  var key = nombre.trim().replace(/\\s+/g, '');
+  var subcats = getSubcategoriasCompletas(catKey);
+  if (subcats[key]) {
+    alert('⚠️ Ya existe esa subcategoría en esta categoría.');
+    return;
+  }
+  var subcatsCustom = getSubcategoriasCustom();
+  if (!subcatsCustom[catKey]) subcatsCustom[catKey] = [];
+  subcatsCustom[catKey].push(key);
+  setSubcategoriasCustom(subcatsCustom);
+  var sel = document.getElementById('eSubcategoria');
+  sel.value = key;
+  rellenarSelectSubcategorias();
+  alert('✅ Subcategoría "'+nombre.trim()+'" creada en '+catNombre+'.');
+}
+
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.id === 'eCategoria' && e.target.value === '__NUEVA_CAT__') {
+    e.target.value = '';
+    setTimeout(promptNuevaCategoria, 100);
+  }
+  if (e.target && e.target.id === 'eSubcategoria' && e.target.value === '__NUEVA_SUBCAT__') {
+    e.target.value = '';
+    setTimeout(promptNuevaSubcategoria, 100);
+  }
+});
 </script>
 </body>
 </html>

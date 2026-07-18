@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Crecimiento Financiero Global · colaboradores de Grupo Galilea</title>
+  <title>CFG Seguros · Protege lo que importa</title>
   <meta name="description" content="Agentes colaboradores de Grupo Galilea en Madrid. Planes de ahorro, inversión y seguros de vida, salud y hogar para particulares y empresas en toda España." />
   <link rel="canonical" href="https://crecimientofinancieroglobal.com/" />
   <!-- Google tag (gtag.js) GA4 -->
@@ -51,7 +51,7 @@
     header .container{display:flex;align-items:center;justify-content:space-between}
     .logo{font-size:3.8rem;font-weight:800;letter-spacing:-.02em}
     .logo-crecimiento{color:#0a1f44}
-    .logo-financiero{color:#f0c040}
+    .logo-financiero{color:#f97316}
     nav{display:flex;gap:1.25rem;align-items:center}
     nav a{font-size:.85rem;font-weight:500;color:#94a3b8;transition:color .2s}
     nav a:hover{color:#818cf8}
@@ -73,7 +73,7 @@
     }
     .hero h1{
       font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.15;
-      letter-spacing:-.03em;margin-bottom:.8rem;color:#f0c040
+      letter-spacing:-.03em;margin-bottom:.8rem;color:#f97316
     }
     .hero h1 span{color:#818cf8}
     .hero p{color:#94a3b8;font-size:1.1rem;max-width:600px;margin:0 auto 2rem}
@@ -81,7 +81,7 @@
 
     /* PRODUCTS */
     .section{padding:4rem 0}
-    .section-title{font-size:1.6rem;font-weight:700;margin-bottom:.5rem;text-align:center;color:#f0c040}
+    .section-title{font-size:1.6rem;font-weight:700;margin-bottom:.5rem;text-align:center;color:#f97316}
     .section-sub{color:#94a3b8;margin-bottom:2.5rem;text-align:center;font-size:.95rem}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
@@ -107,7 +107,7 @@
     /* ABOUT */
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
     @media(max-width:700px){.about-grid{grid-template-columns:1fr}}
-    .about-text h2{font-size:1.5rem;margin-bottom:.75rem;color:#f0c040}
+    .about-text h2{font-size:1.5rem;margin-bottom:.75rem;color:#f97316}
     .about-text p{color:#94a3b8;font-size:.9rem;margin-bottom:.6rem}
 
     /* CONTACT FORM */
@@ -138,12 +138,22 @@
     }
     footer a{color:#667eea;text-decoration:underline}
   </style>
+<!-- cfg-deploy-20260709-v15 -->
 </head>
 <body>
 
 <header>
   <div class="container">
-    <a href="#" class="logo"><img src="/logo.png?v=20260629" alt="CFG" style="height:45px;vertical-align:middle" /> <span class="logo-crecimiento">Crecimiento</span> <span class="logo-financiero">Financiero Global</span></a>
+    <a href="#" class="logo"><div style="display:inline-block;vertical-align:middle;width:50px;height:55px;margin-right:8px">
+<svg viewBox="0 0 200 55" width="100%" height="100%">
+<defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" style="stop-color:#0a1f44"/><stop offset="100%" style="stop-color:#1a3a7a"/></linearGradient></defs>
+<path d="M10 5 L40 5 L47 16 L40 28 L25 39 L10 28 L3 16 Z" fill="url(#g)"/>
+<polyline points="16 19 23 27 34 13" fill="none" stroke="#f0c040" stroke-width="3.5"/>
+<text x="56" y="30" font-family="Arial,sans-serif" font-size="30" font-weight="800" fill="#0a1f44">CFG</text>
+<text x="56" y="48" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#f0c040" letter-spacing="3.5">SEGUROS</text>
+</svg>
+</div> <span class="logo-crecimiento">Seguros</span></a>
     <nav>
       <a href="#servicios">Servicios</a>
       <a href="sobre-mi.html">Sobre mí</a>
@@ -220,7 +230,7 @@
     <p class="section-sub">Somos un equipo de colaboradores de Grupo Galilea con presencia en Madrid y toda España. Te acompañamos en cada paso.</p>
     <div class="about-grid">
       <div class="about-text">
-        <h2 style="color:#f0c040">¿Por qué trabajar con nosotros?</h2>
+        <h2 style="color:#f97316">¿Por qué trabajar con nosotros?</h2>
         <p>✅ Te explicamos las cosas claras, sin tecnicismos ni presión.</p>
         <p>✅ Te ayudamos a elegir el producto que encaja contigo, no el que más comisión nos deje.</p>
         <p>✅ Estamos en Madrid pero atendemos a toda España online.</p>
@@ -239,7 +249,7 @@
     <p class="section-sub">Cuéntanos qué necesitas y te respondemos en menos de 24h.</p>
     <div class="form-card">
       <h3>Cuéntanos tu caso</h3>
-      <form id="contactForm" action="https://api.crecimientofinancieroglobal.com/api/contacto" method="POST">
+      <form name="seguros-cfg" id="contactForm" netlify>
         <div class="form-group">
           <label>Nombre</label>
           <input type="text" name="nombre" required placeholder="Tu nombre" />
@@ -251,7 +261,29 @@
         <div class="form-group">
           <label>Email</label>
           <input type="email" name="email" required placeholder="Tu email" />
+</div>
+        <div class="form-group">
+          <label>Fecha de nacimiento</label>
+          <input type="date" name="fecha_nacimiento" required />
         </div>
+        <div class="form-group">
+          <label>Aseguradora de interés</label>
+          <select name="aseguradora_interes" required>
+            <option value="">Selecciona una aseguradora</option>
+            <option>Sanitas</option>
+            <option>Adeslas</option>
+            <option>Asisa</option>
+            <option>Mapfre</option>
+            <option>DKV</option>
+            <option>AXA</option>
+            <option>Allianz</option>
+            <option>Generali</option>
+            <option>Caser</option>
+            <option>Reale</option>
+            <option>Aegon</option>
+            <option>Otra</option>
+            <option>No lo sé todavía</option>
+          </select>
         </div>
         <div class="form-group">
           <label>¿Qué seguro quieres?</label>
@@ -279,12 +311,12 @@
   <div class="container">
     <p>© 2026 Crecimiento Financiero Global · <a href="#">colaboradores de Grupo Galilea</a></p>
     <p style="margin-top:.3rem">Madrid · Toda España</p>
-    <p style="margin-top:.3rem">📧 info@crecimientofinancieroglobal.com</p>
+    <p style="margin-top:.3rem">📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7811161e17381b0a1d1b1115111d160c171e111619161b111d0a171f14171a1914561b1715">[email&#160;protected]</a></p>
     <p style="margin-top:.5rem"><a href="legal.html">Aviso legal</a> · <a href="privacidad.html">Política de privacidad</a></p>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Formulario con envío AJAX al servidor propio
   // No hay intermediarios - los datos van directos a Telegram
   document.getElementById('contactForm').addEventListener('submit', async function(e) {
@@ -297,18 +329,30 @@
       const formData = new FormData(this);
       const data = {};
       formData.forEach((val, key) => data[key] = val);
-      const res = await fetch(this.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const result = await res.json();
-      if (result.success) {
+
+      const token = '8109029340:AAFnLqA1KUKOFK1ipD8b_jHR3SkVdyWPFzA';
+      const chatId = '7890204626';
+      let mensaje = '';
+      mensaje += '\u{1F514} *Nuevo lead CFG Seguros*\n\n';
+      mensaje += '\u{1F464} *Nombre:* ' + data.nombre + '\n';
+      mensaje += '\u{1F4DE} *Tel\u00E9fono:* ' + data.telefono + '\n';
+      mensaje += '\u2709\uFE0F *Correo:* ' + data.email + '\n';
+      mensaje += '\u{1F382} *Fecha nac.:* ' + data.fecha_nacimiento + '\n';
+      mensaje += '\u{1F4CB} *Seguro:* ' + data.seguro + '\n';
+      mensaje += '\u{1F3E2} *Aseguradora:* ' + data.aseguradora_interes + '\n';
+      mensaje += '\u{1F4C5} *Fecha:* ' + new Date().toLocaleDateString('es-ES');
+
+      const url = 'https://api.telegram.org/bot' + token + '/sendMessage';
+      const body = JSON.stringify({ chat_id: chatId, text: mensaje, parse_mode: 'Markdown' });
+      const resTelegram = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body });
+      const telegramResult = await resTelegram.json();
+
+      if (telegramResult.ok) {
         this.reset();
         document.getElementById('formOk').style.display = 'block';
         setTimeout(() => document.getElementById('formOk').style.display = 'none', 5000);
       } else {
-        alert('Error: ' + result.message);
+        alert('Error al enviar. Int\u00E9ntalo de nuevo.');
       }
     } catch(err) {
       alert('Error de conexión. Inténtalo de nuevo.');

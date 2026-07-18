@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
+<meta name="version" content="2026-07-11-2-updated">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
   <meta name="description" content="Gestión Contable Colombia - Checklist, calendario fiscal, IVA, Retefuente, Seguridad Social, Renta y cierres contables. Datos guardados en tu navegador." />
@@ -329,14 +330,17 @@ function login() {
         <option value="pendientes">Pendientes</option>
         <option value="completadas">Completadas</option>
       </select>
-      <select id="filtroCategoria" onchange="renderChecklist()">
-        <option value="">Todas las categorías</option>
-        <option value="IVA">💰 IVA</option>
-        <option value="Retefuente">📄 Retefuente</option>
-        <option value="SeguridadSocial">👥 Seg. Social</option>
-        <option value="Renta">📊 Renta</option>
-        <option value="CierreContable">📑 Cierre Contable</option>
-        <option value="General">📌 General</option>
+            <select id="filtroCategoria" onchange="cambioCategoria()">
+        <option value="">📁 Todas las categorías</option>
+        <option value="Impuestos">💰 Impuestos</option>
+        <option value="Laboral">👥 Laboral</option>
+        <option value="Contabilidad">📑 Contabilidad</option>
+        <option value="ReporteEntidades">🏛️ Reporte a Entidades</option>
+        <option value="Visitas">🚗 Visitas</option>
+        <option value="SolicitudAreas">📋 Solicitud de Áreas</option>
+      </select>
+      <select id="filtroSubcategoria" onchange="renderChecklist()" style="margin-top:8px">
+        <option value="">📂 Todas las subcategorías</option>
       </select>
       <select id="filtroNit" onchange="renderChecklist()">
         <option value="">Todos los NIT</option>
@@ -482,30 +486,98 @@ function login() {
 
 <script>
 // ===== DATOS =====
-let datos = [{"id":"e_celpa_0","titulo":"FIC","fecha":"2026-01-15","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_1","titulo":"Conciliaciones bancarias","fecha":"2026-01-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_2","titulo":"Informe de cartera","fecha":"2026-02-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_3","titulo":"Verificación legalización anticipos","fecha":"2026-02-28","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_4","titulo":"Traslado al Inventario","fecha":"2026-03-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_5","titulo":"Anexos Plan Maestro","fecha":"2026-03-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_6","titulo":"Gestión RUB Febrero, Mayo, Agosto, Noviembre","fecha":"2026-04-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_7","titulo":"Verificación NR IVA 3.500 UVT","fecha":"2026-04-30","resp":"","tipo":"urgente","categoria":"IVA","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_8","titulo":"Conciliación activos fijos","fecha":"2026-05-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_9","titulo":"Conciliación cuentas por pagar","fecha":"2026-05-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_10","titulo":"Notas y conciliación de impuestos","fecha":"2026-06-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_11","titulo":"Nóminas","fecha":"2026-06-30","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_12","titulo":"Primas","fecha":"2026-07-10","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_13","titulo":"Consolidación prestaciones - Excel","fecha":"2026-07-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_14","titulo":"Consolidación prestaciones - World Office","fecha":"2026-08-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_15","titulo":"Seguridad social","fecha":"2026-08-31","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_16","titulo":"Nota seguridad social","fecha":"2026-09-10","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_17","titulo":"Facturación usuarios","fecha":"2026-09-30","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_18","titulo":"Informe de operaciones por tercero","fecha":"2026-10-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_19","titulo":"Verificación notas crédito y devoluciones","fecha":"2026-10-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_20","titulo":"Conciliación vinculadas","fecha":"2026-11-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_21","titulo":"Facturas de compra - Listado DIAN","fecha":"2026-11-30","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_22","titulo":"RADIAN y Documento Electrónico","fecha":"2026-12-10","resp":"","tipo":"urgente","categoria":"IVA","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_23","titulo":"Operaciones sospechosas","fecha":"2026-12-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_24","titulo":"Renovación factura electrónica","fecha":"2026-01-15","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_25","titulo":"Envío carpeta SOL","fecha":"2026-01-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_26","titulo":"Incapacidades por cobrar","fecha":"2026-02-10","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_27","titulo":"Informe proveedores nuevos Celpa","fecha":"2026-02-28","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_28","titulo":"Formato proveedores - BEPROX","fecha":"2026-03-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_29","titulo":"Borradores impuestos","fecha":"2026-03-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_30","titulo":"Revisión saldos de cartera","fecha":"2026-04-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_31","titulo":"Cálculo retefuente por salarios","fecha":"2026-04-30","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_32","titulo":"Libros oficiales","fecha":"2026-05-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_33","titulo":"Agentes de retención IVA factura","fecha":"2026-05-31","resp":"","tipo":"urgente","categoria":"IVA","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_34","titulo":"Activos fijos Celpa","fecha":"2026-06-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_35","titulo":"Vacaciones equipo","fecha":"2026-06-30","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_36","titulo":"Certificado ingresos y retenciones","fecha":"2026-07-10","resp":"","tipo":"urgente","categoria":"Retefuente","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_37","titulo":"SOL - Respuesta alcaldía","fecha":"2026-07-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_38","titulo":"Descargar VISUM ADVISORE","fecha":"2026-08-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_39","titulo":"Actualizar RUT SOL","fecha":"2026-08-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_40","titulo":"Renta","fecha":"2026-09-10","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_41","titulo":"Exógena DIAN","fecha":"2026-09-30","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_42","titulo":"Conciliación fiscal","fecha":"2026-10-10","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_43","titulo":"Supersociedades","fecha":"2026-10-31","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_44","titulo":"Bogotá - Exógena","fecha":"2026-11-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_45","titulo":"Bucaramanga - Exógena","fecha":"2026-11-30","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_46","titulo":"Bucaramanga - ICA","fecha":"2026-12-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_47","titulo":"Cierre fiducia","fecha":"2026-12-31","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_48","titulo":"Cámara de Comercio - Capital al mil","fecha":"2026-01-15","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_49","titulo":"Paz y salvo Alcaldía","fecha":"2026-01-31","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_50","titulo":"Visita Régimen Franco","fecha":"2026-02-10","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_51","titulo":"Predial","fecha":"2026-02-28","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_52","titulo":"Traslado retenciones al pasivo","fecha":"2026-03-10","resp":"","tipo":"urgente","categoria":"Retefuente","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_53","titulo":"Intereses cesantías","fecha":"2026-03-31","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_54","titulo":"Cesantías","fecha":"2026-04-10","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_55","titulo":"Conciliación seguridad social","fecha":"2026-04-30","resp":"","tipo":"urgente","categoria":"SeguridadSocial","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_56","titulo":"Seguimiento circularizaciones - certificado retención","fecha":"2026-05-10","resp":"","tipo":"urgente","categoria":"Retefuente","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_57","titulo":"Solicitud certificados retenciones","fecha":"2026-05-31","resp":"","tipo":"urgente","categoria":"Retefuente","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_58","titulo":"Evaluación de desempeño","fecha":"2026-06-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_59","titulo":"Cierre año - programa","fecha":"2026-06-30","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_60","titulo":"Notas Estados Financieros","fecha":"2026-07-10","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_61","titulo":"Renovación Cámara de Comercio","fecha":"2026-07-31","resp":"","tipo":"normal","categoria":"General","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_62","titulo":"Bloqueo documentos","fecha":"2026-08-10","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"e_default","notas":"","ok":false},{"id":"e_celpa_63","titulo":"Tasa Supersociedades","fecha":"2026-08-31","resp":"","tipo":"urgente","categoria":"Renta","nit":"e_default","notas":"","ok":false},{"id":"e_def_64","titulo":"Información Exógena DIAN","fecha":"2026-03-31","resp":"","tipo":"urgente","categoria":"Renta","nit":"","notas":"","ok":false},{"id":"e_def_65","titulo":"Estados Financieros - Corte","fecha":"2026-12-31","resp":"","tipo":"normal","categoria":"CierreContable","nit":"","notas":"","ok":false},{"id":"e_def_66","titulo":"Estados Financieros - Aprobación","fecha":"2027-03-31","resp":"","tipo":"urgente","categoria":"CierreContable","nit":"","notas":"","ok":false}];
+let datos = [{"id": "e_celpa_0", "titulo": "FIC", "fecha": "2026-01-15", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_1", "titulo": "Conciliaciones bancarias", "fecha": "2026-01-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_2", "titulo": "Informe de cartera", "fecha": "2026-02-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_3", "titulo": "Verificación legalización anticipos", "fecha": "2026-02-28", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_4", "titulo": "Traslado al Inventario", "fecha": "2026-03-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_5", "titulo": "Anexos Plan Maestro", "fecha": "2026-03-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_6", "titulo": "Gestión RUB Febrero, Mayo, Agosto, Noviembre", "fecha": "2026-04-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_7", "titulo": "Verificación NR IVA 3.500 UVT", "fecha": "2026-04-30", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_8", "titulo": "Conciliación activos fijos", "fecha": "2026-05-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_9", "titulo": "Conciliación cuentas por pagar", "fecha": "2026-05-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_10", "titulo": "Notas y conciliación de impuestos", "fecha": "2026-06-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_11", "titulo": "Nóminas", "fecha": "2026-06-30", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_12", "titulo": "Primas", "fecha": "2026-07-10", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_13", "titulo": "Consolidación prestaciones - Excel", "fecha": "2026-07-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_14", "titulo": "Consolidación prestaciones - World Office", "fecha": "2026-08-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_15", "titulo": "Seguridad social", "fecha": "2026-08-31", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_16", "titulo": "Nota seguridad social", "fecha": "2026-09-10", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_17", "titulo": "Facturación usuarios", "fecha": "2026-09-30", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_18", "titulo": "Informe de operaciones por tercero", "fecha": "2026-10-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_19", "titulo": "Verificación notas crédito y devoluciones", "fecha": "2026-10-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_20", "titulo": "Conciliación vinculadas", "fecha": "2026-11-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_21", "titulo": "Facturas de compra - Listado DIAN", "fecha": "2026-11-30", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_22", "titulo": "RADIAN y Documento Electrónico", "fecha": "2026-12-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_23", "titulo": "Operaciones sospechosas", "fecha": "2026-12-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_24", "titulo": "Renovación factura electrónica", "fecha": "2026-01-15", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_25", "titulo": "Envío carpeta SOL", "fecha": "2026-01-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_26", "titulo": "Incapacidades por cobrar", "fecha": "2026-02-10", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_27", "titulo": "Informe proveedores nuevos Celpa", "fecha": "2026-02-28", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_28", "titulo": "Formato proveedores - BEPROX", "fecha": "2026-03-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_29", "titulo": "Borradores impuestos", "fecha": "2026-03-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_30", "titulo": "Revisión saldos de cartera", "fecha": "2026-04-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_31", "titulo": "Cálculo retefuente por salarios", "fecha": "2026-04-30", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_32", "titulo": "Libros oficiales", "fecha": "2026-05-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_33", "titulo": "Agentes de retención IVA factura", "fecha": "2026-05-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_34", "titulo": "Activos fijos Celpa", "fecha": "2026-06-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_35", "titulo": "Vacaciones equipo", "fecha": "2026-06-30", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_36", "titulo": "Certificado ingresos y retenciones", "fecha": "2026-07-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_37", "titulo": "SOL - Respuesta alcaldía", "fecha": "2026-07-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_38", "titulo": "Descargar VISUM ADVISORE", "fecha": "2026-08-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_39", "titulo": "Actualizar RUT SOL", "fecha": "2026-08-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_40", "titulo": "Renta", "fecha": "2026-09-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_41", "titulo": "Exógena DIAN", "fecha": "2026-09-30", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_42", "titulo": "Conciliación fiscal", "fecha": "2026-10-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_43", "titulo": "Supersociedades", "fecha": "2026-10-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_44", "titulo": "Bogotá - Exógena", "fecha": "2026-11-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_45", "titulo": "Bucaramanga - Exógena", "fecha": "2026-11-30", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_46", "titulo": "Bucaramanga - ICA", "fecha": "2026-12-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_47", "titulo": "Cierre fiducia", "fecha": "2026-12-31", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_48", "titulo": "Cámara de Comercio - Capital al mil", "fecha": "2026-01-15", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_49", "titulo": "Paz y salvo Alcaldía", "fecha": "2026-01-31", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_50", "titulo": "Visita Régimen Franco", "fecha": "2026-02-10", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_51", "titulo": "Predial", "fecha": "2026-02-28", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_52", "titulo": "Traslado retenciones al pasivo", "fecha": "2026-03-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_53", "titulo": "Intereses cesantías", "fecha": "2026-03-31", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_54", "titulo": "Cesantías", "fecha": "2026-04-10", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_55", "titulo": "Conciliación seguridad social", "fecha": "2026-04-30", "resp": "", "tipo": "urgente", "categoria": "Laboral", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_56", "titulo": "Seguimiento circularizaciones - certificado retención", "fecha": "2026-05-10", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_57", "titulo": "Solicitud certificados retenciones", "fecha": "2026-05-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_58", "titulo": "Evaluación de desempeño", "fecha": "2026-06-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_59", "titulo": "Cierre año - programa", "fecha": "2026-06-30", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_60", "titulo": "Notas Estados Financieros", "fecha": "2026-07-10", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_61", "titulo": "Renovación Cámara de Comercio", "fecha": "2026-07-31", "resp": "", "tipo": "normal", "categoria": "General", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_62", "titulo": "Bloqueo documentos", "fecha": "2026-08-10", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_celpa_63", "titulo": "Tasa Supersociedades", "fecha": "2026-08-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "e_default", "notas": "", "ok": false}, {"id": "e_def_64", "titulo": "Información Exógena DIAN", "fecha": "2026-03-31", "resp": "", "tipo": "urgente", "categoria": "Impuestos", "nit": "", "notas": "", "ok": false}, {"id": "e_def_65", "titulo": "Estados Financieros - Corte", "fecha": "2026-12-31", "resp": "", "tipo": "normal", "categoria": "Contabilidad", "nit": "", "notas": "", "ok": false}, {"id": "e_def_66", "titulo": "Estados Financieros - Aprobación", "fecha": "2027-03-31", "resp": "", "tipo": "urgente", "categoria": "Contabilidad", "nit": "", "notas": "", "ok": false}];
 let empresas = [{"id":"e_default","nombre":"Celpa"},{"id":"e_copropiedad","nombre":"Copropiedad"}];
 let editId = null;
 let seccionActiva = 'checklist';
 let empresaSeleccionada = localStorage.getItem('clubcontable_empresa_sel') || '__todas__';
 
 const CATS = {
-  IVA: ['iva'],
-  Retefuente: ['retefuente', 'retención en la fuente', 'retencion en la fuente'],
-  SeguridadSocial: ['seguridad social', 'nómina', 'nomina', 'pago seguridad'],
-  Renta: ['renta', 'declaración de renta', 'declaracion de renta'],
-  CierreContable: ['cierre contable', 'cierre fiscal', 'estados financieros', 'cierre anual']
+  Impuestos: {
+    IVA: ['iva', 'iva mensual', 'iva bimestral', 'declaración iva'],
+    Retefuente: ['retefuente', 'retención en la fuente', 'retencion en la fuente'],
+    Renta: ['renta', 'declaración de renta', 'declaracion de renta'],
+    Exogena: ['exógena', 'exogena', 'información exógena'],
+    RUB: ['rub', 'registro único'],
+    Reteica: ['reteica', 'retención ica', 'retencion ica']
+  },
+  Laboral: {
+    SeguridadSocial: ['seguridad social', 'pago seguridad', 'planilla'],
+    Nomina: ['nómina', 'nomina', 'nómina electrónica', 'nomina electronica']
+  },
+  Contabilidad: {
+    ComprasGastosProveedores: ['compras', 'gastos', 'proveedores', 'cuenta por pagar', 'factura proveedor'],
+    TesoreriaCartera: ['tesorería', 'tesoreria', 'cartera', 'flujo de caja', 'recaudo', 'pago', 'bancos'],
+    ActivosFijos: ['activos fijos', 'activo fijo', 'depreciación', 'depreciacion'],
+    Financiero: ['financiero', 'estados financieros', 'balance', 'pyg', 'estado resultado'],
+    Facturacion: ['facturación', 'facturacion', 'factura electrónica', 'factura electronica']
+  },
+  ReporteEntidades: {
+    RNB: ['rnb', 'registro nacional'],
+    Supersociedades: ['supersociedades', 'super sociedades', 'informe supersociedades'],
+    PlanMaestro: ['plan maestro', 'planmaestro'],
+    CamaraComercio: ['cámara de comercio', 'camara de comercio', 'registro mercantil'],
+    Otra: ['reporte', 'informe entidad']
+  },
+  Visitas: {
+    RevisoriaFiscal: ['revisoría fiscal', 'revisoria fiscal', 'revisor'],
+    AuditoriaRegimenFranco: ['auditoría régimen franco', 'auditoria regimen franco', 'régimen franco'],
+    AuditoriaSagrilatf: ['auditoría sagrilatf', 'auditoria sagrilatf', 'sagrilatf'],
+    Otra: ['visita', 'reunión', 'cita externa', 'diligencia']
+  },
+  SolicitudAreas: {
+    AccionistasJuntaDirectiva: ['accionistas', 'junta directiva', 'junta de socios', 'asamblea'],
+    GerenciaGeneral: ['gerencia general', 'dirección general', 'direccion general'],
+    GerenciaAdminFinanciera: ['gerencia administrativa', 'gerencia financiera'],
+    Operaciones: ['operaciones', 'operativo', 'logística', 'logistica'],
+    OfCumplimiento: ['oficina de cumplimiento', 'cumplimiento', 'sarlaft'],
+    Otra: ['solicitud', 'requerimiento', 'pedido área']
+  }
 };
-const CAT_ICON = { IVA:'💰', Retefuente:'📄', SeguridadSocial:'👥', Renta:'📊', CierreContable:'📑', General:'📌' };
-const CAT_NOMBRE = { IVA:'IVA', Retefuente:'Retefuente', SeguridadSocial:'Seg. Social', Renta:'Renta', CierreContable:'Cierre', General:'General' };
+const CAT_ICON = { Impuestos:'💰', Laboral:'👥', Contabilidad:'📑', ReporteEntidades:'🏛️', Visitas:'🚗', SolicitudAreas:'📋', General:'📌' };
+const SUBCAT_ICON = {
+  IVA:'💰', Retefuente:'📄', Renta:'📊', Exogena:'📋', RUB:'🔖', Reteica:'🧾',
+  SeguridadSocial:'🛡️', Nomina:'👤',
+  ComprasGastosProveedores:'🛒', TesoreriaCartera:'💳', ActivosFijos:'🏗️', Financiero:'📈', Facturacion:'🧾',
+  RNB:'📜', Supersociedades:'🏛️', PlanMaestro:'📋', CamaraComercio:'🏪', Otra:'📌',
+  RevisoriaFiscal:'🔍', AuditoriaRegimenFranco:'📋', AuditoriaSagrilatf:'🛡️',
+  AccionistasJuntaDirectiva:'👥', GerenciaGeneral:'👔', GerenciaAdminFinanciera:'💼', Operaciones:'⚙️', OfCumplimiento:'✅'
+};
+const CAT_NOMBRE = {
+  Impuestos:'💰 Impuestos', Laboral:'👥 Laboral', Contabilidad:'📑 Contabilidad',
+  ReporteEntidades:'🏛️ Reporte Entidades', Visitas:'🚗 Visitas', SolicitudAreas:'📋 Solicitud Áreas',
+  General:'📌 General',
+  IVA:'IVA', Retefuente:'Retefuente', Renta:'Renta', Exogena:'Exógena', RUB:'RUB', Reteica:'Reteica',
+  SeguridadSocial:'Seguridad Social', Nomina:'Nómina',
+  ComprasGastosProveedores:'Compras/Gastos/Proveedores', TesoreriaCartera:'Tesorería y Cartera',
+  ActivosFijos:'Activos Fijos', Financiero:'Financiero', Facturacion:'Facturación',
+  RNB:'RNB', Supersociedades:'Supersociedades', PlanMaestro:'Plan Maestro',
+  CamaraComercio:'Cámara de Comercio', Otra:'Otra',
+  RevisoriaFiscal:'Revisoría Fiscal', AuditoriaRegimenFranco:'Auditoría Régimen Franco',
+  AuditoriaSagrilatf:'Auditoría Sagrilatf',
+  AccionistasJuntaDirectiva:'Accionistas/Junta Directiva', GerenciaGeneral:'Gerencia General',
+  GerenciaAdminFinanciera:'Gerencia Admin/Financiera', Operaciones:'Operaciones',
+  OfCumplimiento:'Of. Cumplimiento'
+};
 
 // ===== MIGRACIÓN AUTOMÁTICA: detecta categoría por texto =====
+function detectarSubcategoria(item) {
+  const t = (item.titulo + ' ' + (item.notas || '')).toLowerCase();
+  const cat_principal = item.categoria || 'General';
+  if (!CATS[cat_principal]) return 'General';
+  for (const [subcat, keywords] of Object.entries(CATS[cat_principal])) {
+    if (keywords.some(k => t.includes(k))) return subcat;
+  }
+  return 'General';
+}
+
 function detectarCategoria(item) {
   const t = (item.titulo + ' ' + (item.notas || '')).toLowerCase();
-  for (const [cat, keywords] of Object.entries(CATS)) {
-    if (keywords.some(k => t.includes(k))) return cat;
+  for (const [cat, subcats] of Object.entries(CATS)) {
+    for (const [subcat, keywords] of Object.entries(subcats)) {
+      if (keywords.some(k => t.includes(k))) return cat;
+    }
   }
-  // También migrar items con tipo urgente que contengan "IVA"
-  if (item.tipo === 'urgente' && t.includes('iva')) return 'IVA';
   return 'General';
 }
 
@@ -767,6 +839,38 @@ function renderStats(containerId, items, label) {
 }
 
 // ===== RENDER CHECKLIST =====
+
+// ===== SUBCATEGORÍAS =====
+function cambioCategoria() {
+  const selCat = document.getElementById('filtroCategoria');
+  const selSub = document.getElementById('filtroSubcategoria');
+  const cat = selCat.value;
+  selSub.innerHTML = '';
+  
+  const optTodas = document.createElement('option');
+  optTodas.value = '';
+  optTodas.textContent = '📂 Todas las subcategorías';
+  selSub.appendChild(optTodas);
+  
+  if (cat && CATS[cat]) {
+    for (const [subcat, _] of Object.entries(CATS[cat])) {
+      if (subcat === 'General') continue;
+      const icon = SUBCAT_ICON[subcat] || '📂';
+      const nombre = CAT_NOMBRE[subcat] || subcat;
+      const opt = document.createElement('option');
+      opt.value = subcat;
+      opt.textContent = icon + ' ' + nombre;
+      selSub.appendChild(opt);
+    }
+  }
+  renderChecklist();
+}
+
+function getSubcategoriaTarea(item) {
+  if (item.subcategoria) return item.subcategoria;
+  // Si no tiene subcategoria, detectarla
+  return detectarSubcategoria(item);
+}
 function renderChecklist() {
   var nitFiltro = (document.getElementById('filtroNitCheck') || {}).value || '';
   const filtroEstado = document.getElementById('filtroEstado').value;
@@ -775,7 +879,16 @@ function renderChecklist() {
   let items = [...datos];
   if (filtroEstado === 'pendientes') items = items.filter(d => !d.ok);
   if (filtroEstado === 'completadas') items = items.filter(d => d.ok);
-  if (filtroCat) items = items.filter(function(d) { return d.categoria === filtroCat; });
+    if (filtroCat) {
+    items = items.filter(function(d) { return d.categoria === filtroCat; });
+    const filtroSub = document.getElementById('filtroSubcategoria').value;
+    if (filtroSub) {
+      items = items.filter(function(d) { 
+        const sub = d.subcategoria || detectarSubcategoria(d);
+        return sub === filtroSub;
+      });
+    }
+  }
   if (nitFiltro) items = items.filter(function(d) { return d.nit === nitFiltro; });
   items = filtrarPorEmpresa(items);
   if (filtroNit) items = items.filter(d => d.nit === filtroNit);
@@ -827,7 +940,7 @@ function pintarLista(items) {
     const nitMostrar = d.nit ? ' · '+d.nit : '';
     const nitShow = d.nit ? ' · 🆔 '+d.nit : '';
     const catTag = d.categoria && d.categoria !== 'General'
-      ? `<span class="cat-tag">${CAT_ICON[d.categoria]||'📌'} ${CAT_NOMBRE[d.categoria]||d.categoria}</span>`
+      ? `<span class="cat-tag">${CAT_ICON[d.categoria]||'📌'} ${CAT_NOMBRE[d.categoria]||d.categoria} › ${SUBCAT_ICON[d.subcategoria||detectarSubcategoria(d)]||'📂'} ${CAT_NOMBRE[d.subcategoria||detectarSubcategoria(d)]||d.subcategoria||"General"}</span>`
       : '';
     return `<div class="item-c ${d.ok ? 'hecho' : ''}">
       <input type="checkbox" ${d.ok ? 'checked' : ''} onchange="toggleOk('${d.id}')" />
