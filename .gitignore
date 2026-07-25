@@ -1,2 +1,27 @@
-# Local Netlify folder
-.netlify
+# Archivos de credenciales y configuracion sensible
+.creds/
+CONTRASEÑAS/
+.env
+.env.*
+*.env
+youtube_token.json
+oauth_client.json
+**/oauth_token*
+**/token*.json
+cloudflare*.*
+**/*cloudflare*.*
+**/credencial*
+**/secret*
+**/secrets*
+
+# Base de datos (SQLite)
+*.db
+*.sqlite
+*.sqlite3
+
+# Node
+node_modules/
+
+# Cache
+__pycache__/
+*.pyc
