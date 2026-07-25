@@ -91,8 +91,44 @@ Nunca digas "cerramos", "¿cerramos?", "¿algo más o cerramos?", "¿seguimos o 
 - 🟡 **Error 522** en www.clubcontable.com (Cloudflare Pages)
 - ⏳ Login clientes, panel independiente
 
+## 🎬 CFG Seguros — Blog (a 25 jul)
+6 artículos publicados, guía PDF descargable "10 trucos para ahorrar en tu seguro de coche"
+
+## 🎬 Redes Sociales — Iniciado (25 jul)
+- LinkedIn: conectando con autónomos, publicando contenido
+- Facebook: grupos de barrio y autónomos
+- Instagram: 1 reel subido, pendiente crecer seguidores
+- Search Console: cfg-seguros.com añadida
+
+## 🎬 CFG Seguros — Estado (25 jul)
+- PROYECTO CERRADO. No tocar más.
+- 6 artículos en blog, guía PDF descargable
+- WhatsApp arreglado (api.whatsapp.com + mensaje predefinido)
+- Search Console añadida
+- Pendiente: probar WhatsApp con esposo, revisar indexación
+- Pendiente: publicar contenido todos los días en redes
+
+## 🎬 CFG Global — Estado (25 jul)
+- Web en Cloudflare Pages (NO en Netlify)
+- Nueva sección contacto: info@crecimientofinancieroglobal.com
+- Error 522 recurrente (se cae a cada rato) — FinanceAds rechazó por inestabilidad
+- Formulario roto (Access Key de Web3Forms faltante)
+- 🔴 PRIORIDAD: investigar cortes y arreglar formulario
+
+## 🎬 Redes Sociales — Iniciado (25 jul)
+- LinkedIn: conectando con autónomos, publicando contenido
+- Facebook: grupos de barrio y autónomos
+- Instagram: 1 Reel subido (seguro coche)
+- TikTok: cuenta creada, 1 video subido
+- Pendiente: publicar TODOS LOS DÍAS
+
 ## 🎬 Videos CFG — CREADOS (21 jul)
 7 videos en `/home/node/workspace/videos/para_enviar/` y `/home/node/workspace/videos-con-movimiento/`
+
+## 🔑 Credenciales ElevenLabs
+- **API Key:** sk_cdc840472d9a33e6899e7580dbe6e990485901b78895c697
+- **Voz elegida:** Adam (ElevenLabs premade) — *Dominant, Firm* — ID: `pNInz6obpgDQGcFmaJgB`
+- **Uso:** Texto a voz para videos de El Club del Éxito
 
 ## ✈️ Aviación TikTok (marido)
 10 videos en `/home/node/workspace/aviacion/`
