@@ -1,3 +1,0 @@
--e User-agent: *
-Allow: /
-Sitemap: https://crecimientofinancieroglobal.com/sitemap.xml

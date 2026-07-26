@@ -1,27 +1,17 @@
-# Archivos de credenciales y configuracion sensible
-.creds/
+# Backups y archivos temporales
+proyectos/BACKUPS/
+*.tar.gz
+*.mp3
+*.mp4
+*.wav
+*.ogg
+**/descargar/
+**/bg_shorts/
+**/videos/
+**/miniaturas/
+logo-opciones/
 CONTRASEÑAS/
-.env
-.env.*
-*.env
-youtube_token.json
-oauth_client.json
-**/oauth_token*
-**/token*.json
-cloudflare*.*
-**/*cloudflare*.*
-**/credencial*
-**/secret*
-**/secrets*
-
-# Base de datos (SQLite)
-*.db
-*.sqlite
-*.sqlite3
-
-# Node
-node_modules/
-
-# Cache
-__pycache__/
+.creds/
 *.pyc
+__pycache__/
+node_modules/
