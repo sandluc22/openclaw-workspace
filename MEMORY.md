@@ -133,8 +133,6 @@ Nunca digas "cerramos", "¿cerramos?", "¿algo más o cerramos?", "¿seguimos o 
 ## ✈️ Aviación TikTok (marido)
 10 videos en `/home/node/workspace/aviacion/`
 
-## 🟣 Gafi — Sin empezar
-
 ## 🎯 ESTRATEGIA GLOBAL — Meta: 300.000€ para la casa 🏠
 
 ### Prioridades actuales
@@ -156,3 +154,34 @@ Nunca digas "cerramos", "¿cerramos?", "¿algo más o cerramos?", "¿seguimos o 
 - **Formato:** 1920x1080, 12+ min para monetización
 - **CTA estándar:** "Déjanos tus comentarios, los leo todos. Suscríbete y activa la campanita."
 - **Scripts:** `clubcontable/videos/gen_habitos_video.py`, `youtube_auth.py`
+
+## 🟢 CFG Global — HOY 26 JULIO (resumen de cambios)
+- Home reestructurada: Header + Hero + 7 tarjetas rutas + Novedades + Footer con formulario
+- 7 artículos nuevos en blog/ (errores-hipoteca, elegir-banco, coche-nuevo-vs-segunda-mano, viajar-barato, seguros-imprescindibles, primeros-pasos-espana, metodo-50-30-20)
+- Enlazados en Novedades con botón desplegable
+- Formularios con checkbox de política de privacidad (todos)
+- Footer: Síguenos + Contacto + Legal + formulario + copyright
+- Número WhatsApp actualizado: +34 641 75 44 90
+- Header: logo SVG + "Crecimiento Financiero Global" en azul oscuro
+
+## 🟢 CFG Seguros — HOY
+- Checkbox política privacidad añadido
+- Número WhatsApp actualizado
+
+## 🎬 El Club del Éxito
+- 2 shorts generados con voz Jorge (sapo_short_1.mp4 y sapo_short_2.mp4)
+- Short 1: "Empieza el día con el sapo más gordo"
+- Short 2: "La regla de los 20 segundos"
+
+## 📅 PLAN DIARIO (28 julio - empezar)
+- LUNES 6:30h → CFG Seguros (autónomos) — REDES
+- MARTES 6:30h → CFG Global (finanzas/ahorro) — REDES
+- MIÉRCOLES 6:30h → CFG Seguros (autónomos/coche) — REDES
+- JUEVES 6:30h → CFG Global (viajes/estudiar españa) — REDES
+- VIERNES 6:30h → CFG Seguros (vida/hogar/salud) — REDES
+- SÁBADO 6:30h → El Club del Éxito (short/hábitos) — YOUTUBE
+- DOMINGO 6:30h → Repaso semanal / preparar contenido
+
+Cada día a las 6:30 Alfa debe generar el post del día correspondiente y enviarlo a Sandra por Telegram para que ella solo copie y pegue.
+
+🔴 PENDIENTE: Configurar cron jobs para que GENEREN automáticamente el post y lo envíen a Telegram de Sandra. Ahora mismo solo están como recordatorio.
